@@ -19,10 +19,10 @@
     margin: 0 auto;
 }
 
-.container{
-    max-width: none !important;
-    width: 1170px;
+.no-padding{
+	padding: 0 !important;
 }
+
 
 .modal-dialog{
     max-width: none !important;
@@ -117,13 +117,17 @@ header{
 
 .guest img{
     display: block;
-    margin: 100px auto;
-    width: 20%;
+    margin: 50px auto;
 }
 
 .login-form {
     margin: 20px auto;
-    width: 40%;
+    max-width:300px;
+}
+
+.login-form input {
+    margin: 20px auto;
+    margin-bottom: 10px;
 }
 
 .login-form button{
@@ -131,7 +135,7 @@ header{
     border-radius: 0;
     background-color: #0057b8;
     border: none;
-    margin-bottom: 10px;
+    margin-top: 20px;
 }
 
 .login-form button:hover{
@@ -176,7 +180,7 @@ header{
 
 #games-list{
     background-color: #fff;
-    box-shadow: 0px 4px 2px #aaa;
+    /*box-shadow: 0px 2px 7px #aaa;*/
     padding-bottom: 25px;
     margin-bottom: 30px;
 }
@@ -188,8 +192,7 @@ header{
 
 #menu-games{
     position: relative;
-    margin-bottom: 40px;
-    background-color: #fff;
+    margin-bottom: 10px;
     padding: 10px;
     border-radius: 1px;
 }
@@ -198,20 +201,24 @@ ul.nav.nav-pills{
     float: left;
 }
 
+ul.nav.nav-pills li:not(:first-child){
+	margin-left:20px;
+}
+
 ul.nav.nav-pills li a{
     color: #333;
+    background-color: #fff;
+    border-radius: 50px;
 }
 
 ul.nav.nav-pills li a:hover{
     background-color: #47a447;
     color: #fff;
-    border-radius: 2px;
 }
 
 ul.nav.nav-pills li.active a{
     background-color: #47a447;
     color: #fff;
-    border-radius: 2px;
 }
 
 .my-points .btn-group{
@@ -221,26 +228,25 @@ ul.nav.nav-pills li.active a{
 .my-points .btn-default{
     margin-top: 2px;
     background-color: #47a447;
-    border-color: #00923E;
-    border-radius: 2px;
+    border-color: #47a447;
+    border-radius: 50px;
     color: #fff;
+    padding: 10px 15px;
 }
 
 
 .game-header{
-    background-color: #333;
+    background-color: #c5181f;
     color: #fff;
     height: 80px;
     padding: 5px 30px;
-    border-bottom: 2px solid #aaa;
 }
 
 .game-previous-header {
-    background-color: #333;
+    background-color: #0057b8;
     color: #fff;
     height: 80px;
     padding: 5px 30px;
-    border-bottom: 2px solid #aaa;
 }
 
 
@@ -257,12 +263,63 @@ ul.nav.nav-pills li.active a{
 }
 
 
+.game .team1-name,.game .team2-name{
+	padding: 25px 0px;
+	font-size:1.8em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:bold;
+	padding:10px;
+}
+
+.game .team1-name img,.game .team2-name img{
+	margin:30px;
+	width: 100px;
+}
+
+.game .team2-name{
+	text-align: right;
+	height: 110px;
+}
+
+
+.game .team2-name img{
+	float:right;
+}
+
+@media(max-width:992px){
+	
+	.container{
+		padding:0px;
+	}
+	
+	.game .team1-name,.game .team2-name{
+		padding:10px;
+		text-align: center;
+		font-size:1.3em;
+	}	
+	
+	.game .team1-name img,.game .team2-name img{
+		margin:10px;
+		width:60px;
+		float: none;
+	}
+		
+	.game .team1-name span, .game .team2-name span{
+		display: block;
+		margin-top: 0px;
+	}
+}
+
 .game h2{
     padding: 25px 0px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:bold;
 }
 
 .game h2.subheader{
     padding: 0;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:normal;
 }
 
 .game h3{
@@ -278,17 +335,26 @@ ul.nav.nav-pills li.active a{
     text-align: left;
 }
 
-.game button.btn.btn-default{
+.game h5 {
+    margin-top: 10px;
+	margin-bottom:-4px;
+}
+
+.game button.btn{
     display: block;
     float: none;
-    border-radius: 1px;
-    padding: 10px 25px;
-    margin: 40px auto;
+    border-radius: 50px;
+    padding: 10px 15px;
+    margin: 15px auto;
     margin-bottom:20px;
     background-color: #333;
     border: none;
     color: #fff;
     font-weight: bold;
+}
+
+.game button.btn.btn-success{
+    background-color: #47a447;
 }
 
 .game .col-xs-6 img{
@@ -301,8 +367,26 @@ ul.nav.nav-pills li.active a{
 }
 
 .game .minute {
-    color:#0057b8;
+    color:#fff;
     font-weight: bold;
+	padding:5px;
+    border-radius: 10px;
+	font-family: 'Open Sans', sans-serif;
+	
+	font-size:15px;
+}
+
+.game .minute .point {
+	animation: blink 1s infinite ;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
 }
 
 /************************** Ranking *************************/
