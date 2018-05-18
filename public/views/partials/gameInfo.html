@@ -24,7 +24,8 @@
                     <tr class="game row" ng-repeat="bet in game.bets" >
                         <td>@@ bet.user.login @@</td>
                         <td>Vainqueur : <b><span ng-show="bet.winner_id != game.team1_id && bet.winner_id != game.team2_id" >Match nul</span><span ng-show="bet.winner_id == game.team1_id" >@@ game.team1.name @@</span><span ng-show="bet.winner_id == game.team2_id">@@ game.team2.name @@</span></b></td>
-                    </tr>
+						<td>Score : <b>@@ bet.team1_points @@</b> - <b>@@ bet.team2_points @@</b></td>
+					</tr>
                 </table>
             </div>
         </div>

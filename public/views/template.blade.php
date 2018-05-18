@@ -28,6 +28,8 @@
 	<base href="https://worldcup.hemidy.fr/">
 
     <meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
     @yield('scripts')
 
@@ -35,9 +37,7 @@
 <body @yield('body') >
 
 <div class="guest" ng-hide="isConnected">
-    <div class="container">
-        <img src="/images/WCLogo.png" alt=""/>
-    </div>
+   <img src="/images/WCLogo.png" alt=""/>
 </div>
 
 <header ng-show="isConnected">

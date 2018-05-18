@@ -20,10 +20,10 @@
                     Bonus sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
                 </td>
                 <td ng-show="transaction.type=='bet'" >
-                    <font color="red" >- @@ transaction.value @@ points</font>
+                    <font color="red" >- @@ transaction.value @@ XP</font>
                 </td>
                 <td ng-show="transaction.type=='gain' || transaction.type=='bonus'" >
-                    <font color="green" >+ @@ transaction.value @@ points</font>
+                    <font color="green" >+ @@ transaction.value @@ XP</font>
                 </td>
                 <td>
                     @@ transaction.created_at | dateToISO | date:'dd/MM/yyyy à H:mm'@@h
