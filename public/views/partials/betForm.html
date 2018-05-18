@@ -10,12 +10,10 @@
                     <h4>@@ game.team1.name @@</h4><br />
                     <img width="50px" src="images/flags/@@ game.team1.code.toLowerCase() @@"/>
                 </div>
-                <div class="col-xs-1 dash">
-                    <input ng-model="bet.team1_points" id="team1Score" type="text" class="form-control team one" ng-change="check()" required/>
-                </div>
-                <div class="col-xs-2 dash"> - </div>
-                <div class="col-xs-1 dash">
-                    <input ng-model="bet.team2_points" id="team2Score" type="text" class="form-control team two" ng-change="check()" required/>
+                <div class="col-xs-4 dash">
+                    <input ng-model="bet.team1_points" id="team1Score" type="text" class="form-control team one" ng-change="check()" style="margin-right:-10px;" required/>
+                    <span style="margin-top:14px; display:inline-block">-</span>
+                    <input ng-model="bet.team2_points" id="team2Score" type="text" class="form-control team two" ng-change="check()" style="margin-left:-10px;" required/>
                 </div>
                 <div class="col-xs-4  text-center">
                     <div class="team2">
@@ -27,7 +25,7 @@
         </div>
         <div class="row" id="winner">
             <div class="col-xs-12">
-                Pays gagnant :
+                <label>Pays gagnant</label>
                 <select class="form-control" ng-model="bet.winner_id" ng-options="team.id as team.name for team in teams"></select>
             </div>
         </div>

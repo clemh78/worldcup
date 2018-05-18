@@ -25,13 +25,7 @@
 
 
 .modal-dialog{
-    max-width: none !important;
-    width: 600px;
     margin: 50px auto;
-}
-
-.modal-dialog.modal-lg{
-    width: 900px;
 }
 
 .alert-danger{
@@ -39,15 +33,11 @@
     color: #fff;
 }
 
-#infos{
-    position:absolute;
+#infos,.alert-danger{
     font-size: 16px;
-    width: 40%;
-    top: 30px;
-    left: 30%;
-    z-index: 10;
     border: none;
     border-radius: 1px;
+    margin:8px;
 }
 
 /************************** Navbar **************************/
@@ -544,10 +534,6 @@ ul.nav.nav-pills li.active a{
 .bet .modal-body .row .score{
     padding: 10px 0px;
     box-shadow: 0px 2px 2px #aaa;
-}
-
-.bet button.btn{
-    border-radius: 2px;
 }
 
 .bet button.btn-primary{
