@@ -103,7 +103,17 @@ header{
     padding: 0px;
 }
 
-/************************** Connection **************************/
+.top-menu{
+    font-size:20px;
+    margin-top:10px;
+}
+
+.top-menu a{
+    color:#fff;
+    padding:10px;
+}
+
+    /************************** Connection **************************/
 
 .guest img{
     display: block;
@@ -560,4 +570,16 @@ ul.nav.nav-pills li.active a{
 
 .bet h4 {
     line-height: 40px;
+}
+
+.bet-input-form #team1Score{
+     margin-right:-10px;
+ }
+
+.bet-input-form #team2Score{
+    margin-left:-10px;
+}
+
+.bet-input-form span{
+    margin-top:14px; display:inline-block
 }

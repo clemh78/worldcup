@@ -27,11 +27,15 @@
 	
 	<base href="https://worldcup.hemidy.fr/">
 
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	
-	<link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
 
     @yield('scripts')
+
+    <script>
+        REGISTER_ON = {{ (Config::get('app.register_on')==1)?1:0 }};
+    </script>
 
 </head>
 <body @yield('body') >
@@ -44,13 +48,11 @@
     <div class="navbar navbar-inverse" role="navigation" >
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/images/WCLogo.png"/></a>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a></li>
-                    <li><a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a></li>
-                    <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a></li>
-                </ul>
-            </div>
+            <ul class="top-menu pull-right">
+                <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a>
+                <a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a>
+                <a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a>
+            </ul>
         </div>
     </div>
 </header>
