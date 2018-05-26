@@ -64,6 +64,19 @@ angular.module('betsController', [])
             }
         };
 
+        $scope.updateWinner = function(){
+            console.log($scope.bet);
+            if($scope.bet.team1_points > $scope.bet.team2_points){
+                $scope.bet.winner_id = $scope.game.team1.id;
+            }
+            else if($scope.bet.team1_points < $scope.bet.team2_points){
+                $scope.bet.winner_id = $scope.game.team2.id;
+            }
+            else{
+                $scope.bet.winner_id = null;
+            }
+        };
+
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
