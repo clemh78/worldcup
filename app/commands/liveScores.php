@@ -52,8 +52,8 @@ class liveScores extends Command {
                     if($match->isStarted && !$match->isFinished){
                         $value->team1_points = $match->scoreHome;
                         $value->team2_points = $match->scoreAway;
-                        $value->team1_kick_at_goal = $match->scoreHomeFirstLeg;
-                        $value->team2_kick_at_goal = $match->scoreAwayFirstLeg;
+                        //$value->team1_kick_at_goal = $match->scoreHomeFirstLeg;
+                        //$value->team2_kick_at_goal = $match->scoreAwayFirstLeg;
                         $value->minute = $match->minute;
                         $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : '.$value->team1()->first()->name.' '.$value->team1_points.'-'.$value->team2_points.' '.$value->team2()->first()->name.'.');
                     }
