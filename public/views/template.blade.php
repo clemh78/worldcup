@@ -51,13 +51,16 @@
             <ul class="top-menu pull-right">
                 <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a>
                 <a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a>
+                <a ng-show="user.isAdmin" href="#" ng-click="admin()" ng-controller="adminControllerModal" ><i class="fa fa-cog"></i></a>
                 <a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a>
             </ul>
         </div>
     </div>
 </header>
 
-
+<alert class="primaryMessage" ng-controller="adminControllerPrimary" type="info" ng-show="isPrimary" id="infos" >
+    <div>Le site est affiché en tant que "@@ user.login @@" mais vous êtes connecté en "@@ primary.login @@".</div>
+</alert>
 
 <alert ng-repeat="alert in alerts" type="@@ alert.class @@" close="closeAlert($index)" id="infos" >
     <div ng-show="alert.cat == 'success'">
@@ -82,6 +85,7 @@
 <script src="/js/controllers/usersController.js"></script>
 <script src="/js/controllers/betsController.js"></script>
 <script src="/js/controllers/transactionsController.js"></script>
+<script src="/js/controllers/adminController.js"></script>
 <script src="/js/app.js"></script>
 
 

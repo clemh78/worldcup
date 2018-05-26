@@ -42,6 +42,28 @@ class AuthController extends BaseController {
         }
     }
 
+    public function loginWithoutPassword()
+    {
+        $input = Input::only('login');
+
+        $user = User::getUserWithLogin($input['login']);
+
+        if ($user != null && Input::has('login'))
+        {
+            return Response::json(
+                array('success' => true,
+                    'payload' => $user->getNewToken(),
+                ));
+        }else{
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => 'Informations incorrects (Login) !'
+                ),
+                404);
+        }
+    }
+
     /**
      * Déconnecte l'utilisateur
      *

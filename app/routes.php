@@ -35,12 +35,21 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
     Route::resource('transactions', 'TransactionController',
         array('only' => array('index', 'show')));
 
+    Route::resource('groups', 'GroupController',
+        array('only' => array('index', 'show')));
+
     Route::resource('bets', 'BetController',
         array('only' => array('index', 'show', 'store', 'update')));
 
     Route::resource('bracket', 'BracketController',
         array('only' => array('index')));
+
+    Route::resource('roles', 'RoleController',
+        array('only' => array('index', 'show')));
 });
+
+Route::post('/api/admin/login', array('before' => ['token', 'admin'], 'uses' => 'AuthController@loginWithoutPassword'));
+Route::post('/api/admin/register', array('before' => ['token', 'admin'], 'uses' => 'UserController@storeWithoutPassword'));
 
 // =============================================
 // CATCH ALL ROUTE =============================

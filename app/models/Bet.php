@@ -79,6 +79,6 @@ class Bet extends Eloquent {
         'game_id' => 'exists:game,id',
         'team1_points' => 'required|integer',
         'team2_points' => 'required|integer',
-        'winner_id' => 'required|exists:team,id',
+        'winner_id' => 'exists:team,id',
     );
 }

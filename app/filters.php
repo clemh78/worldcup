@@ -45,3 +45,18 @@ Route::filter('token', function()
             401);
     }
 });
+
+Route::filter('admin', function()
+{
+    $token = Token::getWithToken($_GET['token']);
+    $user = User::with('role')->find($token->user_id);
+    if($user->role->access_level != 2)
+    {
+        return response()->json(
+            array('success' => false,
+                'payload' => array(),
+                'error'   => 'Non autorisé.'
+            ),
+            403);
+    }
+});

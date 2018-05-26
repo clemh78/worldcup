@@ -95,8 +95,17 @@ class UserController extends BaseController {
      */
     public function store()
     {
+        if(!Config::get('app.register_on'))
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Inscription désactivée !"
+                ),
+                400);
+
         $input = Input::all();
         $input['password'] = Hash::make($input['password']);
+        $input['role_id'] = 2;
 
         $validator = Validator::make($input, User::$rules);
 
@@ -115,6 +124,50 @@ class UserController extends BaseController {
             array('success' => true,
                 'payload' => $user->toArray(),
             ));
+    }
+
+    /**
+     * Enregistre un nouvel utilisateur en mode admin
+     *
+     * @return Response
+     */
+    public function storeWithoutPassword()
+    {
+        $input = Input::all();
+        $password = $this->randomPassword();
+        $input['password'] = Hash::make($password);
+
+        $validator = Validator::make($input, User::$rules);
+
+        if ($validator->fails())
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => $validator->messages()
+                ),
+                400);
+
+        $user = User::create($input);
+        $user->save();
+
+        $newUser = User::find($user->id)->toArray();
+        $newUser['password'] = $password;
+
+        return Response::json(
+            array('success' => true,
+                'payload' => $newUser,
+            ));
+    }
+
+    private function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
 
 }

@@ -20,7 +20,7 @@ angular.module('services', [])
             authorize: function(accessLevel, role) {
                 if(role === undefined)
                     if($rootScope.user != null)
-                        role = userRoles.user;
+                        role = $rootScope.user.role.access_level;
                     else
                         role = userRoles.public;
 
@@ -69,6 +69,28 @@ angular.module('services', [])
         }
     })
 
+    .factory('serviceAdmin', function($http) {
+        return {
+            loginWithoutPassword : function(token, login) {
+                return $http({
+                    method: 'POST',
+                    url: '/api/admin/login?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"login" : login})
+                });
+            },
+
+            registerWithoutPassword : function(token, login, role_id) {
+                return $http({
+                    method: 'POST',
+                    url: 'api/admin/register?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"login" : login, "role_id" : role_id})
+                });
+            }
+        }
+    })
+
     .factory('serviceGame', function($http) {
         return {
             GetNext : function(token, gameId){
@@ -95,6 +117,22 @@ angular.module('services', [])
         return {
             GetBracket : function(token){
                 return $http.get('api/bracket?token=' + token);
+            }
+        }
+    })
+
+    .factory('serviceGroup', function($http) {
+        return {
+            getGroups : function(token){
+                return $http.get('api/groups?token=' + token);
+            }
+        }
+    })
+
+    .factory('serviceRole', function($http) {
+        return {
+            getRoles : function(token){
+                return $http.get('api/roles?token=' + token);
             }
         }
     })

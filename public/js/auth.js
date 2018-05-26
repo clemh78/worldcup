@@ -21,7 +21,6 @@ angular.module('auth', [])
             $rootScope.isConnected = false;
         }
 
-
         //Evennement lors du changement de page
         $rootScope.$on("$stateChangeStart", function (event, toState, toParams, fromState, fromParams) {
             $("#content").html("");
@@ -29,10 +28,20 @@ angular.module('auth', [])
 		console.log("test check perm");
 		console.log($rootScope.isConnected);
 
+            function setRole(user) {
+                console.log(user);
+                switch (user.role.access_level) {
+                    case userRoles.admin      : $rootScope.user.isAdmin      = true; break;
+                    case userRoles.user     : $rootScope.user.isMember     = true; break;
+                    default                    : $rootScope.user.isGuest      = true; break;
+                }
+            }
+
             if($rootScope.isConnected){
                 User.getUser($cookies['user_id'], $cookies['token'])
                     .success(function(data) {
                         $rootScope.user = data;
+                        setRole(data);
                     });
             }
 
@@ -71,10 +80,21 @@ angular.module('auth', [])
         $scope.logout = function(){
             User.logout($cookies['token'])
                 .success(function(){
-                    $rootScope.user = null;
-                    $rootScope.isConnected = false;
-                    delete $cookies['token'];
-                    delete $cookies['user_id'];
+                    if($cookies['primary_token'] && $cookies['primary_user_id']) {
+                        $cookies['token'] = $cookies['primary_token'];
+                        $cookies['user_id'] = $cookies['primary_user_id'];
+
+                        delete $cookies['primary_token'];
+                        delete $cookies['primary_user_id'];
+
+                        location.reload();
+                    }
+                    else{
+                        $rootScope.user = null;
+                        $rootScope.isConnected = false;
+                        delete $cookies['token'];
+                        delete $cookies['user_id'];
+                    }
                 });
         }
 

@@ -183,8 +183,9 @@ class Game extends Eloquent {
 
     public function setFinished($num_team){
 
+        //@TODO : à refaire !!!!
         //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
-        if($num_team == 1){
+        /*if($num_team == 1){
             foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
 
                 $cote = $this->getTeam1CoteAttribute();
@@ -214,7 +215,7 @@ class Game extends Eloquent {
             }
 
             $this->winner_id = $this->team2_id;
-        }
+        }*/
 
         /////////////////////////////////////////////////
         //******************* ROUND X *****************//

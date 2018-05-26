@@ -104,6 +104,14 @@ class BetController extends BaseController {
 
         $input['winner_id'] = ($input['winner_id'] != null)?$input['winner_id']:null;
 
+        if($game->kick_at_goal && $bet->winner_id == null)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Veuillez mettre une équipe gagnante !"
+                ),
+                400);
+
         $bet = Bet::create($input);
 
         return Response::json(
@@ -174,6 +182,14 @@ class BetController extends BaseController {
         $bet->winner_id = ($input['winner_id'] != null)?$input['winner_id']:null;
         $bet->team1_points = $input['team1_points'];
         $bet->team2_points = $input['team2_points'];
+
+        if($game->kick_at_goal && $bet->winner_id == null)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Veuillez mettre une équipe gagnante !"
+                ),
+                400);
 
         $bet->save();
         $user->save();

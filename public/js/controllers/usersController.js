@@ -26,7 +26,7 @@ angular.module('usersController', [])
                     }]
                 }
             });
-        }
+        };
 
         $scope.account = function(user){
             $modal.open({
@@ -38,7 +38,7 @@ angular.module('usersController', [])
                     }
                 }
             });
-        }
+        };
 
     }])
 

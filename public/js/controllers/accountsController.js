@@ -25,6 +25,8 @@ angular.module('accountsController', [])
 
     .controller('accountsControllerLogin', ["$scope", "$http", "serviceUser", "$rootScope", "$state", "$cookies", function($scope, $http, User, $rootScope, $state, $cookies) {
 
+        $scope.REGISTER_ON = REGISTER_ON;
+
         $scope.loginSubmit = function(){
             User.login($scope.loginStr, $scope.password)
                 .success(function(data) {

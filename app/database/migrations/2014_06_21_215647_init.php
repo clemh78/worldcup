@@ -12,12 +12,23 @@ class Init extends Migration {
 	 */
 	public function up()
 	{
+        Schema::create('role', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('label', 255);
+            $table->string('description', 255);
+            $table->integer('access_level');
+        });
+
         //Création table des utilisateurs
         Schema::create('user', function($table)
         {
             $table->increments('id')->unsigned();
             $table->string('login', 255);
             $table->string('password', 255);
+            $table->integer('role_id')->unsigned();
+
+            $table->foreign('role_id')->references('id')->on('role');
 
             $table->timestamps();
         });
@@ -33,14 +44,23 @@ class Init extends Migration {
             $table->timestamps();
         });
 
+        //Création table des groupes (poules)
+        Schema::create('group', function($table)
+        {
+            $table->increments('id')->unsigned();
+            $table->string('name', 255);
+        });
+
         //Création table des équipes
         Schema::create('team', function($table)
         {
             $table->increments('id')->unsigned();
             $table->string('name', 255);
             $table->string('code', 3);
-        });
+            $table->integer('group_id')->unsigned()->nullable();
 
+            $table->foreign('group_id')->references('id')->on('group');
+        });
 
         //Création table des étapes de la compétition
         Schema::create('stage', function($table)
@@ -70,6 +90,8 @@ class Init extends Migration {
             $table->integer('stage_game_num')->nullable();
             $table->integer('fifa_match_id');
             $table->timestamp('date');
+
+            $table->boolean('kick_at_goal');
 
             $table->foreign('team1_id')->references('id')->on('team');
             $table->foreign('team2_id')->references('id')->on('team');
@@ -124,6 +146,8 @@ class Init extends Migration {
         Schema::dropIfExists('user');
         Schema::dropIfExists('team');
         Schema::dropIfExists('stage');
+        Schema::dropIfExists('group');
+        Schema::dropIfExists('role');
 	}
 
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * Modèle de donnée des équipes du tournoi
+ * Modèle de donnée des groupes du tournoi
  *
  * PHP version 5.5
  *
@@ -12,14 +12,14 @@
  * @since      0.1
  */
 
-class Team extends Eloquent {
+class Group extends Eloquent {
 
     /**
      * Table corespondant sur le SGBD
      *
      * @var string
      */
-    protected $table = 'team';
+    protected $table = 'group';
 
     public $timestamps = false;
 
@@ -32,23 +32,23 @@ class Team extends Eloquent {
     protected $hidden = array('created_at', 'updated_at');
 
     /**
-     * Récupère l'objet Group de l'équipe
-     *
-     * @var Stage
-     */
-    public function group()
-    {
-        return $this->belongsTo('Group', 'group_id', 'id');
-    }
-
-    /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
      * @var array
      */
     public static $rules = array(
         'name' => 'required|alpha_num|max:255',
-        'flag' => 'required|alpha|max:2',
-        'group_id' => 'exists:group,id',
     );
+
+    protected $with = array('teams');
+
+    /**
+     * Récupère toutes les équipe du groupe
+     *
+     * @var Team[]
+     */
+    public function teams()
+    {
+        return $this->hasMany('Team', 'group_id', 'id');
+    }
 }

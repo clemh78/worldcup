@@ -11,7 +11,7 @@
  * @since      0.1
  */
 
-var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'usersController', 'auth']);
+var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'usersController', 'adminController', 'auth']);
 
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
@@ -56,12 +56,12 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
                 }],
                 users: ["serviceUser", "$cookies", function(User, $cookies){
                     return User.getRanking($cookies['token']);
+                }],
+                groups: ["serviceGroup", "$cookies", function(Group, $cookies){
+                    return Group.getGroups($cookies['token']);
                 }]
             }
         })
-
-console.log('test');
-
 
 });
 

@@ -28,7 +28,7 @@ class User extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = array('login', 'password');
+    protected $fillable = array('login', 'password', 'role_id');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -44,6 +44,9 @@ class User extends Eloquent {
      */
     public $filters = array('login');
 
+
+    protected $with = array('role');
+
     public function toArray()
     {
         $array = parent::toArray();
@@ -57,8 +60,9 @@ class User extends Eloquent {
      * @var array
      */
     public static $rules = array(
-        'login' => 'required|max:255',
-        'password' => 'required|max:255'
+        'login' => 'required|unique:user|max:255',
+        'password' => 'required|max:255',
+        'role_id' => 'exists:role,id'
     );
 
     /**
@@ -69,6 +73,7 @@ class User extends Eloquent {
     public static $rulesUpdate = array(
         'login' => 'max:255',
         'password' => 'max:255',
+        'role_id' => 'exists:role,id'
     );
 
     /**
@@ -96,6 +101,11 @@ class User extends Eloquent {
     public function getWinPointsAttribute()
     {
         return DB::table('transaction')->where('user_id', '=', $this->id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('Role', 'role_id', 'id');
     }
 
     /**

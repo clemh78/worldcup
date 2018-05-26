@@ -13,9 +13,10 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "games", "gamesPrevious", "bracket", function($scope, games, gamesPrevious, bracket) {
+    .controller('gamesControllerList', ["$scope", "games", "gamesPrevious", "bracket", "groups", function($scope, games, gamesPrevious, bracket, groups) {
         $scope.games = games.data;
         $scope.gamesPrevious = gamesPrevious.data;
+        $scope.groups = groups.data;
 
         $("#rounds").gracket({
             src : bracket.data['rounds'],
@@ -41,6 +42,7 @@ angular.module('gamesController', [])
             .css("position", "relative")
             .prepend("<h4>Gagnant</h4>")
 
+        $('#groups').hide();
         $('#bracket').hide();
         $('#gamesPrevious').hide();
         $('#games').show();
@@ -48,6 +50,7 @@ angular.module('gamesController', [])
         $scope.filterList = function(){
             $('#filter-gamesPrevious').parent('li').removeClass('active');
             $('#filter-bracket').parent('li').removeClass('active');
+            $('#filter-groups').parent('li').removeClass('active');
             $('#filter-list').parent('li').addClass('active');
             $('.bracket-header').hide();
             $('#bracket').hide();
@@ -55,11 +58,14 @@ angular.module('gamesController', [])
             $('#games').show();
             $('.game-previous-header').hide();
             $('#gamesPrevious').hide();
+            $('#groups').hide();
+            $('.groups-header').hide();
         };
 
         $scope.filterBracket = function(){
             $('#filter-list').parent('li').removeClass('active');
             $('#filter-gamesPrevious').parent('li').removeClass('active');
+            $('#filter-groups').parent('li').removeClass('active');
             $('#filter-bracket').parent('li').addClass('active');
             $('.game-header').hide();
             $('#games').hide();
@@ -67,11 +73,14 @@ angular.module('gamesController', [])
             $('#bracket').show();
             $('.game-previous-header').hide();
             $('#gamesPrevious').hide();
+            $('#groups').hide();
+            $('.groups-header').hide();
         };
 
         $scope.filterGamesPrevious = function(){
             $('#filter-list').parent('li').removeClass('active');
             $('#filter-bracket').parent('li').removeClass('active');
+            $('#filter-groups').parent('li').removeClass('active');
             $('#filter-gamesPrevious').parent('li').addClass('active');
             $('.game-header').hide();
             $('#games').hide();
@@ -79,6 +88,23 @@ angular.module('gamesController', [])
             $('#bracket').hide();
             $('.game-previous-header').show();
             $('#gamesPrevious').show();
+            $('#groups').hide();
+            $('.groups-header').hide();
+        };
+
+        $scope.filterGroups = function(){
+            $('#filter-gamesPrevious').parent('li').removeClass('active');
+            $('#filter-bracket').parent('li').removeClass('active');
+            $('#filter-groups').parent('li').addClass('active');
+            $('#filter-list').parent('li').removeClass('active');
+            $('.bracket-header').hide();
+            $('#bracket').hide();
+            $('.game-header').hide();
+            $('#games').hide();
+            $('.game-previous-header').hide();
+            $('#gamesPrevious').hide();
+            $('#groups').show();
+            $('.groups-header').show();
         };
     }])
 

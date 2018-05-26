@@ -33,11 +33,18 @@
     color: #fff;
 }
 
-#infos,.alert-danger{
+#infos{
     font-size: 16px;
     border: none;
     border-radius: 1px;
     margin:8px;
+    position: fixed;
+    bottom: 0px;
+    z-index: 100;
+}
+
+.primaryMessage {
+    right:0px;
 }
 
 /************************** Navbar **************************/
@@ -165,6 +172,29 @@ header{
     color: #0066f4;
 }
 
+/************************** ADMIN **************************/
+
+#admin-panel{
+    position: relative;
+    margin-top: 125px;
+    z-index: 10;
+    padding-top: 20px;
+}
+
+#menu-admin{
+    position: relative;
+    padding: 10px;
+    border-radius: 1px;
+}
+
+#menu-admin .nav {
+    float: none;
+}
+
+#users-list{
+    background-color: #fff;
+}
+
 /************************** Games **************************/
 
 #games-panel{
@@ -251,12 +281,8 @@ ul.nav.nav-pills li.active a{
 
 
 .game{
-    margin-bottom: 30px;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
 }
-
-
 
 .game:first-child{
     border-top: none;
