@@ -1,0 +1,11 @@
+<div class="bet_bonus">
+    <div class="modal-header">
+        <h3 class="modal-title">Paris bonus</h3>
+    </div>
+    <div class="modal-body">
+        <div class="bbt" ng-repeat="bbt in bbts" >
+            <h2>@@bbt.label@@</h2>
+            <select ng-disabled="!isActive(bbt)" ng-change="updateBet(bbt.id)" class="form-control" ng-model="bets_bonus[bbt.id]" ng-options="team.id as team.name for team in teams"></select>
+        </div>
+    </div>
+</div>

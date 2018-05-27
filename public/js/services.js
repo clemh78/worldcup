@@ -129,6 +129,22 @@ angular.module('services', [])
         }
     })
 
+    .factory('serviceTeam', function($http) {
+        return {
+            getTeams : function(token){
+                return $http.get('api/teams?token=' + token);
+            }
+        }
+    })
+
+    .factory('serviceBetBonusType', function($http) {
+        return {
+            getBbts : function(token){
+                return $http.get('api/bbts?token=' + token);
+            }
+        }
+    })
+
     .factory('serviceRole', function($http) {
         return {
             getRoles : function(token){
@@ -158,5 +174,22 @@ angular.module('services', [])
             GetBet : function(token, gameId){
                 return $http.get('api/bets?token=' + token + '&game_id=' + gameId);
             }
+        }
+    })
+
+    .factory('serviceBonusBet', function($http) {
+        return {
+
+            GetBonusBets : function(token){
+                return $http.get('api/bets_bonus?token=' + token);
+            },
+            storeBet : function(token, userId, bbtId, teamId){
+                return $http({
+                    method: 'POST',
+                    url: 'api/bets_bonus?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"user_id" : userId, "bbt_id" : bbtId, "team_id" : teamId})
+                });
+            },
         }
     })

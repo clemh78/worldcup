@@ -38,8 +38,17 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
     Route::resource('groups', 'GroupController',
         array('only' => array('index', 'show')));
 
+    Route::resource('teams', 'TeamController',
+        array('only' => array('index', 'show')));
+
+    Route::resource('bbts', 'BetBonusTypeController',
+        array('only' => array('index', 'show')));
+
     Route::resource('bets', 'BetController',
         array('only' => array('index', 'show', 'store', 'update')));
+
+    Route::resource('bets_bonus', 'BetBonusController',
+        array('only' => array('index', 'show', 'store')));
 
     Route::resource('bracket', 'BracketController',
         array('only' => array('index')));
