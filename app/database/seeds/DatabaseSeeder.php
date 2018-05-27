@@ -16,6 +16,7 @@ class DatabaseSeeder extends Seeder {
         $this->call('TeamTableSeeder');
         $this->call('StageTableSeeder');
         $this->call('GameTableSeeder');
+        $this->call('BetBonusTypeTableSeeder');
         $this->call('TestSeeder');
     }
 
@@ -220,6 +221,19 @@ class GameTableSeeder extends Seeder {
 
         //Petite Finale
         Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331536, 'stage_id' => 5, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-14T16:00:00.000Z"))));
+
+    }
+
+}
+
+class BetBonusTypeTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('bet_bonus_type')->delete();
+
+        BetBonusType::create(array('label' => 'Vainqueur de la coupe', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 6));
+        BetBonusType::create(array('label' => 'Finaliste de la coupe', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 3));
 
     }
 

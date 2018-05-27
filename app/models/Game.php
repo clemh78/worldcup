@@ -108,32 +108,6 @@ class Game extends Eloquent {
         return $this->hasMany('Bet', 'game_id', 'id');
     }
 
-    /**
-     * Calcule la "cote" de l'équipe 1
-     *
-     * @var Integer
-     */
-    public function getTeam1CoteAttribute()
-    {
-        /*$sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');*/
-        $sumPoints1 = 0;
-        $sumPoints2 = 0;
-
-        $cote = ((($sumPoints2+1)/($sumPoints1+1))+1);
-
-        $cote = round($cote, 2);
-
-        if($cote > $this->MAX_COTE)
-            $cote = $this->MAX_COTE;
-
-        if($cote < $this->MIN_COTE)
-            $cote = $this->MIN_COTE;
-
-        return $cote;
-    }
-
-
     public function getUserHasBetAttribute()
     {
         $user = User::getUserWithToken($_GET['token']);
@@ -143,30 +117,6 @@ class Game extends Eloquent {
             return true;
         else
             return false;
-    }
-
-    /**
-     * Calcule la "cote" de l'équipe 2
-     *
-     * @var Integer
-     */
-    public function getTeam2CoteAttribute()
-    {
-        /*$sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');*/
-        $sumPoints1 = 0;
-        $sumPoints2 = 0;
-
-        $cote = ((($sumPoints1+1)/($sumPoints2+1))+1);
-        $cote = round($cote,2);
-
-        if($cote > $this->MAX_COTE)
-            $cote = $this->MAX_COTE;
-
-        if($cote < $this->MIN_COTE)
-            $cote = $this->MIN_COTE;
-
-        return $cote;
     }
 
     public function toArray()
@@ -183,39 +133,49 @@ class Game extends Eloquent {
 
     public function setFinished($num_team){
 
-        //@TODO : à refaire !!!!
+        $POINTS_BON_WINNER = 1;
+        $POINTS_SCORE_EXACT = 4;
+        $POINTS_ECART = 2;
+
         //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
-        /*if($num_team == 1){
+        if($num_team == 1){
             foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
+                Transaction::addTransaction($bet->user_id, $bet->id, $POINTS_BON_WINNER, 'gain');
 
-                $cote = $this->getTeam1CoteAttribute();
-                $points = $bet->points * $cote;
+                if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                    Transaction::addTransaction($bet->user_id, $bet->id, $POINTS_SCORE_EXACT, 'bonus');
 
-                Transaction::addTransaction($bet->user_id, $bet->id, $points, 'bonus');
-
-                if($bet->inDistance($this->team1_points-$this->team2_points))
-                    Transaction::addTransaction($bet->user_id, $bet->id, (($bet->points/10)*$cote), 'gain');
-
+                if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
+                    Transaction::addTransaction($bet->user_id, $bet->id, $POINTS_ECART, 'bonus');
             }
 
             $this->winner_id = $this->team1_id;
+            $this->looser_id = $this->team2_id;
 
         //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
         }else{
             foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
+                Transaction::addTransaction($bet->user_id, $bet->id, $POINTS_BON_WINNER, 'gain');
 
-                $cote = $this->getTeam2CoteAttribute();
-                $points = $bet->points * $cote;
+                if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                    Transaction::addTransaction($bet->user_id, $bet->id, $POINTS_SCORE_EXACT, 'bonus');
 
-                Transaction::addTransaction($bet->user_id, $bet->id, $points, 'bonus');
-
-                if($bet->inDistance($this->team2_points-$this->team1_points))
-                    Transaction::addTransaction($bet->user_id, $bet->id, (($bet->points/10)*$cote), 'gain');
-
+                if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
+                    Transaction::addTransaction($bet->user_id, $bet->id, $POINTS_ECART, 'bonus');
             }
 
             $this->winner_id = $this->team2_id;
-        }*/
+            $this->looser_id = $this->team1_id;
+        }
+
+        //On check les paris bonus
+        foreach(BetBonusType::whereRaw('trigger_data_type = GAME && trigger_data_id = ?', array($this->id))->get() as $betBonusType){
+            foreach($betBonusType->bets() as $bet){
+                if($betBonusType->trigger_condition == "WINNER" && $bet->team_id == $this->winner_id || $betBonusType->trigger_condition == "LOOSER" && $bet->team_id == $this->looser_id){
+                    Transaction::addTransaction($bet->user_id, $betBonusType->trigger_data_id, $betBonusType->trigger_points, 'bonus');
+                }
+            }
+        }
 
         /////////////////////////////////////////////////
         //******************* ROUND X *****************//

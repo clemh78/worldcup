@@ -29,7 +29,7 @@ class BetBonusType extends Eloquent {
      *
      * @var array
      */
-    protected $hidden = array('created_at', 'updated_at');
+    protected $hidden = array('created_at', 'updated_at', 'trigger_data_type', 'trigger_data_id', 'trigger_points', 'trigger_condition');
 
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql

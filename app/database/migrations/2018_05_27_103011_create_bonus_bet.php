@@ -18,6 +18,11 @@ class CreateBonusBet extends Migration {
             $table->increments('id')->unsigned();
             $table->string('label', 255);
             $table->timestamp('date');
+
+            $table->string('trigger_data_type', 255);
+            $table->string('trigger_data_id', 255);
+            $table->string('trigger_condition', 255);
+            $table->integer('trigger_points');
         });
 
         //Création table des pari bonus
