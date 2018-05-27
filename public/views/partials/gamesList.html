@@ -68,13 +68,13 @@
                 <div class="jumbotron" ng-show="gamesPrevious.length == 0"><h2>Pas de match pour le moment ! :(</h2></div>
             </div>
             <div id="groups">
-                <div class="group row" ng-repeat="group in groups" >
-                    <div class="col-xs-12 groups-header animated fadeIn" >
+                <div class="row" >
+                    <div class="col-md-3 group" ng-repeat="group in groups" >
                         <h2 class="subheader" >@@ group.name @@</h2>
+                        <ul>
+                            <li ng-repeat="team in group.teams" ><img src="images/flags/@@ team.code.toLowerCase() @@"> @@ team.name @@</li>
+                        </ul>
                     </div>
-                    <ul>
-                        <li ng-repeat="team in group.teams" >@@ team.name @@</li>
-                    </ul>
                 </div>
             </div>
             <div id="bracket">
