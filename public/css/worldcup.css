@@ -422,7 +422,7 @@ ul.nav.nav-pills li.active a{
 /************************** Group *************************/
 
 .group .subheader {
-    background-color: #c5181f;
+    background-color: #0057b8;
     color: #fff;
     height: 60px;
     padding: 12px 30px;
@@ -436,7 +436,16 @@ ul.nav.nav-pills li.active a{
 
 .group ul li {
     margin-top: 10px;
-    font-size: 20px;
+    font-size: 15px;
+}
+
+.group ul li .points {
+    float:right;
+    background-color: #c5181f;
+    color: white;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
 }
 
 .group ul li img {

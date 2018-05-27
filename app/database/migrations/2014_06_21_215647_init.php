@@ -57,6 +57,7 @@ class Init extends Migration {
             $table->increments('id')->unsigned();
             $table->string('name', 255);
             $table->string('code', 3);
+            $table->integer('points')->default(0);
             $table->integer('group_id')->unsigned()->nullable();
 
             $table->foreign('group_id')->references('id')->on('group');

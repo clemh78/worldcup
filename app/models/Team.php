@@ -49,6 +49,7 @@ class Team extends Eloquent {
     public static $rules = array(
         'name' => 'required|alpha_num|max:255',
         'flag' => 'required|alpha|max:2',
+        'points' => 'required|numeric',
         'group_id' => 'exists:group,id',
     );
 }
