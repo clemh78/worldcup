@@ -116,6 +116,14 @@ class UserController extends BaseController {
         $input['password'] = Hash::make($input['password']);
         $input['role_id'] = 2;
 
+        if (!$input['room_code'])
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Veuillez indique un salon"
+                ),
+                400);
+
         $validator = Validator::make($input, User::$rules);
 
         if ($validator->fails())
@@ -126,7 +134,20 @@ class UserController extends BaseController {
                 ),
                 400);
 
+        $room = Room::where('code', '=', $input['room_code'])->first();
+
+        if (!$room)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Ce salon n'existe pas !"
+                ),
+                400);
+
         $user = User::create($input);
+        $user->save();
+
+        $user->rooms()->attach($room->id);
         $user->save();
 
         return Response::json(
