@@ -11,7 +11,7 @@
  * @since      0.1
  */
 
-var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'usersController', 'adminController', 'auth']);
+var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-loading-bar', 'ui.bootstrap', 'services', 'angularMoment', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'usersController', 'adminController', 'auth']);
 
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 

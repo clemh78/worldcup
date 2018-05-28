@@ -120,7 +120,9 @@ angular.module('betsController', [])
         }
 
         $scope.isActive = function(bbt){
-            return new Date(bbt.date) > new Date();
+            now = moment();
+
+            return now.isBefore(moment(bbt.date));
         }
     }]);
 
