@@ -26,6 +26,10 @@ class Init extends Migration {
             $table->increments('id')->unsigned();
             $table->string('login', 255);
             $table->string('password', 255);
+
+            $table->string('firstname', 255);
+            $table->string('lastname', 1);
+
             $table->integer('role_id')->unsigned();
 
             $table->foreign('role_id')->references('id')->on('role');

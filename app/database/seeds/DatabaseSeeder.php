@@ -246,8 +246,8 @@ class TestSeeder extends Seeder {
 
     public function run()
     {
-        User::create(array('login' => 'admin', 'password' => Hash::make('admin'), 'role_id' => 1));
-        User::create(array('login' => 'user', 'password' => Hash::make('user'), 'role_id' => 2));
+        User::create(array('login' => 'admin', 'firstname' => 'Admin', 'lastname' => 'A', 'password' => Hash::make('admin'), 'role_id' => 1));
+        User::create(array('login' => 'user', 'firstname' => 'User', 'lastname' => 'A',  'password' => Hash::make('user'), 'role_id' => 2));
 
         Bet::create(array('user_id' => 1, 'game_id' => 1, 'team1_points' => 12, 'team2_points' => 1, 'winner_id' => 1));
         Bet::create(array('user_id' => 1, 'game_id' => 2, 'team1_points' => 1, 'team2_points' => 2, 'winner_id' => 3));

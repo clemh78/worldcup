@@ -15,11 +15,9 @@
 
         <div class="user" ng-repeat="user in usersSelect | orderBy : '-winPoints'">
             <div class="position" >
-                @@ $index + 1 @@
-                <span class="pos_txt" ng-show="$index == 0" >er</span>
-                <span class="pos_txt" ng-show="$index > 0" >ème</span>
+                #@@ $index + 1 @@
             </div>
-            <div class="login" >@@ user.login @@</div>
+            <div class="login" >@@ user.firstname @@ @@ user.lastname @@.</div>
             <div class="points" >@@ user.winPoints @@ XP</div>
             <p style="clear:both;" />
         </div>

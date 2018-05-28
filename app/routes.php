@@ -64,6 +64,7 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
 Route::post('/api/admin/login', array('before' => ['token', 'admin'], 'uses' => 'AuthController@loginWithoutPassword'));
 Route::post('/api/admin/register', array('before' => ['token', 'admin'], 'uses' => 'UserController@storeWithoutPassword'));
+Route::get('/api/admin/users', array('before' => 'token', 'uses' => 'UserController@indexAdmin'));
 
 // =============================================
 // CATCH ALL ROUTE =============================

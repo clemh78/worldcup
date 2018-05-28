@@ -16,7 +16,7 @@ angular.module('accountsController', [])
     .controller('accountsControllerRegister', ["$scope", "$http", "serviceUser", "$rootScope", "$state", function($scope, $http, User, $rootScope, $state) {
 
         $scope.registerSubmit = function(){
-            User.register($scope.loginStr, $scope.password)
+            User.register($scope.loginStr, $scope.password, $scope.firstnameStr, $scope.lastnameStr)
                 .success(function() {
                    $state.transitionTo("login");
                 });

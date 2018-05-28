@@ -54,7 +54,7 @@ class Room extends Eloquent {
 
     public function getNbUsersAttribute()
     {
-        return count($this->users());
+        return count($this->users()->get());
     }
 
 }

@@ -3,11 +3,11 @@
         <h2 class="modal-title">Mes salons</h2>
     </div>
     <div class="modal-body">
-        <ul>
-            <li ng-repeat="room in user.rooms" >
-                @@room.name@@
-                <span class="label label-default">@@room.nbUsers@@ joueurs</span>
-                <span style="float:right;" class="label label-success">Code du salon : @@room.code@@</span>
+        <ul class="list-group">
+            <li ng-repeat="room in user.rooms" class="list-group-item">
+                <b>@@room.name@@</b>
+                <div class="code">Code du salon : <b>@@room.code@@</b></div>
+                <div class="nbUsers">@@room.nbUsers@@ joueurs</div>
             </li>
         </ul>
 
@@ -15,9 +15,14 @@
 
         <hr>
 
-        <h2>Rejoindre un salon</h2><br />
-        <input type="text" ng-model="roomCode" class="form-control" placeholder="Code du salon"/><br />
-        <button class="btn btn-default" ng-click="addRoom()">Rejoindre</button>
+        <div class="row" >
+            <div class="col-xs-9" >
+                <input type="text" ng-model="roomCode" class="form-control" placeholder="Code du salon"/>
+            </div>
+            <div class="col-xs-3" >
+                <button style="float:right;" class="btn btn-default" ng-click="addRoom()">Rejoindre</button>
+            </div>
+        </div>
     </div>
     <div class="modal-footer">
         <button class="btn btn-warning" ng-click="cancel()">Annuler</button>

@@ -484,15 +484,11 @@ ul.nav.nav-pills li.active a{
     padding-right: 10px;
 }
 
-.users .modal-body .user .position .pos_txt {
-    font-size: 15px;
-}
-
 .users .modal-body .user .login {
     float:left;
     margin-left: 20px;
     font-size: 25px;
-    padding-top: 3px;
+    padding-top: 5px;
     text-transform: uppercase;
 }
 
@@ -730,4 +726,23 @@ ul.nav.nav-pills li.active a{
     background-color: #3c763d;
     border-color: #3c763d;
     color: white;
+}
+
+.room .nbUsers{
+    background-color: #0057b8;
+    color:white;
+    float: right;
+    padding: 10px;
+    margin-top: -10px;
+}
+
+.room .code{
+    background-color: #47a447;
+    color:white;
+    float: right;
+    padding: 10px;
+    margin-top: -10px;
+    margin-right: -15px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
 }

@@ -213,6 +213,15 @@ class UserController extends BaseController {
             ));
     }
 
+    public function indexAdmin()
+    {
+
+        return Response::json(
+            array('success' => true,
+                'payload' => (new User())->get()->toArray(),
+            ), 200, [], JSON_NUMERIC_CHECK);
+    }
+
     private function randomPassword() {
         $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
         $pass = array(); //remember to declare $pass as an array

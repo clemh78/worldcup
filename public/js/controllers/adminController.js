@@ -61,7 +61,7 @@ angular.module('adminController', [])
         };
 
         $scope.registerSubmit = function(){
-            Admin.registerWithoutPassword($cookies['token'], $scope.newUser.login, $scope.newUser.role_id)
+            Admin.registerWithoutPassword($cookies['token'], $scope.newUser.login, $scope.newUser.role_id, $scope.newUser.firstname, $scope.newUser.lastname)
                 .success(function(data) {
                     $scope.users.push(data);
                     $scope.newUser.password = data.password;
@@ -82,8 +82,8 @@ angular.module('adminController', [])
                 controller: 'adminControllerList',
                 size: 'lg',
                 resolve: {
-                    users: [ "serviceUser", "$cookies", function(User, $cookies){
-                        return User.getRanking($cookies['token']);
+                    users: [ "serviceAdmin", "$cookies", function(Admin, $cookies){
+                        return Admin.getUsers($cookies['token']);
                     }],
                     roles: [ "serviceRole", "$cookies", function(Role, $cookies){
                         return Role.getRoles($cookies['token']);

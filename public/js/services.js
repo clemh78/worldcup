@@ -48,12 +48,12 @@ angular.module('services', [])
                 return $http.get('/api/users/logout?token=' + token);
             },
 
-            register : function(login, pass) {
+            register : function(login, pass, firstname, lastname) {
                 return $http({
                     method: 'POST',
                     url: 'api/users',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"login" : login, "password" : pass})
+                    data: $.param({"login" : login, "password" : pass, 'firstname' : firstname, 'lastname' : lastname})
                 });
             },
 
@@ -89,14 +89,18 @@ angular.module('services', [])
                 });
             },
 
-            registerWithoutPassword : function(token, login, role_id) {
+            registerWithoutPassword : function(token, login, role_id, firstname, lastname) {
                 return $http({
                     method: 'POST',
                     url: 'api/admin/register?token=' + token,
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"login" : login, "role_id" : role_id})
+                    data: $.param({"login" : login, "role_id" : role_id, 'firstname' : firstname, 'lastname' : lastname})
                 });
-            }
+            },
+
+            getUsers : function(token) {
+                return $http.get('/api/admin/users?token=' + token);
+            },
         }
     })
 
