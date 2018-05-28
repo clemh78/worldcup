@@ -56,7 +56,7 @@ class Game extends Eloquent {
      *
      * @var array
      */
-    protected $with = array('stage', 'team1', 'team2', 'winner', 'bets');
+    protected $with = array('stage', 'team1', 'team2', 'winner');
 
     /**
      * Récupère l'objet Stage indiqué dans ce matche

@@ -23,6 +23,13 @@ class Room extends Eloquent {
 
     public $timestamps = false;
 
+    public function toArray()
+    {
+        $array = parent::toArray();
+        $array['nbUsers'] = $this->nbUsers;
+        return $array;
+    }
+
     /**
      * Table corespondant au champ caché sur les retours JSON
      *
@@ -40,5 +47,14 @@ class Room extends Eloquent {
         'code' => 'required|alpha_num|max:10',
     );
 
+    public function users()
+    {
+        return $this->belongsToMany('User');
+    }
+
+    public function getNbUsersAttribute()
+    {
+        return count($this->users());
+    }
 
 }

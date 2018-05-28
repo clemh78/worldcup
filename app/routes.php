@@ -26,6 +26,8 @@ Route::get('/api/bets/distances', 'BetController@distances');
 
 Route::post('/api/users/join', array('before' => 'token', 'uses' => 'UserController@joinRoom'));
 
+Route::get('/api/games/{id?}/bets', array('before' => 'token', 'uses' => 'GameController@getBets'));
+
 //Tout les ressources disponibles avec un token
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 

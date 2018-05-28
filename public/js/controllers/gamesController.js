@@ -117,17 +117,22 @@ angular.module('gamesController', [])
                 resolve: {
                     game: function(){
                         return game;
-                    }
+                    },
+                    bets: [ "serviceGame", "$cookies", function(Game, $cookies){
+                        return Game.GetBets($cookies['token'], game.id);
+                    }]
                 }
             });
         };
     })
 
 
-    .controller('gamesControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game" , function ($scope, $modalInstance, $cookies, game) {
+    .controller('gamesControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "bets", function ($scope, $modalInstance, $cookies, game, bets) {
         $scope.game = game;
 
         $scope.teams = [game.team1, game.team2];
+
+        $scope.bets = bets.data;
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

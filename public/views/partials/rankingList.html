@@ -3,14 +3,16 @@
         <h3 class="modal-title">Classement</h3>
     </div>
     <div class="modal-body">
-        <table class="table">
-            <thead>
+        <div ng-repeat="room in rooms" >
+            <h2>@@room.room.name@@</h2><br />
+            <table class="table">
+                <thead>
                 <th>Position</th>
                 <th>Total XP</th>
                 <th>Utilisateur</th>
-            </thead>
-            <tbody>
-                <tr ng-repeat="user in users | orderBy : '-winPoints'">
+                </thead>
+                <tbody>
+                <tr ng-repeat="user in room.users | orderBy : '-winPoints'">
                     <td>
                         <h3>@@ $index + 1 @@</h3>
                         <img src="/images/medals/medal1.png" ng-show="$index + 1 == 1"/>
@@ -20,8 +22,9 @@
                     <td><h3>@@ user.winPoints @@</h3></td>
                     <td><h3>@@ user.login @@</h3></td>
                 </tr>
-            </tbody>
-        </table>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

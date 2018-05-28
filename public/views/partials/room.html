@@ -6,6 +6,8 @@
         <ul>
             <li ng-repeat="room in user.rooms" >
                 @@room.name@@
+                <span class="label label-default">@@room.nbUsers@@ joueurs</span>
+                <span style="float:right;" class="label label-success">Code du salon : @@room.code@@</span>
             </li>
         </ul>
 

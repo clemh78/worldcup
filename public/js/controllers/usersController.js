@@ -56,6 +56,24 @@ angular.module('usersController', [])
 
     .controller('usersControllerListModalInstance', ["$scope", "serviceUser","$cookies", "$modalInstance", "users", function($scope, User, $cookies, $modalInstance, users) {
         $scope.users = users.data;
+        $scope.rooms = [];
+
+        angular.forEach($scope.users, function(user, key) {
+            angular.forEach(user.rooms, function(room, key) {
+                if(room.id){
+                    if(!$scope.rooms[room.id]){
+                        $scope.rooms[room.id] = {
+                            'room' : room,
+                            'users' : []
+                        }
+                    }
+
+                    $scope.rooms[room.id].users.push(user);
+                }
+            });
+        });
+
+        $scope.rooms.shift();
     }])
 
     .controller('usersControllerAccountModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {

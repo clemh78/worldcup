@@ -23,9 +23,18 @@ class UserController extends BaseController {
      */
     public function index()
     {
+        $ids = [];
+        $user = User::getUserWithToken($_GET['token']);
+        $rooms = $user->rooms;
+        foreach($rooms as $room){
+            foreach($room->users as $user) {
+                $ids[] = $user->id;
+            }
+        }
+
         return Response::json(
             array('success' => true,
-                'payload' => $this->query_params(new User())->toArray(),
+                'payload' => (new User())->whereIn('id', $ids)->get()->toArray(),
             ), 200, [], JSON_NUMERIC_CHECK);
     }
 

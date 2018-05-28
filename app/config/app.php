@@ -94,7 +94,7 @@ return array(
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
 
-    'register_on' => false,
+    'register_on' => true,
 
 	/*
 	|--------------------------------------------------------------------------
