@@ -454,7 +454,58 @@ ul.nav.nav-pills li.active a{
 
 /************************** Ranking *************************/
 
-.users .table h3{
+.users .modal-body {
+    background-color: #0057b8;
+    background-image: url(../images/fwc_darkbluebg.png);
+    color: white;
+}
+
+.users .modal-body .nav {
+    margin-bottom: 20px;
+}
+
+.users .modal-body .alert-info {
+    background-color: #47a447;
+    border-color: #47a447;
+    color: white;
+}
+
+.users .modal-body .user {
+    margin-top: 5px;
+}
+
+.users .modal-body .user .position {
+    float:left;
+    font-size: 25px;
+    background-color: #c5181f;
+    color: white;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.users .modal-body .user .position .pos_txt {
+    font-size: 15px;
+}
+
+.users .modal-body .user .login {
+    float:left;
+    margin-left: 20px;
+    font-size: 25px;
+    padding-top: 3px;
+    text-transform: uppercase;
+}
+
+.users .modal-body .user .points {
+    float: right;
+    background-color: #47a447;
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    font-size: 17px;
+}
+
+/*.users .table h3{
     display: inline-block;
     padding: 5px 5px;
 }
@@ -468,7 +519,7 @@ ul.nav.nav-pills li.active a{
 .users .table h3 .lastname{
     display: inline;
     text-transform: uppercase;
-}
+}*/
 
 /************************** Account *************************/
 

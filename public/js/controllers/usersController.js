@@ -73,6 +73,14 @@ angular.module('usersController', [])
             });
         });
 
+        $scope.usersSelect = $scope.users;
+        $scope.selector = 'all';
+
+        $scope.select = function(selector, users){
+            $scope.selector = selector;
+            $scope.usersSelect = users;
+        };
+
         $scope.rooms.shift();
     }])
 

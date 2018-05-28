@@ -3,27 +3,25 @@
         <h3 class="modal-title">Classement</h3>
     </div>
     <div class="modal-body">
-        <div ng-repeat="room in rooms" >
-            <h2>@@room.room.name@@</h2><br />
-            <table class="table">
-                <thead>
-                <th>Position</th>
-                <th>Total XP</th>
-                <th>Utilisateur</th>
-                </thead>
-                <tbody>
-                <tr ng-repeat="user in room.users | orderBy : '-winPoints'">
-                    <td>
-                        <h3>@@ $index + 1 @@</h3>
-                        <img src="/images/medals/medal1.png" ng-show="$index + 1 == 1"/>
-                        <img src="/images/medals/medal2.png" ng-show="$index + 1 == 2"/>
-                        <img src="/images/medals/medal3.png" ng-show="$index + 1 == 3"/>
-                    </td>
-                    <td><h3>@@ user.winPoints @@</h3></td>
-                    <td><h3>@@ user.login @@</h3></td>
-                </tr>
-                </tbody>
-            </table>
+
+
+        <div class="alert alert-info" ng-show="rooms.length == 0" role="alert">Rejoignez un salon avec vos amis pour partager vos résultas</div>
+
+        <ul class="nav nav-pills" ng-show="rooms.length > 1">
+            <li ng-class="{'active' : selector=='all'}" ><a href="#" ng-click="select('all', users)" >Tous les utilisateurs</a></li>
+            <li ng-repeat="room in rooms" ng-class="{'active' : selector==room.room.id}" ><a href="#" ng-click="select(room.room.id, room.users)" >Salon : @@room.room.name@@</a></li>
+        </ul>
+        <p style="clear:both;" />
+
+        <div class="user" ng-repeat="user in usersSelect | orderBy : '-winPoints'">
+            <div class="position" >
+                @@ $index + 1 @@
+                <span class="pos_txt" ng-show="$index == 0" >er</span>
+                <span class="pos_txt" ng-show="$index > 0" >ème</span>
+            </div>
+            <div class="login" >@@ user.login @@</div>
+            <div class="points" >@@ user.winPoints @@ XP</div>
+            <p style="clear:both;" />
         </div>
     </div>
 </div>
