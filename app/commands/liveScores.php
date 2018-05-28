@@ -20,7 +20,7 @@ class liveScores extends Command {
 	 *
 	 * @var string
 	 */
-	protected $description = 'Tache qui permet de récupérer les scores en direct depuis KimonoLabs.';
+	protected $description = 'Tache qui permet de récupérer les scores en direct depuis la FIFA.';
 
 	/**
 	 * Create a new command instance.

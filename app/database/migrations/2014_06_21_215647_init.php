@@ -49,6 +49,10 @@ class Init extends Migration {
         {
             $table->increments('id')->unsigned();
             $table->string('name', 255);
+            $table->string('code', 1);
+
+            $table->integer('winner_id')->unsigned()->nullable();
+            $table->integer('runnerup_id')->unsigned()->nullable();
         });
 
         //Création table des équipes
@@ -61,6 +65,13 @@ class Init extends Migration {
             $table->integer('group_id')->unsigned()->nullable();
 
             $table->foreign('group_id')->references('id')->on('group');
+        });
+
+        //Modification table group
+        Schema::table('group', function($table)
+        {
+            $table->foreign('winner_id')->references('id')->on('team');
+            $table->foreign('runnerup_id')->references('id')->on('team');
         });
 
         //Création table des étapes de la compétition

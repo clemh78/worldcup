@@ -100,7 +100,10 @@ class User extends Eloquent {
 
     public function getWinPointsAttribute()
     {
-        return DB::table('transaction')->where('user_id', '=', $this->id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+        $total = DB::table('transaction')->where('user_id', '=', $this->id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+        $total = $total - DB::table('transaction')->where('user_id', '=', $this->id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
+
+        return $total;
     }
 
     public function role()

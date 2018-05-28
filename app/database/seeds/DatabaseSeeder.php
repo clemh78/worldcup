@@ -40,14 +40,14 @@ class GroupTableSeeder extends Seeder {
     {
         DB::table('group')->delete();
 
-        Group::create(array('name' => 'Groupe A')); //1
-        Group::create(array('name' => 'Groupe B')); //2
-        Group::create(array('name' => 'Groupe C')); //3
-        Group::create(array('name' => 'Groupe D')); //4
-        Group::create(array('name' => 'Groupe E')); //5
-        Group::create(array('name' => 'Groupe F')); //6
-        Group::create(array('name' => 'Groupe G')); //7
-        Group::create(array('name' => 'Groupe H')); //8
+        Group::create(array('name' => 'Groupe A', 'code' => 'A')); //1
+        Group::create(array('name' => 'Groupe B', 'code' => 'B')); //2
+        Group::create(array('name' => 'Groupe C', 'code' => 'C')); //3
+        Group::create(array('name' => 'Groupe D', 'code' => 'D')); //4
+        Group::create(array('name' => 'Groupe E', 'code' => 'E')); //5
+        Group::create(array('name' => 'Groupe F', 'code' => 'F')); //6
+        Group::create(array('name' => 'Groupe G', 'code' => 'G')); //7
+        Group::create(array('name' => 'Groupe H', 'code' => 'H')); //8
     }
 
 }
@@ -232,8 +232,11 @@ class BetBonusTypeTableSeeder extends Seeder {
     {
         DB::table('bet_bonus_type')->delete();
 
-        BetBonusType::create(array('label' => 'Vainqueur de la coupe', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 6));
-        BetBonusType::create(array('label' => 'Finaliste de la coupe', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 3));
+        BetBonusType::create(array('label' => 'Vainqueur de la coupe', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 10));
+        BetBonusType::create(array('label' => 'Vainqueur de la coupe (hide)', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 5, 'linked_bbt_id' => 1));
+
+        BetBonusType::create(array('label' => 'Finaliste de la coupe', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 10));
+        BetBonusType::create(array('label' => 'Finaliste de la coupe (hide)', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 5, 'linked_bbt_id' => 3));
 
     }
 

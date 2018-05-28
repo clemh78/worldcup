@@ -81,6 +81,16 @@ class BetBonusController extends BaseController {
                 ),
                 400);
 
+        $bbt = BetBonusType::find($input['bbt_id']);
+        //On vérifie si le pari n'est pas un pari lié
+        if($bbt->linked_bbt_id)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Ceci est un pari caché car lié à un autre pari."
+                ),
+                400);
+
         $bet = BetBonus::whereRaw('user_id = ? && bbt_id = ?', array($input['user_id'], $input['bbt_id']))->first();
         //Si un paris sur le même pari bonus pour cet utilisateur existe, erreur envoyée.
         if($bet) {
@@ -88,6 +98,21 @@ class BetBonusController extends BaseController {
             $bet->save();
         }else
             $bet = BetBonus::create($input);
+
+        //SI lien
+        $bbts = BetBonusType::whereRaw('linked_bbt_id = ?', array($bbt->id))->get();
+
+        foreach ($bbts as $bbtL){
+            $betL = BetBonus::whereRaw('user_id = ? && bbt_id = ?', array($input['user_id'], $bbtL->id))->first();
+            //Si un paris sur le même pari bonus pour cet utilisateur existe, erreur envoyée.
+            if($betL) {
+                $betL->team_id = $input['team_id'];
+                $betL->save();
+            }else{
+                $input['bbt_id'] = $bbtL->id;
+                $betL = BetBonus::create($input);
+            }
+        }
 
         return Response::json(
             array('success' => true,

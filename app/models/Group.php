@@ -23,6 +23,37 @@ class Group extends Eloquent {
 
     public $timestamps = false;
 
+    public static function boot()
+    {
+        parent::boot();
+
+        //Si le champ winner ou runnerup est renseigné, on assigne l'équipe dans l'arbre
+        User::saving(function($group)
+        {
+            if($group->winner_id != null){
+                $code = '1'.$group->code;
+
+                $game = Game::whereRaw('team1_tmp_name = ? || team2_tmp_name = ?', array($code, $code))->first();
+                if($game->team1_tmp_name == $code)
+                    $game->team1_id = $group->winner_id;
+                else if($game->team2_tmp_name == $code)
+                    $game->team2_id = $group->winner_id;
+                $game->save();
+            }
+
+            if($group->runnerup_id != null){
+                $code = '2'.$group->code;
+
+                $game = Game::whereRaw('team1_tmp_name = ? || team2_tmp_name = ?', array($code, $code))->first();
+                if($game->team1_tmp_name == $code)
+                    $game->team1_id = $group->runnerup_id;
+                else if($game->team2_tmp_name == $code)
+                    $game->team2_id = $group->runnerup_id;
+                $game->save();
+            }
+        });
+    }
+
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -51,4 +82,6 @@ class Group extends Eloquent {
     {
         return $this->hasMany('Team', 'group_id', 'id');
     }
+
+
 }

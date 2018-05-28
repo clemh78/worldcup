@@ -31,6 +31,16 @@ class BetBonusType extends Eloquent {
      */
     protected $hidden = array('created_at', 'updated_at', 'trigger_data_type', 'trigger_data_id', 'trigger_points', 'trigger_condition');
 
+    public function bets()
+    {
+        return $this->hasMany('BetBonus', 'bbt_id', 'id');
+    }
+
+    public function linkedBbt()
+    {
+        return $this->hasMany('BetBonusType', 'linked_bbt_id', 'id');
+    }
+
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *

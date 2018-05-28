@@ -23,6 +23,14 @@ class CreateBonusBet extends Migration {
             $table->string('trigger_data_id', 255);
             $table->string('trigger_condition', 255);
             $table->integer('trigger_points');
+
+            $table->integer('linked_bbt_id')->unsigned()->nullable();
+        });
+
+        //Modification table types de pari bonus
+        Schema::table('bet_bonus_type', function($table)
+        {
+            $table->foreign('linked_bbt_id')->references('id')->on('bet_bonus_type');
         });
 
         //Création table des pari bonus
