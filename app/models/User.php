@@ -45,7 +45,7 @@ class User extends Eloquent {
     public $filters = array('login');
 
 
-    protected $with = array('role');
+    protected $with = array('role', 'rooms');
 
     public function toArray()
     {
@@ -125,5 +125,10 @@ class User extends Eloquent {
         $token->id = $id;
 
         return $token;
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany('Room');
     }
 }

@@ -1,0 +1,23 @@
+<div class="room">
+    <div class="modal-header">
+        <h2 class="modal-title">Mes salons</h2>
+    </div>
+    <div class="modal-body">
+        <ul>
+            <li ng-repeat="room in user.rooms" >
+                @@room.name@@
+            </li>
+        </ul>
+
+        <div class="alert alert-info" ng-show="user.rooms.length == 0" role="alert">Vous avez rejoins aucun salon !</div>
+
+        <hr>
+
+        <h2>Rejoindre un salon</h2><br />
+        <input type="text" ng-model="roomCode" class="form-control" placeholder="Code du salon"/><br />
+        <button class="btn btn-default" ng-click="addRoom()">Rejoindre</button>
+    </div>
+    <div class="modal-footer">
+        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
+    </div>
+</div>

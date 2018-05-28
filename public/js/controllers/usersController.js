@@ -40,6 +40,18 @@ angular.module('usersController', [])
             });
         };
 
+        $scope.room = function(user){
+            $modal.open({
+                templateUrl:'/views/partials/room.html',
+                controller: 'usersControllerRoomModalInstance',
+                resolve:{
+                    user: function(){
+                        return user;
+                    }
+                }
+            });
+        };
+
     }])
 
     .controller('usersControllerListModalInstance', ["$scope", "serviceUser","$cookies", "$modalInstance", "users", function($scope, User, $cookies, $modalInstance, users) {
@@ -63,3 +75,19 @@ angular.module('usersController', [])
             $modalInstance.dismiss('cancel');
         };
     }])
+
+    .controller('usersControllerRoomModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {
+        $scope.user = user;
+
+        $scope.addRoom = function(){
+            User.join($cookies['token'], $scope.roomCode)
+                .success(function(data){
+                    $rootScope.user = data;
+                    $scope.user = data;
+                });
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }]);

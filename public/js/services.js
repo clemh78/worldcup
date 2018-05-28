@@ -57,6 +57,15 @@ angular.module('services', [])
                 });
             },
 
+            join : function(token, room_code) {
+                return $http({
+                    method: 'POST',
+                    url: 'api/users/join?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"room_code" : room_code})
+                });
+            },
+
             update : function(token,userId,userData) {
                 return $http({
                     method: 'PUT',

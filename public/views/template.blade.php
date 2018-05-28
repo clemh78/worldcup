@@ -50,7 +50,8 @@
             <a class="navbar-brand" href="/"><img src="/images/WCLogo.png"/></a>
             <ul class="top-menu pull-right">
                 <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a>
-                <a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a>
+                <a href="#" ng-click="room(user)" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a>
+                <a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-trophy"></i></a>
                 <a ng-show="user.isAdmin" href="#" ng-click="admin()" ng-controller="adminControllerModal" ><i class="fa fa-cog"></i></a>
                 <a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a>
             </ul>

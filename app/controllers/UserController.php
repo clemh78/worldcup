@@ -127,6 +127,51 @@ class UserController extends BaseController {
     }
 
     /**
+     * Enregistre un nouvel utilisateur
+     *
+     * @return Response
+     */
+    public function joinRoom()
+    {
+        $user = User::getUserWithToken($_GET['token']);
+        $input = Input::all();
+
+        $room = Room::where('code', '=', $input['room_code'])->first();
+
+        if (!$room)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Ce salon n'existe pas !"
+                ),
+                400);
+
+        $exist = false;
+        foreach($user->rooms()->get() as $roomTest){
+            if($roomTest->id == $room->id)
+                $exist = true;
+        }
+
+        if ($exist)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Vous êtes déjà dans ce salon !"
+                ),
+                400);
+
+        $user->rooms()->attach($room->id);
+        $user->save();
+
+        $user = User::getUserWithToken($_GET['token']);
+        return Response::json(
+            array('success' => true,
+                'payload' => $user->toArray(),
+                'message' => 'Vous avez intégré le salon ' . $room->name
+            ));
+    }
+
+    /**
      * Enregistre un nouvel utilisateur en mode admin
      *
      * @return Response
