@@ -73,7 +73,7 @@
             </div>
             <div id="groups">
                 <div class="row" >
-                    <div class="col-md-3 group" ng-repeat="group in groups" >
+                    <div class="col-md-3 col-sm-6 group" ng-repeat="group in groups" >
                         <h2 class="subheader" >@@ group.name @@</h2>
                         <ul>
                             <li ng-repeat="team in group.teams" ><img src="images/flags/@@ team.code.toLowerCase() @@"> @@ team.name @@ <div class="points">@@ team.points @@</div></li>

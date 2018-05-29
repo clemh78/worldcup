@@ -488,21 +488,20 @@ ul.nav.nav-pills li.active a{
 }
 
 .users .modal-body .user {
-    margin-top: 5px;
+    margin-top: 15px;
 }
 
 .users .modal-body .user .position {
-    float:left;
     font-size: 25px;
     background-color: #c5181f;
     color: white;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
+    display: inline-block;
 }
 
 .users .modal-body .user .login {
-    float:left;
     margin-left: 20px;
     font-size: 25px;
     padding-top: 5px;

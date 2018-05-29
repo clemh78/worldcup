@@ -11,15 +11,13 @@
             <li ng-class="{'active' : selector=='all'}" ><a href="#" ng-click="select('all', users)" >Tous les utilisateurs</a></li>
             <li ng-repeat="room in rooms" ng-class="{'active' : selector==room.room.id}" ><a href="#" ng-click="select(room.room.id, room.users)" >Salon : @@room.room.name@@</a></li>
         </ul>
-        <p style="clear:both;" />
 
         <div class="user" ng-repeat="user in usersSelect | orderBy : '-winPoints'">
             <div class="position" >
                 #@@ $index + 1 @@
             </div>
-            <div class="login" >@@ user.firstname @@ @@ user.lastname @@.</div>
-            <div class="points" >@@ user.winPoints @@ XP</div>
-            <p style="clear:both;" />
+            <span class="login" >@@ user.firstname @@ @@ user.lastname @@.</span>
+            <span class="points" >@@ user.winPoints @@ XP</span>
         </div>
     </div>
 </div>
