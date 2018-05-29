@@ -47,7 +47,7 @@
 <header ng-show="isConnected">
     <div class="navbar navbar-inverse" role="navigation" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/images/WCLogo.png"/></a>
+            <a class="navbar-brand" href="/"><img src="/images/KUPILogo.png"/></a>
             <ul class="top-menu pull-right">
                 <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a>
                 <a href="#" ng-click="room(user)" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a>

@@ -102,8 +102,9 @@ header{
 }
 
 .navbar-inverse .navbar-brand img{
-    width: 100px;
+    width: 85px;
     margin-left: 15px;
+    float:left;
 }
 
 .navbar-inverse .navbar-brand{
@@ -124,7 +125,12 @@ header{
 
 .guest img{
     display: block;
-    margin: 50px auto;
+    margin: 20px auto;
+}
+
+.logo-kupi-login{
+    width: 226px;
+    margin-left:36px;
 }
 
 .login-form {
