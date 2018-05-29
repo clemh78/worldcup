@@ -11,13 +11,16 @@
             </thead>
             <tr ng-repeat="transaction in transactions" >
                 <td ng-show="transaction.type=='bet'" >
-                    Pari sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
+                    Pari sur <i>@@ transaction.game.team1.name @@ - @@ transaction.game.team2.name @@</i>
+                    <br /> <small>@@ transaction.desc @@</small>
                 </td>
                 <td ng-show="transaction.type=='gain'" >
-                    Gains sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
+                    Gains sur <i>@@ transaction.game.team1.name @@ - @@ transaction.game.team2.name @@</i>
+                    <br /> <small>@@ transaction.desc @@</small>
                 </td>
                 <td ng-show="transaction.type=='bonus'" >
-                    Bonus sur <i>@@ transaction.bet.game.team1.name @@ - @@ transaction.bet.game.team2.name @@</i>
+                    Bonus sur <i>@@ transaction.game.team1.name @@ - @@ transaction.game.team2.name @@</i>
+                    <br /> <small>@@ transaction.desc @@</small>
                 </td>
                 <td ng-show="transaction.type=='bet'" >
                     <font color="red" >- @@ transaction.value @@ XP</font>
@@ -26,7 +29,7 @@
                     <font color="green" >+ @@ transaction.value @@ XP</font>
                 </td>
                 <td>
-                    @@ transaction.created_at | dateToISO | date:'dd/MM/yyyy à H:mm'@@h
+                    @@ transaction.created_at | amDateFormat:'DD/MM/YYYY HH:mm'@@h
                 </td>
             </tr>
         </table>

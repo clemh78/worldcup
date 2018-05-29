@@ -1,4 +1,12 @@
 <div class="container" id="games-panel" ng-show="isConnected">
+
+    <div class="my-points">
+        <div class="btn-group" ng-controller="transactionsControllerModal" ng-click="open()">
+            <button type="button" class="btn btn-default"  >Mon score</button>
+            <button type="button" class="btn btn-default" style="border-left: 1px solid #426cca;"  >@@ user.winPoints @@ XP</button>
+        </div>
+    </div>
+
         <div class="col-xs-12" id="menu-games">
             <ul class="nav nav-pills">
                 <li class="active" ><a href="#" id="filter-list" ng-click="filterList()">Liste des Matchs</a></li>
@@ -6,19 +14,14 @@
                 <li><a href="#" id="filter-groups" ng-click="filterGroups()">Groupes</a></li>
                 <li><a href="#" id="filter-bracket" class="hidden-xs hidden-sm" ng-click="filterBracket()">Arbre</a></li>
             </ul>
-            <div class="my-points">
-                <div class="btn-group">
-                    <button type="button" class="btn btn-default" ng-controller="betBonusControllerModal" ng-click="open()" >Paris bonus</button>
-                    <button type="button" class="btn btn-default" style="border-left: 1px solid #426cca;" ng-controller="transactionsControllerModal" ng-click="open()" >@@ user.winPoints @@ XP</button>
-                </div>
-            </div>
         </div>
         <div class="col-xs-12" id="games-list">
             <div id="games">
                 <div class="game row" ng-repeat="game in games | groupBy:['stage_id']" >
                     <div class="col-xs-12 game-header animated fadeIn" ng-show="game.group_by_CHANGED">
+                        <button type="button" class="btn btn-success pull-right" ng-controller="betBonusControllerModal" ng-click="open()" style="padding:12px;" ><i class="fa fa-plus"></i> Paris bonus</button>
                         <h2 class="subheader" ng-show="game.stage != null">@@ game.stage.name @@</h2>
-                        <h2 class="subheader" ng-hide="game.stage != null">Phase de poule</h2>
+                        <h2 class="subheader" ng-hide="game.stage != null"><span class="hidden-xs">Phase de poule</span><span class="hidden-lg hidden-md hidden-sm">Poules</span></h2>
                     </div>
                     <div class="col-xs-4 team1-name"><img src="images/flags/@@ game.team1.code.toLowerCase() @@"/><span>@@ game.team1.name @@</span>
                     </div>
@@ -41,7 +44,7 @@
                             </button>
                         </div><p style="clear:both;" ></p>
                         <div class="col-xs-12 col-centered text-center" >
-                            <h5>@@game.date | amDateFormat:'DD/MM/YYYY HH:mm'@@</h5>
+                            <h5>@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
                         </div>
                     </div>
                     <div class="col-xs-4  team2-name"><img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span></div>
@@ -52,7 +55,7 @@
                 <div class="game row" ng-repeat="game in gamesPrevious | groupBy:['stage_id']" >
                     <div class="col-xs-12 game-previous-header animated fadeIn" ng-show="game.group_by_CHANGED">
                         <h2 class="subheader" ng-show="game.stage != null">@@ game.stage.name @@</h2>
-                        <h2 class="subheader" ng-hide="game.stage != null">Phase de poule</h2>
+                        <h2 class="subheader" ng-hide="game.stage != null"><span class="hidden-xs">Phase de poule</span><span class="hidden-lg hidden-md hidden-sm">Poules</span></h2>
                     </div>
                     <div class="col-xs-4 team1-name"><img src="images/flags/@@ game.team1.code.toLowerCase() @@"/><span>@@ game.team1.name @@</span></div>
                     <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">

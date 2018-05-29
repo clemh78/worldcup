@@ -251,14 +251,20 @@ ul.nav.nav-pills li.active a{
     color: #fff;
 }
 
+.my-points{
+    float: right;
+    margin-top: -70px;
+    margin-right: 20px;
+}
+
 .my-points .btn-group{
     float: right;
 }
 
 .my-points .btn-default{
     margin-top: 2px;
-    background-color: #47a447;
-    border-color: #47a447;
+    background-color: #c5181f;
+    border-color: #c5181f;
     border-radius: 50px;
     color: #fff;
     padding: 10px 15px;
@@ -295,6 +301,12 @@ ul.nav.nav-pills li.active a{
 	font-family: 'Open Sans', sans-serif;
 	font-weight:bold;
 	padding:10px;
+}
+
+@media(max-width:1200px){
+    .game .team1-name, .game .team2-name {
+        font-size: 1.6em;
+    }
 }
 
 .game .team1-name img,.game .team2-name img{
@@ -353,11 +365,6 @@ ul.nav.nav-pills li.active a{
 	font-weight:normal;
 }
 
-.game h3{
-    /* padding: 30px 0px; */
-    text-align: center;
-}
-
 .game h3.goals-team1{
     text-align: right;
 }
@@ -369,6 +376,10 @@ ul.nav.nav-pills li.active a{
 .game h5 {
     margin-top: 10px;
 	margin-bottom:-4px;
+    font-style: italic;
+    color: #666;
+    margin-left: -100px;
+    margin-right: -100px;
 }
 
 .game button.btn{
