@@ -26,16 +26,16 @@ class Transaction extends Eloquent {
      *
      * @var array
      */
-    protected $with = array('bet');
+    protected $with = array('game');
 
     /**
      * Récupère l'objet Bet indiqué dans cette transaction
      *
      * @var Stage
      */
-    public function bet()
+    public function game()
     {
-        return $this->belongsTo('Bet', 'bet_id', 'id')->with('game');
+        return $this->belongsTo('Game', 'game_id', 'id');
     }
 
     /**
@@ -45,7 +45,7 @@ class Transaction extends Eloquent {
      */
     public static $rules = array(
         'user_id' => 'exists:stage,id',
-        'bet_id' => 'exists:bet,id',
+        'game_id' => 'exists:game,id',
         'value' => 'integer',
         'type' => 'in:bet,gain,bonus',
     );
@@ -62,32 +62,21 @@ class Transaction extends Eloquent {
      * Utilisé uniquement par le code
      *
      * @param $user_id
-     * @param $bet_id
+     * @param $game_id
      * @param $value
      * @param $type
      * @return bool
      */
-    public static function addTransaction($user_id, $bet_id, $value, $type){
-        if(in_array($type, array('gain', 'bet')) && Bet::find($bet_id)){
+    public static function addTransaction($user_id, $game_id, $value, $type, $desc){
+        if(in_array($type, array('gain', 'bet', 'bonus')) && Game::find($game_id)){
             $transaction = new Transaction();
             $transaction->user_id = $user_id;
-            $transaction->bet_id = $bet_id;
+            $transaction->game_id = $game_id;
             $transaction->value = $value;
             $transaction->type = $type;
+            $transaction->desc = $desc;
 
             $transaction->save();
-
-            //On déduit/ajoute les point de la transaction
-            $user = User::find($user_id);
-
-            if($transaction->type == "bet")
-                $user->points -= $transaction->value;
-            else if ($transaction->type == "gain")
-                $user->points += $transaction->value;
-            else if ($transaction->type == "bonus")
-                $user->points += $transaction->value;
-
-            $user->save();
         }
 
         return false;

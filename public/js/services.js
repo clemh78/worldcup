@@ -48,12 +48,12 @@ angular.module('services', [])
                 return $http.get('/api/users/logout?token=' + token);
             },
 
-            register : function(login, pass, firstname, lastname, code) {
+            register : function(login, pass, firstname, lastname, code, email) {
                 return $http({
                     method: 'POST',
                     url: 'api/users',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"login" : login, "password" : pass, 'firstname' : firstname, 'lastname' : lastname, 'room_code' : code})
+                    data: $.param({"login" : login, "password" : pass, 'firstname' : firstname, 'lastname' : lastname, 'room_code' : code, 'email' : email})
                 });
             },
 

@@ -6,7 +6,8 @@
 	"require": {
 		"laravel/framework": "4.2.*",
         "ramsey/uuid": "2.8.*@dev",
-        "mashape/unirest-php" : "dev-master"
+        "mashape/unirest-php" : "dev-master",
+		"barryvdh/laravel-dompdf": "0.4.*"
     },
 	"autoload": {
 		"classmap": [

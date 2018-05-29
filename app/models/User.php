@@ -28,7 +28,7 @@ class User extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = array('login', 'password', 'role_id', 'firstname', 'lastname');
+    protected $fillable = array('login', 'password', 'role_id', 'firstname', 'lastname', 'email');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -64,6 +64,7 @@ class User extends Eloquent {
         'firstname' => 'required|max:255',
         'lastname' => 'required|max:1',
         'password' => 'required|max:255',
+        'email' => 'email|max:255',
         'role_id' => 'exists:role,id'
     );
 
@@ -77,6 +78,7 @@ class User extends Eloquent {
         'password' => 'max:255',
         'firstname' => 'max:255',
         'lastname' => 'max:1',
+        'email' => 'email|max:255',
         'role_id' => 'exists:role,id'
     );
 

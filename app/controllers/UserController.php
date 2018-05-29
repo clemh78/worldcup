@@ -94,6 +94,7 @@ class UserController extends BaseController {
         return Response::json(
             array('success' => true,
                 'payload' => $user->toArray(),
+                'message' => 'Profil modifié'
             ));
     }
 

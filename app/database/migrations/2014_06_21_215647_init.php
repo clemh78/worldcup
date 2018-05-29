@@ -29,6 +29,7 @@ class Init extends Migration {
 
             $table->string('firstname', 255);
             $table->string('lastname', 1);
+            $table->string('email', 255)->nullable();
 
             $table->integer('role_id')->unsigned();
 
@@ -136,12 +137,13 @@ class Init extends Migration {
         {
             $table->increments('id')->unsigned();
             $table->integer('user_id')->unsigned();
-            $table->integer('bet_id')->unsigned();
+            $table->integer('game_id')->unsigned();
             $table->integer('value');
+            $table->string('desc', 255)->nullable();
             $table->enum('type', array('bet', 'gain', 'bonus'));
 
             $table->foreign('user_id')->references('id')->on('user');
-            $table->foreign('bet_id')->references('id')->on('bet');
+            $table->foreign('game_id')->references('id')->on('game');
 
             $table->timestamps();
         });
