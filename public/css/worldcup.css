@@ -143,17 +143,19 @@ header{
     margin-bottom: 10px;
 }
 
-.login-form button{
+.login-form button, .login-form a{
     color: white;
     border-radius: 0;
     background-color: #0057b8;
     border: none;
     margin-top: 20px;
+    color: #fff;
 }
 
-.login-form button:hover{
+.login-form button:hover, .login-form a:hover{
     background-color: #002e6b;
     border: none;
+    color: #fff;
 }
 
 .login-form input{
@@ -173,10 +175,6 @@ header{
     margin-bottom: 10px;
 }
 
-.login-form a{
-    text-decoration: none;
-    color: #0066f4;
-}
 
 /************************** ADMIN **************************/
 
