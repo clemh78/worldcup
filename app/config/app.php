@@ -96,6 +96,8 @@ return array(
 
     'register_on' => true,
 
+    'app_key' => "fc68cae9-0903-47a2-a83a-a307e0c5142897",
+
 	/*
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers

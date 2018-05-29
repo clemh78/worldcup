@@ -111,7 +111,10 @@ class Game extends Eloquent {
     public function getUserHasBetAttribute()
     {
         $user = User::getUserWithToken($_GET['token']);
-        $bet = Bet::whereRaw('game_id = ? && user_id = ?', array($this->id, $user->id))->first();
+        if($user)
+            $bet = Bet::whereRaw('game_id = ? && user_id = ?', array($this->id, $user->id))->first();
+        else
+            $bet = null;
 
         if($bet)
             return true;

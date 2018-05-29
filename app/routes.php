@@ -28,7 +28,7 @@ Route::post('/api/users/join', array('before' => 'token', 'uses' => 'UserControl
 
 Route::get('/api/games/{id?}/bets', array('before' => 'token', 'uses' => 'GameController@getBets'));
 
-Route::get('/api/report/', array('before' => 'token', 'uses' => 'ReportController@index'));
+Route::get('/api/report/', array('before' => 'key', 'uses' => 'ReportController@index'));
 
 //Tout les ressources disponibles avec un token
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {

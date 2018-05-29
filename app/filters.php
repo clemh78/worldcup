@@ -46,6 +46,19 @@ Route::filter('token', function()
     }
 });
 
+Route::filter('key', function()
+{
+    if (!isset($_GET['token']) || $_GET['token'] != Config::get('app.app_key'))
+    {
+        return Response::json(
+            array('success' => false,
+                'payload' => array(),
+                'error' => 'Non autorisé !'
+            ),
+            401);
+    }
+});
+
 Route::filter('admin', function()
 {
     $token = Token::getWithToken($_GET['token']);

@@ -38,6 +38,8 @@ class Report extends Command {
 	public function fire()
 	{
 		//
+
+        //http://docker.raussin.com:8888/convert?auth=arachnys-weaver&url=https://worldcup.hemidy.fr/api/report?token=fc68cae9-0903-47a2-a83a-a307e0c5142897
 	}
 
 	/**
