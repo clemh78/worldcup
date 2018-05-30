@@ -47,6 +47,10 @@
     right:0px;
 }
 
+.btn{
+
+}
+
 /************************** Navbar **************************/
 
 header{
@@ -229,10 +233,6 @@ header{
     margin-bottom: 10px;
     padding: 10px;
     border-radius: 1px;
-}
-
-ul.nav.nav-pills{
-    float: left;
 }
 
 ul.nav.nav-pills li:not(:first-child){
@@ -490,13 +490,15 @@ ul.nav.nav-pills li.active a{
 }
 
 .users .modal-body .user .position {
-    font-size: 25px;
+    font-size: 20px;
     background-color: #c5181f;
     color: white;
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
     display: inline-block;
+    width:52px;
+    text-align: center;
 }
 
 .users .modal-body .user .login {
@@ -624,13 +626,14 @@ ul.nav.nav-pills li.active a{
     display: inline;
     width: 50px;
 
-    margin-top: -5px;
+    margin-top: 5px;
     margin-left: 10px;
     margin-right: 10px;
 }
 
 .bet .modal-body h4{
     display: inline;
+    line-height: 1em;
 }
 
 .bet .modal-body select{

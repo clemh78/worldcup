@@ -2,7 +2,7 @@
         <form ng-submit="registerSubmit()" role="form" name="register">
             <input type="text" ng-model="loginStr" name="login" class="form-control" placeholder="Login">
             <input type="text" ng-model="firstnameStr" name="firstname" class="form-control" placeholder="Prénom">
-            <input type="text" ng-model="lastnameStr" name="lastname" class="form-control" size="1" placeholder="Nom (inital)">
+            <input type="text" ng-model="lastnameStr" name="lastname" class="form-control" maxlength="1" placeholder="Nom (première lettre)">
             <input type="password" ng-model="password" name="password" class="form-control" placeholder="Mot de passe">
             <input type="email" ng-model="emailStr" name="email" class="form-control" placeholder="Adresse mail (optionnel)">
             <input type="text" ng-model="codeStr" name="code" class="form-control" size="1" placeholder="Code du salon">
