@@ -17,7 +17,8 @@
                 #@@ $index + 1 @@
             </div>
             <span class="points" >@@ user.winPoints @@ XP</span>
-            <span class="login" >@@ user.firstname @@ @@ user.lastname @@.</span>
+            <span class="login hidden-sm hidden-md hidden-lg" >@@ user.firstname | limitTo:12 @@ @@ user.lastname @@.</span>
+            <span class="login hidden-xs" >@@ user.firstname @@ @@ user.lastname @@.</span>
         </div>
     </div>
 </div>

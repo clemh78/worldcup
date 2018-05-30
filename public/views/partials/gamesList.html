@@ -9,7 +9,7 @@
 
         <div class="col-xs-12" id="menu-games">
             <ul class="nav nav-pills">
-                <li class="active" ><a href="#" id="filter-list" ng-click="filterList()">Liste des Matchs</a></li>
+                <li class="active" ><a href="#" id="filter-list" ng-click="filterList()"><span class="hidden-xs">Liste des </span>Matchs</a></li>
                 <li><a href="#" id="filter-gamesPrevious" ng-click="filterGamesPrevious()"><span class="hidden-xs">Matchs </span>Terminés</a></li>
                 <li><a href="#" id="filter-groups" ng-click="filterGroups()">Groupes</a></li>
                 <li><a href="#" id="filter-bracket" class="hidden-xs hidden-sm" ng-click="filterBracket()">Arbre</a></li>
@@ -49,7 +49,10 @@
                     </div>
                     <div class="col-xs-4  team2-name"><img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span></div>
                 </div>
-                <div class="jumbotron" ng-show="games.length == 0"><h2>Pas de match pour le moment ! :(</h2></div>
+                <div class="jumbotron" ng-show="games.length == 0">
+                    <img src="images/no-games.jpg" width="180" class="pull-left">
+                    <h2>Pas de match pour le moment :(</h2>
+                </div>
             </div>
             <div id="gamesPrevious">
                 <div class="game row" ng-repeat="game in gamesPrevious | groupBy:['stage_id']" >
@@ -69,7 +72,10 @@
                     </div>
                     	<div class="col-xs-4  team2-name"><img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span></div>
                 </div>
-                <div class="jumbotron" ng-show="gamesPrevious.length == 0"><h2>Pas de match pour le moment ! :(</h2></div>
+                <div class="jumbotron" ng-show="gamesPrevious.length == 0">
+                    <img src="images/no-games.jpg" width="180" class="pull-left">
+                    <h2>Pas de match pour le moment :(</h2>
+                </div>
             </div>
             <div id="groups">
                 <div class="row" >

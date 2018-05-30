@@ -48,7 +48,7 @@
 }
 
 .btn{
-
+    padding: 7px 12px;
 }
 
 /************************** Navbar **************************/
@@ -226,6 +226,8 @@ header{
 #games-list .jumbotron{
     margin-top: 15px;
     border-radius: 2px;
+    min-height: 200px;
+    color: #666;
 }
 
 #menu-games{
