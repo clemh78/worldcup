@@ -47,6 +47,10 @@ angular.module('gamesController', [])
         $('#gamesPrevious').hide();
         $('#games').show();
 
+        $scope.betColor = function(score1, score2){
+            return (score1>score2) ? 'btn-success' : ((score1<score2) ? 'btn-danger' : 'btn-warning');
+        }
+
         $scope.filterList = function(){
             $('#filter-gamesPrevious').parent('li').removeClass('active');
             $('#filter-bracket').parent('li').removeClass('active');

@@ -23,7 +23,7 @@
                 </li>
             </ul>
         </div>
-        <div class="alert alert-info" ng-show="user.rooms.length == 0" role="alert">Vous n'avez rejoins aucun salon</div>
+        <div class="alert alert-info" ng-show="user.rooms.length == 0" role="alert">Rejoignez ou créez un nouveau salon pour jouer avec vos amis et partager vos résultats</div>
 
         <hr>
 
@@ -45,17 +45,14 @@
                 <h3>Créer un nouveau salon</h3>
             </div>
             <div class="col-sm-5  col-xs-9" >
-                <input type="text" ng-model="roomCode" class="form-control" placeholder="Nom du salon"/>
+                <input type="text" ng-model="newRoomName" class="form-control" placeholder="Nom du salon"/>
             </div>
             <div class="col-sm-4 col-xs-9" >
-                <input type="text" ng-model="roomCode" class="form-control" placeholder="Code du salon"/>
+                <input type="text" ng-model="newRoomCode" class="form-control" placeholder="Code du salon"/>
             </div>
             <div class="col-xs-3" >
-                <button style="float:right;" class="btn btn-success" ng-click="addRoom()">Créer</button>
+                <button style="float:right;" class="btn btn-success" ng-click="createRoom()">Créer</button>
             </div>
         </div>
-    </div>
-    <div class="modal-footer">
-        <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
     </div>
 </div>

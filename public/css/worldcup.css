@@ -97,6 +97,10 @@ header{
     color: #fff;
 }
 
+.navbar a:hover{
+    text-decoration: none;
+}
+
 .navbar-inverse .nav li.dropdown.open a.dropdown-toggle{
     background-color: #002e6b;
 }
@@ -311,6 +315,13 @@ ul.nav.nav-pills li.active a{
     padding: 5px 30px;
 }
 
+.game h5.game-previous-experience{
+    font-weight: bold;
+    font-style: normal;
+    font-size: 1.2em;
+    margin-bottom: -13px;
+}
+
 
 .game{
     border-top: 1px solid #eee;
@@ -355,6 +366,7 @@ ul.nav.nav-pills li.active a{
     display: block;
 }
 
+
 @media(max-width:992px){
 	
 	.container{
@@ -379,6 +391,25 @@ ul.nav.nav-pills li.active a{
 	}
 }
 
+
+
+.game .team1-name .bet, .game .team2-name .bet{
+    position:absolute;
+    border-radius: 50px;
+    padding:3px; padding-left:6px;
+    padding-right:6px;
+    line-height: 1em; font-weight: bold;
+    margin-top:0px;
+}
+
+.game .team1-name .bet{
+    left:10px;
+}
+.game .team2-name .bet{
+    right:10px;
+}
+
+
 .game h2{
     padding: 25px 0px;
 	font-family: 'Open Sans', sans-serif;
@@ -400,12 +431,8 @@ ul.nav.nav-pills li.active a{
 }
 
 .game h5 {
-    margin-top: 10px;
-	margin-bottom:-4px;
     font-style: italic;
-    color: #666;
-    margin-left: -100px;
-    margin-right: -100px;
+    margin: 10px -100px -4px;
 }
 
 .game button.btn{
@@ -425,8 +452,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .game .col-xs-6 img{
-    margin: 0 auto;
-    margin-top: 40px;
+    margin: 40px auto 0;
 }
 
 .game .label{
@@ -804,7 +830,7 @@ ul.nav.nav-pills li.active a{
 .room .modal-header{
     background-color: #0057b8;
     color:#fff;
-    border-bottom: 1px solid #777777;
+    border-bottom: 1px solid #002e6b;
 }
 
 .room hr{

@@ -23,7 +23,10 @@
                         <h2 class="subheader" ng-show="game.stage != null">@@ game.stage.name @@</h2>
                         <h2 class="subheader" ng-hide="game.stage != null"><span class="hidden-xs">Phase de poule</span><span class="hidden-lg hidden-md hidden-sm">Poules</span></h2>
                     </div>
-                    <div class="col-xs-4 team1-name"><img src="images/flags/@@ game.team1.code.toLowerCase() @@"/><span>@@ game.team1.name @@</span>
+                    <div class="col-xs-4 team1-name">
+                        <span class="btn btn-success bet"  ng-show="game.user_bet" ng-class="betColor(game.user_bet.team1_points, game.user_bet.team2_points)">@@ game.user_bet.team1_points @@</span>
+                        <img src="images/flags/@@ game.team1.code.toLowerCase() @@"/>
+                        <span>@@ game.team1.name @@</span>
                     </div>
                     <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">
                         <h5>En cours</h5>
@@ -36,10 +39,10 @@
                     </div>
                     <div class="col-xs-4" ng-show="game.team1_points == null && game.team2_points == null">
                         <div class="col-xs-12 col-centered text-center" >
-                            <button ng-hide="game.user_has_bet"class="btn btn-success" ng-controller="betsControllerModal" ng-click="open(game, user)">
+                            <button ng-hide="game.user_bet"class="btn btn-success" ng-controller="betsControllerModal" ng-click="open(game, user)">
                                 <i class="fa fa-plus"></i>
                             </button>
-                            <button ng-show="game.user_has_bet" class="btn btn-default" ng-controller="betsControllerModal" ng-click="open(game, user)">
+                            <button ng-show="game.user_bet" class="btn btn-default" ng-controller="betsControllerModal" ng-click="open(game, user)">
                                 <i class="fa fa-pencil"></i>
                             </button>
                         </div><p style="clear:both;" ></p>
@@ -47,7 +50,10 @@
                             <h5>@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
                         </div>
                     </div>
-                    <div class="col-xs-4  team2-name"><img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span></div>
+                    <div class="col-xs-4  team2-name">
+                        <span class="btn bet" ng-show="game.user_bet" ng-class="betColor(game.user_bet.team2_points, game.user_bet.team1_points)" >@@ game.user_bet.team2_points @@</span>
+                        <img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span>
+                    </div>
                 </div>
                 <div class="jumbotron" ng-show="games.length == 0">
                     <img src="images/no-games.jpg" width="180" class="pull-left">
@@ -60,9 +66,14 @@
                         <h2 class="subheader" ng-show="game.stage != null">@@ game.stage.name @@</h2>
                         <h2 class="subheader" ng-hide="game.stage != null"><span class="hidden-xs">Phase de poule</span><span class="hidden-lg hidden-md hidden-sm">Poules</span></h2>
                     </div>
-                    <div class="col-xs-4 team1-name"><img src="images/flags/@@ game.team1.code.toLowerCase() @@"/><span>@@ game.team1.name @@</span></div>
+                    <div class="col-xs-4 team1-name">
+                        <span class="btn bet" ng-show="game.user_bet" ng-class="betColor(game.user_bet.team1_points, game.user_bet.team2_points)" >@@ game.user_bet.team1_points @@</span>
+                        <img src="images/flags/@@ game.team1.code.toLowerCase() @@"/><span>@@ game.team1.name @@</span>
+                    </div>
                     <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">
-                        <h5>Terminé</h5>
+                        <h5 class="game-previous-experience text-success" ng-show="game.user_bet.win_points && game.user_bet.win_points!=0 ">+@@ game.user_bet.win_points @@XP</h5>
+                        <h5 class="game-previous-experience text-danger" ng-show="!game.user_bet.win_points || game.user_bet.win_points==0">0XP</h5>
+
                         <div class="col-xs-4 no-padding"><h3 class="goals-team1">@@ game.team1_points @@</h3></div>
                         <div class="col-xs-4 no-padding"><h3>—</h3></div>
                         <div class="col-xs-4 no-padding"><h3 class="goals-team2">@@ game.team2_points @@</h3></div><br />
@@ -70,7 +81,11 @@
                             Liste des paris
                         </button>
                     </div>
-                    	<div class="col-xs-4  team2-name"><img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span></div>
+
+                    <div class="col-xs-4  team2-name">
+                        <span class="btn bet" ng-show="game.user_bet" ng-class="betColor(game.user_bet.team2_points, game.user_bet.team1_points)" >@@ game.user_bet.team2_points @@</span>
+                        <img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span>
+                    </div>
                 </div>
                 <div class="jumbotron" ng-show="gamesPrevious.length == 0">
                     <img src="images/no-games.jpg" width="180" class="pull-left">
