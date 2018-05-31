@@ -45,3 +45,31 @@ Route::filter('token', function()
             401);
     }
 });
+
+Route::filter('key', function()
+{
+    if (!isset($_GET['token']) || $_GET['token'] != Config::get('app.app_key'))
+    {
+        return Response::json(
+            array('success' => false,
+                'payload' => array(),
+                'error' => 'Non autorisé !'
+            ),
+            401);
+    }
+});
+
+Route::filter('admin', function()
+{
+    $token = Token::getWithToken($_GET['token']);
+    $user = User::with('role')->find($token->user_id);
+    if($user->role->access_level != 2)
+    {
+        return response()->json(
+            array('success' => false,
+                'payload' => array(),
+                'error'   => 'Non autorisé.'
+            ),
+            403);
+    }
+});

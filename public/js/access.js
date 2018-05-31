@@ -1,7 +1,7 @@
 userRoles = {
-    public: 1,
-    user:   2,
-    admin:  4
+    public: 1000,
+    user:   1,
+    admin:  2
 };
 
 accessLevels = {

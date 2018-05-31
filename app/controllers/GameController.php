@@ -42,4 +42,23 @@ class GameController extends BaseController {
             ));
     }
 
+    public function getBets($id){
+        $ids = [];
+
+        if(new DateTime() > new DateTime(Game::find($id)->date)){
+            $user = User::getUserWithToken($_GET['token']);
+            $rooms = $user->rooms;
+            foreach($rooms as $room){
+                foreach($room->users as $user) {
+                    $ids[] = $user->id;
+                }
+            }
+        }
+
+        return Response::json(
+            array('success' => true,
+                'payload' => Bet::whereRaw('game_id = ?', array($id))->whereIn('user_id', $ids)->get()->toArray(),
+            ));
+    }
+
 }

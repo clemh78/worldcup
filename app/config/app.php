@@ -93,6 +93,11 @@ return array(
 
 	'cipher' => MCRYPT_RIJNDAEL_128,
 
+
+    'register_on' => true,
+
+    'app_key' => "fc68cae9-0903-47a2-a83a-a307e0c5142897",
+
 	/*
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
@@ -132,7 +137,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-
+        'Barryvdh\DomPDF\ServiceProvider',
 	),
 
 	/*
@@ -199,7 +204,7 @@ return array(
 		'URL'             => 'Illuminate\Support\Facades\URL',
 		'Validator'       => 'Illuminate\Support\Facades\Validator',
 		'View'            => 'Illuminate\Support\Facades\View',
-
+        'PDF' => 'Barryvdh\DomPDF\Facade',
 	),
 
 );

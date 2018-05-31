@@ -6,36 +6,38 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-xs-12 score">
-                <div class="col-xs-5">
-                    <img src="/images/flags/@@ game.team1.code @@.png"/>
-                    <h4>@@ game.team1.name @@</h4>
-
-                    <input ng-model="bet.team1_goals" ng-disabled="bet.id != null" id="team1Score" type="text" class="form-control team one" ng-change="check()" required/>
+                <div class="col-xs-4 text-center">
+                    <h4>@@ game.team1.name @@</h4><br />
+                    <img width="50px" src="images/flags/@@ game.team1.code.toLowerCase() @@"/>
+                    <br />
+                    <span ng-show="bet.winner_id == game.team1.id" class="label label-success">Gagnant</span>
                 </div>
-                <div class="col-xs-2 dash"> - </div>
-                <div class="col-xs-5">
-                    <input ng-model="bet.team2_goals" ng-disabled="bet.id != null" id="team2Score" type="text" class="form-control team two" ng-change="check()" required/>
-
+                <div class="col-xs-4 bet-input-form dash">
+                    <input ng-change="updateWinner()" ng-model="bet.team2_points" id="team1Score" type="text" class="form-control team one" ng-change="check()" required/>
+                    <span>-</span>
+                    <input ng-change="updateWinner()" ng-model="bet.team1_points" id="team2Score" type="text" class="form-control team two" ng-change="check()"  required/>
+                </div>
+                <div class="col-xs-4  text-center">
                     <div class="team2">
-                        <h4>@@ game.team2.name @@</h4>
-                        <img src="/images/flags/@@ game.team2.code @@.png"/>
+                        <h4>@@ game.team2.name @@</h4><br />
+                        <img width="50px" src="images/flags/@@ game.team2.code.toLowerCase() @@"/>
+                        <br />
+                        <span ng-show="bet.winner_id == game.team2.id" class="label label-success">Gagnant</span>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="row" id="winner" ng-show="bet.team1_goals == bet.team2_goals && bet.team1_goals != null && bet.team2_goals != null">
+        <div class="row" id="winner" ng-show="game.kick_at_goal == 1 && bet.team2_points == bet.team1_points">
             <div class="col-xs-12">
-                <select class="form-control" ng-model="bet.winner_id" ng-disabled="bet.id != null" ng-options="team.id as team.name for team in teams"></select>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-xs-12">
-                <input ng-model="bet.points" ng-disabled="bet.id != null" type="text" class="form-control" placeholder="Points à miser" required/>
+                <label>Pays gagnant</label>
+                <select ng-disabled="game.kick_at_goal == 0 || bet.team2_points != bet.team1_points" class="form-control" ng-model="bet.winner_id" ng-options="team.id as team.name for team in teams"></select>
             </div>
         </div>
     </div>
-    <div class="modal-footer" ng-hide="bet.id != null">
-        <button class="btn btn-primary" ng-click="ok()">OK</button>
+    <div class="modal-footer" style="border:none;">
+        <button class="btn btn-primary" ng-hide="bet.id != null" ng-click="ok()">Parier</button>
+        <button class="btn btn-primary" ng-hide="bet.id == null" ng-click="ok()">Modifier</button>
         <button class="btn btn-warning" ng-click="cancel()">Annuler</button>
     </div>
+
 </div>

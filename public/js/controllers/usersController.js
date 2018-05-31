@@ -22,11 +22,11 @@ angular.module('usersController', [])
                 size: 'lg',
                 resolve: {
                     users: [ "serviceUser", "$cookies", function(User, $cookies){
-                        return User.getRanking($cookies.token);
+                        return User.getRanking($cookies['token']);
                     }]
                 }
             });
-        }
+        };
 
         $scope.account = function(user){
             $modal.open({
@@ -38,12 +38,54 @@ angular.module('usersController', [])
                     }
                 }
             });
-        }
+        };
+
+        $scope.room = function(user){
+            $modal.open({
+                templateUrl:'/views/partials/room.html',
+                controller: 'usersControllerRoomModalInstance',
+                resolve:{
+                    user: function(){
+                        return user;
+                    }
+                }
+            });
+        };
 
     }])
 
-    .controller('usersControllerListModalInstance', ["$scope", "serviceUser","$cookies", "$modalInstance", "users", function($scope, User, $cookies, $modalInstance, users) {
+    .controller('usersControllerListModalInstance', ["$scope", "$rootScope", "serviceUser","$cookies", "$modalInstance", "users", function($scope, $rootScope, User, $cookies, $modalInstance, users) {
         $scope.users = users.data;
+        $scope.roomsTmp = [];
+        $scope.rooms = [];
+
+        angular.forEach($rootScope.user.rooms, function(room, key) {
+            $scope.roomsTmp[room.id] = room;
+            $scope.roomsTmp[room.id].users = [];
+        });
+
+        angular.forEach($scope.users, function(user, key) {
+            angular.forEach(user.rooms, function(room, key) {
+                if(room.id){
+                    if($scope.roomsTmp[room.id] != undefined){
+                        $scope.roomsTmp[room.id].users.push(user);
+                    }
+                }
+            });
+        });
+
+        $scope.usersSelect = $scope.users;
+        $scope.selector = 'all';
+
+        $scope.select = function(selector, users){
+            $scope.selector = selector;
+            $scope.usersSelect = users;
+        };
+
+        angular.forEach($scope.roomsTmp, function(room, key) {
+            if(room != undefined)
+                $scope.rooms.push(room);
+        });
     }])
 
     .controller('usersControllerAccountModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {
@@ -52,7 +94,7 @@ angular.module('usersController', [])
         $scope.userData = {};
 
         $scope.ok = function () {
-            User.update($cookies.token, $cookies.user_id, $scope.userData)
+            User.update($cookies['token'], $cookies['user_id'], $scope.userData)
                 .success(function(data){
                     $rootScope.user = data;
                 });
@@ -63,3 +105,26 @@ angular.module('usersController', [])
             $modalInstance.dismiss('cancel');
         };
     }])
+
+    .controller('usersControllerRoomModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", "serviceRoom", function($scope, $rootScope, $modalInstance, $cookies, User, user, Room) {
+        $scope.user = user;
+
+        $scope.addRoom = function(){
+            User.join($cookies['token'], $scope.roomCode)
+                .success(function(data){
+                    $rootScope.user = data;
+                    $scope.user = data;
+                });
+        };
+
+        $scope.createRoom = function(){
+            Room.create($cookies['token'], $scope.newRoomName, $scope.newRoomCode)
+                .success(function(data){
+                    $rootScope.user.rooms.push(data);
+                });
+        };
+
+        $scope.cancel = function () {
+            $modalInstance.dismiss('cancel');
+        };
+    }]);

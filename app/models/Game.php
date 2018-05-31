@@ -20,11 +20,7 @@ class Game extends Eloquent {
      * @var string
      */
     protected $table = 'game';
-
-    private $MAX_COTE = 10;
-    private $MIN_COTE = 1.10;
-
-
+    
     public $timestamps = false;
 
 
@@ -43,10 +39,8 @@ class Game extends Eloquent {
     public $filters = array('team1_id',
         'team2_id',
         'stage_id',
-        'team1_goals',
-        'team2_goals',
-        'team1_kick_at_goal',
-        'team2_kick_at_goal',
+        'team1_points',
+        'team2_points',
         'team1_tmp_name',
         'team2_tmp_name',
         'winner_id',
@@ -101,60 +95,24 @@ class Game extends Eloquent {
     }
 
     /**
-     * Calcule la "cote" de l'équipe 1
+     * Récupère tous les pari du match
      *
-     * @var Integer
+     * @var Bet[]
      */
-    public function getTeam1CoteAttribute()
+    public function bets()
     {
-        $sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
-
-        $cote = ((($sumPoints2+1)/($sumPoints1+1))+1);
-
-        $cote = round($cote, 2);
-
-        if($cote > $this->MAX_COTE)
-            $cote = $this->MAX_COTE;
-
-        if($cote < $this->MIN_COTE)
-            $cote = $this->MIN_COTE;
-
-        return $cote;
+        return $this->hasMany('Bet', 'game_id', 'id');
     }
 
-
-    public function getUserHasBetAttribute()
+    public function getUserBetAttribute()
     {
         $user = User::getUserWithToken($_GET['token']);
-        $bet = Bet::whereRaw('game_id = ? && user_id = ?', array($this->id, $user->id))->first();
-
-        if($bet)
-            return true;
+        if($user)
+            $bet = Bet::whereRaw('game_id = ? && user_id = ?', array($this->id, $user->id))->first();
         else
-            return false;
-    }
+            $bet = null;
 
-    /**
-     * Calcule la "cote" de l'équipe 2
-     *
-     * @var Integer
-     */
-    public function getTeam2CoteAttribute()
-    {
-        $sumPoints1 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->sum('points');
-        $sumPoints2 = Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->sum('points');
-
-        $cote = ((($sumPoints1+1)/($sumPoints2+1))+1);
-        $cote = round($cote,2);
-
-        if($cote > $this->MAX_COTE)
-            $cote = $this->MAX_COTE;
-
-        if($cote < $this->MIN_COTE)
-            $cote = $this->MIN_COTE;
-
-        return $cote;
+        return $bet;
     }
 
     public function toArray()
@@ -171,35 +129,47 @@ class Game extends Eloquent {
 
     public function setFinished($num_team){
 
+        $POINTS_BON_WINNER = 1;
+        $POINTS_SCORE_EXACT = 4;
+        $POINTS_ECART = 2;
+
         //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
         if($num_team == 1){
             foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
 
-                $cote = $this->getTeam1CoteAttribute();
-                $points = $bet->points * $cote;
-
-                if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
-                    $points += (($bet->points/10)*$cote);
-
-                Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
+                if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
+                else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
+                else
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
             }
 
             $this->winner_id = $this->team1_id;
+            $looser_id = $this->team2_id;
 
         //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
         }else{
             foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
-
-                $cote = $this->getTeam2CoteAttribute();
-                $points = $bet->points * $cote;
-
-                if($this->team1_goals == $bet->team1_goals && $this->team2_goals == $bet->team2_goals)
-                    $points += (($bet->points/10)*$cote);
-
-                Transaction::addTransaction($bet->user_id, $bet->id, $points, 'gain');
+                if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
+                else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
+                else
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
             }
 
             $this->winner_id = $this->team2_id;
+            $looser_id = $this->team1_id;
+        }
+
+        //On check les paris bonus
+        foreach(BetBonusType::whereRaw('trigger_data_type = "GAME" && trigger_data_id = ?', array($this->id))->get() as $betBonusType){
+            foreach($betBonusType->bets()->get() as $bet){
+                if($betBonusType->trigger_condition == "WINNER" && $bet->team_id == $this->winner_id || $betBonusType->trigger_condition == "LOOSER" && $bet->team_id == $looser_id){
+                    Transaction::addTransaction($bet->user_id, $this->id, $betBonusType->trigger_points, 'bonus', $betBonusType->label);
+                }
+            }
         }
 
         /////////////////////////////////////////////////
@@ -207,43 +177,46 @@ class Game extends Eloquent {
         /////////////////////////////////////////////////
 
         //On inscrit l'équipe gagnante dans son prochain match
-        $id = $this->stage()->first()->next_stage()->first()->id;
-        $num_game = round($this->stage_game_num / 2);
 
-        $game = Game::whereRaw("stage_id = ? && stage_game_num = ?", array($id, $num_game))->first();
+        if($this->stage_id != null) {
+            $id = $this->stage()->first()->next_stage()->first()->id;
+            $num_game = round($this->stage_game_num / 2);
 
-        if(($this->stage_game_num % 2) == 1)
-            $game->team1_id = $this->winner_id;
-        else
-            $game->team2_id = $this->winner_id;
+            $game = Game::whereRaw("stage_id = ? && stage_game_num = ?", array($id, $num_game))->first();
 
-        $game->save();
+            if (($this->stage_game_num % 2) == 1)
+                $game->team1_id = $this->winner_id;
+            else
+                $game->team2_id = $this->winner_id;
 
-        /////////////////////////////////////////////////
-        //******************* 3e place ****************//
-        /////////////////////////////////////////////////
+            $game->save();
 
-        //Si on est lors des demi, on va définir aussi la 3e finale
-        if($this->stage()->first()->next_stage()->first()->next_stage == null){
+            /////////////////////////////////////////////////
+            //******************* 3e place ****************//
+            /////////////////////////////////////////////////
 
-            $stage_third = Stage::getThirdStage()->id;
+            //Si on est lors des demi, on va définir aussi la 3e finale
+            if ($this->stage()->first()->next_stage()->first()->next_stage == null) {
 
-            $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
+                $stage_third = Stage::getThirdStage()->id;
 
-            //Si équipe 1 a gagné on met l'équipe 2 en 3e place
-            if($num_game == 1){
-                if(($this->stage_game_num % 2) == 1)
-                    $gamme_third->team1_id = $this->team1_id;
-                else
-                    $gamme_third->team2_id = $this->team1_id;
-            }else{
-                if(($this->stage_game_num % 2) == 1)
-                    $gamme_third->team1_id = $this->team2_id;
-                else
-                    $gamme_third->team2_id = $this->team2_id;
+                $gamme_third = Game::whereRaw('stage_id = ?', array($stage_third))->first();
+
+                //Si équipe 1 a gagné on met l'équipe 2 en 3e place
+                if ($num_game == 1) {
+                    if (($this->stage_game_num % 2) == 1)
+                        $gamme_third->team1_id = $this->team1_id;
+                    else
+                        $gamme_third->team2_id = $this->team1_id;
+                } else {
+                    if (($this->stage_game_num % 2) == 1)
+                        $gamme_third->team1_id = $this->team2_id;
+                    else
+                        $gamme_third->team2_id = $this->team2_id;
+                }
+
+                $gamme_third->save();
             }
-
-            $gamme_third->save();
         }
 
         $this->save();
@@ -258,10 +231,8 @@ class Game extends Eloquent {
         'team1_id' => 'integer',
         'team2_id' => 'integer',
         'stage_id' => 'exists:stage,id',
-        'team1_goals' => 'integer',
-        'team2_goals' => 'integer',
-        'team1_kick_at_goal' => 'integer',
-        'team2_kick_at_goal' => 'integer',
+        'team1_points' => 'integer',
+        'team2_points' => 'integer',
         'team1_tmp_name' => 'alpha|max:255',
         'team2_tmp_name' => 'alpha|max:255',
         'winner_id' => 'integer',

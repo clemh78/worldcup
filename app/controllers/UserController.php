@@ -23,10 +23,19 @@ class UserController extends BaseController {
      */
     public function index()
     {
+        $ids = [];
+        $user = User::getUserWithToken($_GET['token']);
+        $rooms = $user->rooms;
+        foreach($rooms as $room){
+            foreach($room->users as $user) {
+                $ids[] = $user->id;
+            }
+        }
+
         return Response::json(
             array('success' => true,
-                'payload' => $this->query_params(new User())->toArray(),
-            ));
+                'payload' => (new User())->whereIn('id', $ids)->get()->toArray(),
+            ), 200, [], JSON_NUMERIC_CHECK);
     }
 
     /**
@@ -85,6 +94,7 @@ class UserController extends BaseController {
         return Response::json(
             array('success' => true,
                 'payload' => $user->toArray(),
+                'message' => 'Profil modifié'
             ));
     }
 
@@ -95,8 +105,113 @@ class UserController extends BaseController {
      */
     public function store()
     {
+        if(!Config::get('app.register_on'))
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Inscription désactivée !"
+                ),
+                400);
+
         $input = Input::all();
         $input['password'] = Hash::make($input['password']);
+        $input['role_id'] = 2;
+
+        if (!$input['room_code'])
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Veuillez indique un salon"
+                ),
+                400);
+
+        $validator = Validator::make($input, User::$rules);
+
+        if ($validator->fails())
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => $validator->messages()
+                ),
+                400);
+
+        $room = Room::where('code', '=', $input['room_code'])->first();
+
+        if (!$room)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Ce salon n'existe pas !"
+                ),
+                400);
+
+        $user = User::create($input);
+        $user->save();
+
+        $user->rooms()->attach($room->id);
+        $user->save();
+
+        return Response::json(
+            array('success' => true,
+                'payload' => $user->toArray(),
+            ));
+    }
+
+    /**
+     * Enregistre un nouvel utilisateur
+     *
+     * @return Response
+     */
+    public function joinRoom()
+    {
+        $user = User::getUserWithToken($_GET['token']);
+        $input = Input::all();
+
+        $room = Room::where('code', '=', $input['room_code'])->first();
+
+        if (!$room)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Ce salon n'existe pas !"
+                ),
+                400);
+
+        $exist = false;
+        foreach($user->rooms()->get() as $roomTest){
+            if($roomTest->id == $room->id)
+                $exist = true;
+        }
+
+        if ($exist)
+            return Response::json(
+                array('success' => false,
+                    'payload' => array(),
+                    'error' => "Vous êtes déjà dans ce salon !"
+                ),
+                400);
+
+        $user->rooms()->attach($room->id);
+        $user->save();
+
+        $user = User::getUserWithToken($_GET['token']);
+        return Response::json(
+            array('success' => true,
+                'payload' => $user->toArray(),
+                'message' => 'Vous avez intégré le salon ' . $room->name
+            ));
+    }
+
+    /**
+     * Enregistre un nouvel utilisateur en mode admin
+     *
+     * @return Response
+     */
+    public function storeWithoutPassword()
+    {
+        $input = Input::all();
+        $password = $this->randomPassword();
+        $input['password'] = Hash::make($password);
 
         $validator = Validator::make($input, User::$rules);
 
@@ -109,13 +224,35 @@ class UserController extends BaseController {
                 400);
 
         $user = User::create($input);
-        $user->points = Config::get('app.points');
         $user->save();
+
+        $newUser = User::find($user->id)->toArray();
+        $newUser['password'] = $password;
 
         return Response::json(
             array('success' => true,
-                'payload' => $user->toArray(),
+                'payload' => $newUser,
             ));
+    }
+
+    public function indexAdmin()
+    {
+
+        return Response::json(
+            array('success' => true,
+                'payload' => (new User())->get()->toArray(),
+            ), 200, [], JSON_NUMERIC_CHECK);
+    }
+
+    private function randomPassword() {
+        $alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890';
+        $pass = array(); //remember to declare $pass as an array
+        $alphaLength = strlen($alphabet) - 1; //put the length -1 in cache
+        for ($i = 0; $i < 8; $i++) {
+            $n = rand(0, $alphaLength);
+            $pass[] = $alphabet[$n];
+        }
+        return implode($pass); //turn the array into a string
     }
 
 }

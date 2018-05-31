@@ -1,6 +1,6 @@
 /************************** Global **************************/
 .title{
-    color: #00923E;
+    color: #002e6b;
     margin-left: 8%;
     background-color: #F8C100;
 }
@@ -19,19 +19,13 @@
     margin: 0 auto;
 }
 
-.container{
-    max-width: none !important;
-    width: 1170px;
+.no-padding{
+	padding: 0 !important;
 }
+
 
 .modal-dialog{
-    max-width: none !important;
-    width: 600px;
     margin: 50px auto;
-}
-
-.modal-dialog.modal-lg{
-    width: 900px;
 }
 
 .alert-danger{
@@ -40,14 +34,21 @@
 }
 
 #infos{
-    position:absolute;
     font-size: 16px;
-    width: 40%;
-    top: 30px;
-    left: 30%;
-    z-index: 10;
     border: none;
     border-radius: 1px;
+    margin:8px;
+    position: fixed;
+    bottom: 0px;
+    z-index: 100;
+}
+
+.primaryMessage {
+    right:0px;
+}
+
+.btn{
+    padding: 7px 12px;
 }
 
 /************************** Navbar **************************/
@@ -59,8 +60,9 @@ header{
     height: 400px;
     width: 100%;
     border-bottom: 2px solid #333;
-    background-color: #47a447;
+    background-color: #0057b8;
     z-index: -1;
+    background-image: url(../images/fwc_darkbluebg.png);
 }
 
 .navbar-inverse{
@@ -95,8 +97,12 @@ header{
     color: #fff;
 }
 
+.navbar a:hover{
+    text-decoration: none;
+}
+
 .navbar-inverse .nav li.dropdown.open a.dropdown-toggle{
-    background-color: #00923E;
+    background-color: #002e6b;
 }
 
 .navbar-inverse .nav li a.blacklink{
@@ -104,38 +110,67 @@ header{
 }
 
 .navbar-inverse .navbar-brand img{
-    width: 60px;
+    width: 85px;
     margin-left: 15px;
+    float:left;
+}
+
+@media(max-width:320px) {
+    .navbar-inverse .navbar-brand img {
+        width: 50px;
+    }
+
 }
 
 .navbar-inverse .navbar-brand{
     padding: 0px;
 }
 
-/************************** Connection **************************/
+.top-menu{
+    font-size:20px;
+    margin-top:10px;
+}
+
+.top-menu a{
+    color:#fff;
+    padding:10px;
+}
+
+    /************************** Connection **************************/
 
 .guest img{
     display: block;
-    margin: 25px auto;
-    width: 10%;
+    margin: 20px auto;
+}
+
+.logo-kupi-login{
+    width: 226px;
+    margin-left:36px;
 }
 
 .login-form {
     margin: 20px auto;
-    width: 40%;
+    max-width:300px;
 }
 
-.login-form button{
-    color: #333;
-    border-radius: 0;
-    background-color: #F8C100;
-    border: none;
+.login-form input {
+    margin: 20px auto;
     margin-bottom: 10px;
 }
 
-.login-form button:hover{
-    background-color: #dfad00;
+.login-form button, .login-form a{
+    color: white;
+    border-radius: 0;
+    background-color: #0057b8;
     border: none;
+    margin-top: 20px;
+    color: #fff;
+}
+
+.login-form button:hover, .login-form a:hover{
+    background-color: #002e6b;
+    border: none;
+    color: #fff;
 }
 
 .login-form input{
@@ -144,7 +179,7 @@ header{
 }
 
 .login-form input:focus{
-    border-color: #F8C100;
+    border-color: #0057b8;
     z-index: -2;
 }
 
@@ -155,9 +190,28 @@ header{
     margin-bottom: 10px;
 }
 
-.login-form a{
-    text-decoration: none;
-    color: #F8C100;
+
+/************************** ADMIN **************************/
+
+#admin-panel{
+    position: relative;
+    margin-top: 125px;
+    z-index: 10;
+    padding-top: 20px;
+}
+
+#menu-admin{
+    position: relative;
+    padding: 10px;
+    border-radius: 1px;
+}
+
+#menu-admin .nav {
+    float: none;
+}
+
+#users-list{
+    background-color: #fff;
 }
 
 /************************** Games **************************/
@@ -175,7 +229,7 @@ header{
 
 #games-list{
     background-color: #fff;
-    box-shadow: 0px 4px 2px #aaa;
+    /*box-shadow: 0px 2px 7px #aaa;*/
     padding-bottom: 25px;
     margin-bottom: 30px;
 }
@@ -183,34 +237,54 @@ header{
 #games-list .jumbotron{
     margin-top: 15px;
     border-radius: 2px;
+    min-height: 200px;
+    color: #777;
 }
+
+@media(max-width:600px){
+    #games-list .jumbotron {
+        text-align: center;
+    }
+    #games-list .jumbotron h2{
+        font-size:1.3em;
+    }
+    #games-list .jumbotron img{
+        float:none!important;
+    }
+}
+
 
 #menu-games{
     position: relative;
-    margin-bottom: 40px;
-    background-color: #fff;
+    margin-bottom: 10px;
     padding: 10px;
     border-radius: 1px;
 }
 
-ul.nav.nav-pills{
-    float: left;
+ul.nav.nav-pills li:not(:first-child){
+	margin-left:20px;
 }
 
 ul.nav.nav-pills li a{
     color: #333;
+    background-color: #fff;
+    border-radius: 50px;
 }
 
 ul.nav.nav-pills li a:hover{
     background-color: #47a447;
     color: #fff;
-    border-radius: 2px;
 }
 
 ul.nav.nav-pills li.active a{
     background-color: #47a447;
     color: #fff;
-    border-radius: 2px;
+}
+
+.my-points{
+    float: right;
+    margin-top: -70px;
+    margin-right: 20px;
 }
 
 .my-points .btn-group{
@@ -219,46 +293,133 @@ ul.nav.nav-pills li.active a{
 
 .my-points .btn-default{
     margin-top: 2px;
-    background-color: #47a447;
-    border-color: #00923E;
-    border-radius: 2px;
+    background-color: #c5181f;
+    border-color: #c5181f;
+    border-radius: 50px;
     color: #fff;
+    padding: 10px 15px;
 }
 
 
 .game-header{
-    background-color: #333;
+    background-color: #c5181f;
     color: #fff;
     height: 80px;
     padding: 5px 30px;
-    border-bottom: 2px solid #aaa;
+}
+
+.game-previous-header {
+    background-color: #0057b8;
+    color: #fff;
+    height: 80px;
+    padding: 5px 30px;
+}
+
+.game h5.game-previous-experience{
+    font-weight: bold;
+    font-style: normal;
+    font-size: 1.2em;
+    margin-bottom: -13px;
 }
 
 
 .game{
-    margin-bottom: 30px;
     border-top: 1px solid #eee;
-    border-bottom: 1px solid #eee;
 }
-
-
 
 .game:first-child{
     border-top: none;
 }
 
 
+.game .team1-name,.game .team2-name{
+	padding: 25px 0px;
+	font-size:1.8em;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:bold;
+	padding:10px;
+}
+
+@media(max-width:1200px){
+    .game .team1-name, .game .team2-name {
+        font-size: 1.6em;
+    }
+}
+
+.game .team1-name img,.game .team2-name img{
+	margin:30px;
+	width: 100px;
+}
+
+.game .team2-name{
+	text-align: right;
+	height: 110px;
+}
+
+
+.game .team2-name img{
+	float:right;
+}
+
+.game .team2-name span{
+	margin-top: 30px;
+    display: block;
+}
+
+
+@media(max-width:992px){
+	
+	.container{
+		padding:0px;
+	}
+	
+	.game .team1-name,.game .team2-name{
+		padding:10px;
+		text-align: center;
+		font-size:1.3em;
+	}	
+	
+	.game .team1-name img,.game .team2-name img{
+		margin:10px;
+		width:60px;
+		float: none;
+	}
+		
+	.game .team1-name span, .game .team2-name span{
+		display: block;
+		margin-top: 0px;
+	}
+}
+
+
+
+.game .team1-name .bet, .game .team2-name .bet{
+    position:absolute;
+    border-radius: 50px;
+    padding:3px; padding-left:6px;
+    padding-right:6px;
+    line-height: 1em; font-weight: bold;
+    margin-top:0px;
+}
+
+.game .team1-name .bet{
+    left:10px;
+}
+.game .team2-name .bet{
+    right:10px;
+}
+
+
 .game h2{
     padding: 25px 0px;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:bold;
 }
 
 .game h2.subheader{
     padding: 0;
-}
-
-.game h3{
-    /* padding: 30px 0px; */
-    text-align: center;
+	font-family: 'Open Sans', sans-serif;
+	font-weight:normal;
 }
 
 .game h3.goals-team1{
@@ -269,43 +430,155 @@ ul.nav.nav-pills li.active a{
     text-align: left;
 }
 
-.game button.btn.btn-default{
+.game h5 {
+    font-style: italic;
+    margin: 10px -100px -4px;
+}
+
+.game button.btn{
     display: block;
     float: none;
-    border-radius: 1px;
-    padding: 10px 25px;
-    margin: 40px auto;
+    border-radius: 50px;
+    margin: 15px auto;
     margin-bottom:20px;
-    background-color: #333;
+    background-color: #333; 
     border: none;
     color: #fff;
     font-weight: bold;
 }
 
-.game .col-md-6 img{
-    margin: 0 auto;
+.game button.btn.btn-success{
+    background-color: #47a447;
+}
+
+.game .col-xs-6 img{
+    margin: 40px auto 0;
 }
 
 .game .label{
     margin: 0 10px;
 }
 
+.game .minute {
+    color:#fff;
+    font-weight: bold;
+	padding:5px;
+    border-radius: 10px;
+	font-family: 'Open Sans', sans-serif;
+	
+	font-size:15px;
+}
+
+.game .minute .point {
+	animation: blink 1s infinite ;
+}
+
+@keyframes blink {
+  0% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/************************** Group *************************/
+
+.group .subheader {
+    background-color: #0057b8;
+    color: #fff;
+    height: 60px;
+    padding: 12px 30px;
+}
+
+.group ul {
+    list-style: none;
+    padding: 0px;
+    padding-left: 5px;
+}
+
+.group ul li {
+    margin-top: 10px;
+    font-size: 15px;
+}
+
+.group ul li .points {
+    float:right;
+    background-color: #c5181f;
+    color: white;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.group ul li img {
+    width:50px;
+}
+
 /************************** Ranking *************************/
 
-.users .table h3{
-    display: inline-block;
-    padding: 5px 5px;
+
+.users .modal-header{
+    background-color: #c5181f;
+    color:#fff;
+    border-bottom: 1px solid #5f0c0f;
 }
 
-.users .table img{
-    display: inline-block;
-    padding: 10px 5px;
-    margin-bottom: 10px;
+.users .modal-body {
+    background-color: #0057b8;
+    background-image: url(../images/fwc_darkbluebg.png);
+    color: white;
 }
 
-.users .table h3 .lastname{
-    display: inline;
+.users .modal-body .nav {
+    margin-bottom: 20px;
+}
+
+.users .modal-body .alert-info {
+    background-color: #47a447;
+    border-color: #47a447;
+    color: white;
+}
+
+.users .modal-body .user {
+    margin-top: 15px;
+}
+
+.users .modal-body .user .position {
+    font-size: 20px;
+    background-color: #c5181f;
+    color: white;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    width:52px;
+    text-align: center;
+}
+
+.users .modal-body .user .login {
+    margin-left: 20px;
+    font-size: 25px;
+    padding-top: 5px;
     text-transform: uppercase;
+}
+
+.users .modal-body .user .points {
+    float: right;
+    background-color: #47a447;
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    font-size: 17px;
+}
+
+@media (max-width: 530px) {
+    .users .modal-body .user .login,.users .modal-body .user .points {
+        font-size:15px;
+    }
+    .users .modal-body .user .points {
+        padding: 6px;
+    }
 }
 
 /************************** Account *************************/
@@ -339,7 +612,7 @@ ul.nav.nav-pills li.active a{
 .g_gracket { width: 9999px; background-color: #fff; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
 .g_round { float: left; margin-right: 45px; width:170px; }
 .g_game { position: relative; margin-bottom: 15px; box-shadow: 3px 4px 0px #ddd; border: 1px solid #fff; border-top: 0; border-left: 0; }
-.g_gracket h3 { min-width: 180px; margin: 0; padding: 10px 8px 8px; font-size: 18px; font-weight: normal; color: #b3afa7; font-size: 20px; text-shadow: 1px 1px 1px #333;} /* @note: this width determinds node size */
+.g_gracket h3 { min-width: 180px; margin: 0; padding: 10px 8px 8px; font-size: 15px!important; font-weight: normal; color: #b3afa7; font-size: 20px; text-shadow: 1px 1px 1px #333;} /* @note: this width determinds node size */
 .g_team { background: #423c3c; }
 .g_team h3 small{font-size: 65%;color: #fff;float: right;font-weight: bold;margin-right: 10px;margin-top: 5px;}
 .g_round_label { top: -5px; font-weight: normal; color: #ccc; text-align: center; font-size: 18px}
@@ -355,7 +628,7 @@ ul.nav.nav-pills li.active a{
 
 /* secondary-bracket */
 .container-secondary { position: relative; overflow: hidden; }
-.secondary-bracket { bottom: 200px; left: 690px; position: absolute; width: 450px; }
+.secondary-bracket { bottom: 50px; left: 690px; position: absolute; width: 450px; }
 #bracket h4 { color: #CCCCCC; font-weight: normal; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999; }
 .secondary-bracket .g_round_label { top: -30px; }
 .secondary-bracket > div { padding-top: 35px;}
@@ -400,10 +673,15 @@ ul.nav.nav-pills li.active a{
 .bet .modal-body img{
     display: inline;
     width: 50px;
+
+    margin-top: 5px;
+    margin-left: 10px;
+    margin-right: 10px;
 }
 
 .bet .modal-body h4{
     display: inline;
+    line-height: 1em;
 }
 
 .bet .modal-body select{
@@ -439,13 +717,9 @@ ul.nav.nav-pills li.active a{
     box-shadow: 0px 2px 2px #aaa;
 }
 
-.bet button.btn{
-    border-radius: 2px;
-}
-
 .bet button.btn-primary{
-    background-color: #47a447;
-    border-color: #419641;
+    background-color: #0057b8;
+    border-color: #002e6b;
 }
 
 .bet button.btn-warning{
@@ -455,4 +729,123 @@ ul.nav.nav-pills li.active a{
 .bet .dash{
     text-align: center;
     margin: 12px 0px;
+}
+
+.game .tLogo50 {
+    margin-top:25px;
+}
+
+.bet .tLogoSmall {
+    margin-top:10px;
+}
+
+.bet h4 {
+    line-height: 40px;
+}
+
+.bet-input-form #team1Score{
+     margin-right:-10px;
+ }
+
+.bet-input-form #team2Score{
+    margin-left:-10px;
+}
+
+.bet-input-form span{
+    margin-top:14px; display:inline-block
+}
+
+
+.bet_bonus .modal-body {
+    padding:0px;
+}
+
+.bbt {
+    background-color: #0057b8;
+    background-image: url(../images/fwc_darkbluebg.png);
+    color: white;
+    padding: 10px;
+    height: 65px;
+}
+
+.bbt:not(:last-child) {
+    border-bottom: 2px solid #47a447;
+}
+
+.bbt h2 {
+    font-size: 20px;
+    margin: 10px;
+    float: left;
+}
+
+.bbt select {
+    background-color: #47a447;
+    border-color: #47a447;
+    color: white;
+    width: 150px;
+    float: right;
+    margin-top: 5px;
+}
+
+.bbt select[disabled] {
+    background-color: #3c763d;
+    border-color: #3c763d;
+    color: white;
+}
+
+/***************************** ROOM ******************************/
+
+.room .nbUsers{
+    background-color: #0057b8;
+    color:white;
+    float: right;
+    padding: 10px;
+    margin-top: -10px;
+    margin-right: -15px;
+    min-width: 50%;
+    text-align: center;
+}
+
+.room .code{
+    background-color: #f0ad4e;
+    color:white;
+    float: right;
+    padding: 10px;
+    margin-top: -10px;
+    margin-right: -15px;
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+    min-width: 50%;
+    text-align: center;
+    text-transform: uppercase;
+    color:#000;
+}
+
+.room .modal-body {
+    background-color: #0057b8;
+    background-image: url(../images/fwc_darkbg.jpg);
+    color: white;
+}
+
+.room .modal-header{
+    background-color: #0057b8;
+    color:#fff;
+    border-bottom: 1px solid #002e6b;
+}
+
+.room hr{
+    border-top: 1px solid #777777;
+}
+
+.room .list-group-item{
+    background-color: #666;
+    border: 1px solid #777777;
+    font-size: 1.2em;
+}
+
+.room input{
+    background-color:#ccc;
+}
+.room input, .room button{
+    margin-top:2px;
 }

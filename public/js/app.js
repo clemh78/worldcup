@@ -11,11 +11,13 @@
  * @since      0.1
  */
 
-var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-loading-bar', 'ui.bootstrap', 'services', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'usersController', 'auth']);
+var worldcup = angular.module('worldcup', ['ngCookies', 'ui.router' , 'angular-loading-bar', 'ui.bootstrap', 'services', 'angularMoment', 'accountsController', 'gamesController', 'betsController', 'transactionsController', 'usersController', 'adminController', 'auth']);
 
 worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) {
 
-    $locationProvider.html5Mode(true);
+    $locationProvider.html5Mode({
+        enabled: true
+    });
 
     $urlRouterProvider.otherwise('/');
 
@@ -24,22 +26,35 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
             url: '/register',
             templateUrl: '/views/partials/registerForm.html',
             controller: 'accountsControllerRegister',
-            access: accessLevels.public
+            access: accessLevels.public,
+            resolve: {
+                code: [ function(){
+                    return null;
+                }]
+            }
         })
-
+        .state('registerWithCode', {
+            url: '/r/:code',
+            templateUrl: '/views/partials/registerForm.html',
+            controller: 'accountsControllerRegister',
+            access: accessLevels.public,
+            resolve: {
+                code: [ "$stateParams", function($stateParams){
+                    return $stateParams.code;
+                }]
+            }
+        })
         .state('login', {
             url: '/login',
             templateUrl: '/views/partials/loginForm.html',
             controller: 'accountsControllerLogin',
             access: accessLevels.public
         })
-
         .state('account', {
             url: '/account',
             templateUrl: '/views/partials/accountForm.html',
             access: accessLevels.user
         })
-
         .state('index', {
             url: '/',
             templateUrl: '/views/partials/gamesList.html',
@@ -47,19 +62,22 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
             access: accessLevels.user,
             resolve: {
                 games: [ "serviceGame", "$cookies", function(Game, $cookies){
-                    return Game.GetNext($cookies.token);
+                    return Game.GetNext($cookies['token']);
+                }],
+                gamesPrevious: [ "serviceGame", "$cookies", function(Game, $cookies){
+                    return Game.GetPrevious($cookies['token']);
                 }],
                 bracket: [ "serviceBracket", "$cookies", function(Bracket, $cookies){
-                    return Bracket.GetBracket($cookies.token);
+                    return Bracket.GetBracket($cookies['token']);
                 }],
                 users: ["serviceUser", "$cookies", function(User, $cookies){
-                    return User.getRanking($cookies.token);
+                    return User.getRanking($cookies['token']);
+                }],
+                groups: ["serviceGroup", "$cookies", function(Group, $cookies){
+                    return Group.getGroups($cookies['token']);
                 }]
             }
         })
-
-
-
 
 });
 
@@ -86,8 +104,8 @@ worldcup.config(['$httpProvider', function ($httpProvider) {
                 if(rejection.status == 401){
                     $rootScope.user = null;
                     $rootScope.isConnected = false;
-                    $cookieStore.remove('token');
-                    $cookieStore.remove('user_id');
+                    delete $cookies['token'];
+                    delete $cookies['user_id'];
                 }
 
                 return $q.reject(rejection);
@@ -106,12 +124,19 @@ worldcup.alert = function($scope, infos){
     if(infos.status != undefined){
         if(infos.status == 500)
             $scope.alerts.push({message: infos.data.error.message, type: infos.data.error.type, file: infos.data.error.file, line: infos.data.error.line, cat: 'exception', class: 'danger'});
-
-
+        
         if(infos.status != 500)
-            $scope.alerts.push({message: infos.data.error, cat: 'error', class: 'danger'});
+            if(typeof infos.data.error == "object") {
+                message = "" ;
+                $.each(infos.data.error, function(index, value) {
+                    message += value + "<br />";
+                });
+
+                $scope.alerts.push({message: message, cat: 'error', class: 'danger'});
+            }else
+                $scope.alerts.push({message: infos.data.error, cat: 'error', class: 'danger'});
     }
-}
+};
 
 worldcup.closeAlert = function($scope ,index) {
     $scope.alerts.splice(index, 1);

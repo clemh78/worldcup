@@ -1,12 +1,12 @@
-<div class="container">
-    <div class="login-form">
+<div class="login-form">
         <form ng-submit="registerSubmit()" role="form" name="register">
-            <input type="email" ng-model="email" name="email" class="form-control" placeholder="Email">
+            <input type="text" ng-model="loginStr" name="login" class="form-control" placeholder="Login">
+            <input type="text" ng-model="firstnameStr" name="firstname" class="form-control" placeholder="Prénom">
+            <input type="text" ng-model="lastnameStr" name="lastname" class="form-control" maxlength="1" placeholder="Nom (première lettre)">
             <input type="password" ng-model="password" name="password" class="form-control" placeholder="Mot de passe">
-            <input type="text" ng-model="firstname" name="firstname" class="form-control" placeholder="Prénom">
-            <input type="text" ng-model="lastname" name="lastname" class="form-control" placeholder="Nom"><br/>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">S'inscrire</button>
+            <input type="email" ng-model="emailStr" name="email" class="form-control" placeholder="Adresse mail (optionnel)">
+            <input type="text" ng-model="codeStr" name="code" class="form-control" size="1" placeholder="Code du salon">
+            <button class="btn btn-lg btn-primary btn-block" type="submit"  style="background: #c5181f">S'inscrire</button>
         </form>
-        <a href="/login">Se connecter</a>
-    </div>
+        <a href="/login" class="btn btn-lg btn-default btn-block" style="background: #444">Retour</a>
 </div>

@@ -55,9 +55,9 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'worldcup',
-			'username'  => 'worldcup',
-			'password'  => 'fcote.loc',
+			'database'  => 'c3worldcup',
+			'username'  => 'c3worldcup',
+			'password'  => 'LiZz6Q!r5eL',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

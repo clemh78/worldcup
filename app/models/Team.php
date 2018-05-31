@@ -32,6 +32,16 @@ class Team extends Eloquent {
     protected $hidden = array('created_at', 'updated_at');
 
     /**
+     * Récupère l'objet Group de l'équipe
+     *
+     * @var Stage
+     */
+    public function group()
+    {
+        return $this->belongsTo('Group', 'group_id', 'id');
+    }
+
+    /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
      * @var array
@@ -39,5 +49,7 @@ class Team extends Eloquent {
     public static $rules = array(
         'name' => 'required|alpha_num|max:255',
         'flag' => 'required|alpha|max:2',
+        'points' => 'required|numeric',
+        'group_id' => 'exists:group,id',
     );
 }

@@ -27,7 +27,7 @@ angular.module('betsController', [])
                         return user;
                     },
                     bet: [ "serviceBet", "$cookies", function(Bet, $cookies){
-                        return Bet.GetBet($cookies.token, game.id);
+                        return Bet.GetBet($cookies['token'], game.id);
                     }]
                 }
             });
@@ -45,23 +45,86 @@ angular.module('betsController', [])
 
         $scope.teams = [game.team1, game.team2];
 
+        if($scope.game.kick_at_goal == 0)
+            $scope.teams.push({id: null, name: "- Match nul -", code: "NULL"});
+
         $scope.ok = function () {
-            if($scope.bet.winner_id == undefined){
-                if($scope.bet.team1_goals > $scope.bet.team2_goals){
-                    $scope.bet.winner_id = $scope.game.team1_id;
-                }else{
-                    $scope.bet.winner_id = $scope.game.team2_id;
-                }
-            }
-            $modalInstance.close(
-                    Bet.placeBet($cookies.token, user.id, game.id, $scope.bet.points, $scope.bet.team1_goals, $scope.bet.team2_goals, $scope.bet.winner_id)
-                        .success(function() {
-                            user.points = parseInt(user.points) - parseInt($scope.bet.points);
+            if(bet.data[0] == undefined){
+                $modalInstance.close(
+                    Bet.placeBet($cookies['token'], user.id, game.id, $scope.bet.winner_id, $scope.bet.team1_points, $scope.bet.team2_points)
+                        .success(function(data) {
+                            $scope.game.user_bet = data;
                         })
-            );
+                );
+            }else{
+                $modalInstance.close(
+                    Bet.updateBet($cookies['token'], $scope.bet.id, $scope.bet.winner_id, $scope.bet.team1_points, $scope.bet.team2_points)
+                        .success(function(data) {
+                            $scope.game.user_bet = data;
+                        })
+                );
+            }
+        };
+
+        $scope.updateWinner = function(){
+            console.log($scope.bet);
+            if($scope.bet.team1_points > $scope.bet.team2_points){
+                $scope.bet.winner_id = $scope.game.team1.id;
+            }
+            else if($scope.bet.team1_points < $scope.bet.team2_points){
+                $scope.bet.winner_id = $scope.game.team2.id;
+            }
+            else{
+                $scope.bet.winner_id = null;
+            }
         };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
+    }])
+
+    .controller('betBonusControllerModal', function ($scope, $modal) {
+
+        $scope.open = function () {
+            $modal.open({
+                templateUrl: '/views/partials/betBonus.html',
+                controller: 'betBonusControllerModalInstance',
+                resolve: {
+                    bbts: [ "serviceBetBonusType", "$cookies", function(BetBonusType, $cookies){
+                        return BetBonusType.getBbts($cookies['token']);
+                    }],
+                    teams: [ "serviceTeam", "$cookies", function(Team, $cookies){
+                        return Team.getTeams($cookies['token']);
+                    }],
+                    bets: [ "serviceBonusBet", "$cookies", function(BonusBet, $cookies){
+                        return BonusBet.GetBonusBets($cookies['token']);
+                    }]
+                }
+            });
+        };
+    })
+
+    .controller('betBonusControllerModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "bbts" , "teams", "bets", "serviceBonusBet", function ($scope, $rootScope, $modalInstance, $cookies, bbts, teams, bets, BonusBet) {
+        $scope.bbts = bbts.data;
+        $scope.teams = teams.data;
+        $scope.bets_bonus = [];
+
+        angular.forEach(bets.data, function(value, key) {
+            console.log(value);
+            $scope.bets_bonus[value.bbt_id] = value.team_id;
+        });
+
+        $scope.updateBet = function(bbt_id){
+            BonusBet.storeBet($cookies['token'], $rootScope.id, bbt_id, $scope.bets_bonus[bbt_id])
+                .success(function() {
+                })
+        }
+
+        $scope.isActive = function(bbt){
+            now = moment();
+
+            return now.isBefore(moment(bbt.date));
+        }
     }]);
+

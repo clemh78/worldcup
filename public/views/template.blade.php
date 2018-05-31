@@ -3,7 +3,7 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr" >
 <head>
-    <title>Worldcup</title>
+    <title>Coupe du Monde de la FIFA, Russie 2018™</title>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 
     <!-- BOWER COMPONENTS -->
@@ -25,33 +25,48 @@
     <link rel="stylesheet" type="text/css" href="/css/animate.css" media="screen" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
 
+    <link rel="apple-touch-icon" type="image/png" href="/images/favicon.57.png"><!-- iPhone -->
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/images/favicon.72.png"><!-- iPad -->
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/images/favicon.114.png"><!-- iPhone4 -->
+    <link rel="icon" type="image/png" href="icon.114.png"><!-- Opera Speed Dial, at least 144×114 px -->
+	
+	<base href="https://worldcup.hemidy.fr/">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+
     @yield('scripts')
+
+    <script>
+        REGISTER_ON = {{ (Config::get('app.register_on')==1)?1:0 }};
+    </script>
 
 </head>
 <body @yield('body') >
 
 <div class="guest" ng-hide="isConnected">
-    <div class="container">
-        <img src="/images/WCLoginLogo.png" alt=""/>
-    </div>
+   <img src="/images/WCLogo.png" alt=""/>
 </div>
 
 <header ng-show="isConnected">
     <div class="navbar navbar-inverse" role="navigation" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/images/WCLogo.png"/></a>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav navbar-right">
-                    <li><a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a></li>
-                    <li><a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a></li>
-                    <li><a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a></li>
-                </ul>
-            </div>
+            <a class="navbar-brand" href="/"><img src="/images/KUPILogo.png"/></a>
+            <ul class="top-menu pull-right">
+                <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i> <span class="hidden-xs">Compte</span></a>
+                <a href="#" ng-click="room(user)" ng-controller="usersControllerModal"><i class="fa fa-users"></i> <span class="hidden-xs">Salons</span></a>
+                <a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-trophy"></i> <span class="hidden-xs">Classements</span></a>
+                <a ng-show="user.isAdmin" href="#" ng-click="admin()" ng-controller="adminControllerModal" ><i class="fa fa-cog"></i> <span class="hidden-xs">Admin</span></a>
+                <a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a>
+            </ul>
         </div>
     </div>
 </header>
 
-
+<alert class="primaryMessage" ng-controller="adminControllerPrimary" type="info" ng-show="isPrimary" id="infos" >
+    <div>Le site est affiché en tant que "@@ user.login @@" mais vous êtes connecté en "@@ primary.login @@".</div>
+</alert>
 
 <alert ng-repeat="alert in alerts" type="@@ alert.class @@" close="closeAlert($index)" id="infos" >
     <div ng-show="alert.cat == 'success'">
@@ -67,6 +82,11 @@
 @yield('content')
 
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/moment.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.17.1/locale/fr.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.11/moment-timezone-with-data.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.2.0/angular-moment.min.js" ></script>
+
 <!-- ANGULARJS -->
 <script src="/js/access.js"></script>
 <script src="/js/auth.js"></script>
@@ -76,6 +96,7 @@
 <script src="/js/controllers/usersController.js"></script>
 <script src="/js/controllers/betsController.js"></script>
 <script src="/js/controllers/transactionsController.js"></script>
+<script src="/js/controllers/adminController.js"></script>
 <script src="/js/app.js"></script>
 
 

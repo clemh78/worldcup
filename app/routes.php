@@ -21,6 +21,15 @@ Route::get('/api/users/logout', array('before' => 'token', 'uses' => 'AuthContro
 Route::post('/api/users/login', 'AuthController@login');
 Route::post('/api/users/', 'UserController@store');
 
+Route::get('/api/bets/distances', 'BetController@distances');
+
+
+Route::post('/api/users/join', array('before' => 'token', 'uses' => 'UserController@joinRoom'));
+
+Route::get('/api/games/{id?}/bets', array('before' => 'token', 'uses' => 'GameController@getBets'));
+
+Route::get('/api/report/', array('before' => 'key', 'uses' => 'ReportController@index'));
+
 //Tout les ressources disponibles avec un token
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
@@ -33,12 +42,34 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
     Route::resource('transactions', 'TransactionController',
         array('only' => array('index', 'show')));
 
+    Route::resource('groups', 'GroupController',
+        array('only' => array('index', 'show')));
+
+    Route::resource('teams', 'TeamController',
+        array('only' => array('index', 'show')));
+
+    Route::resource('bbts', 'BetBonusTypeController',
+        array('only' => array('index', 'show')));
+
     Route::resource('bets', 'BetController',
+        array('only' => array('index', 'show', 'store', 'update')));
+
+    Route::resource('bets_bonus', 'BetBonusController',
         array('only' => array('index', 'show', 'store')));
 
     Route::resource('bracket', 'BracketController',
         array('only' => array('index')));
+
+    Route::resource('roles', 'RoleController',
+        array('only' => array('index', 'show')));
+
+    Route::resource('rooms', 'RoomController',
+        array('only' => array('store')));
 });
+
+Route::post('/api/admin/login', array('before' => ['token', 'admin'], 'uses' => 'AuthController@loginWithoutPassword'));
+Route::post('/api/admin/register', array('before' => ['token', 'admin'], 'uses' => 'UserController@storeWithoutPassword'));
+Route::get('/api/admin/users', array('before' => 'token', 'uses' => 'UserController@indexAdmin'));
 
 // =============================================
 // CATCH ALL ROUTE =============================

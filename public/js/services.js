@@ -20,7 +20,7 @@ angular.module('services', [])
             authorize: function(accessLevel, role) {
                 if(role === undefined)
                     if($rootScope.user != null)
-                        role = userRoles.user;
+                        role = $rootScope.user.role.access_level;
                     else
                         role = userRoles.public;
 
@@ -32,15 +32,15 @@ angular.module('services', [])
             },
 
             getRanking : function(token) {
-              return $http.get('/api/users?token=' + token + '&orderby=points&order=DESC');
+              return $http.get('/api/users?token=' + token /*+ '&orderby=points&order=DESC'*/);
             },
 
-            login : function(email, pass) {
+            login : function(login, pass) {
                 return $http({
                     method: 'POST',
                     url: '/api/users/login',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"email" : email, "password" : pass})
+                    data: $.param({"login" : login, "password" : pass})
                 });
             },
 
@@ -48,12 +48,21 @@ angular.module('services', [])
                 return $http.get('/api/users/logout?token=' + token);
             },
 
-            register : function(email, pass, first, last) {
+            register : function(login, pass, firstname, lastname, code, email) {
                 return $http({
                     method: 'POST',
                     url: 'api/users',
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"email" : email, "password" : pass, "firstname" : first, "lastname" : last})
+                    data: $.param({"login" : login, "password" : pass, 'firstname' : firstname, 'lastname' : lastname, 'room_code' : code, 'email' : email})
+                });
+            },
+
+            join : function(token, room_code) {
+                return $http({
+                    method: 'POST',
+                    url: 'api/users/join?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"room_code" : room_code})
                 });
             },
 
@@ -69,10 +78,45 @@ angular.module('services', [])
         }
     })
 
+    .factory('serviceAdmin', function($http) {
+        return {
+            loginWithoutPassword : function(token, login) {
+                return $http({
+                    method: 'POST',
+                    url: '/api/admin/login?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"login" : login})
+                });
+            },
+
+            registerWithoutPassword : function(token, login, role_id, firstname, lastname) {
+                return $http({
+                    method: 'POST',
+                    url: 'api/admin/register?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"login" : login, "role_id" : role_id, 'firstname' : firstname, 'lastname' : lastname})
+                });
+            },
+
+            getUsers : function(token) {
+                return $http.get('/api/admin/users?token=' + token);
+            },
+        }
+    })
+
     .factory('serviceGame', function($http) {
         return {
+            GetNext : function(token, gameId){
+                return $http.get('api/games/'+gameId+'?token=' + token + '');
+            },
             GetNext : function(token){
                 return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderby=date&order=ASC');
+            },
+            GetPrevious : function(token){
+                return $http.get('api/games?token=' + token + '&winner_id!=null&team1_id!=null&team2_id!=null&orderby=date&order=DESC');
+            },
+            GetBets : function(token, gameId){
+                return $http.get('api/games/' + gameId + '/bets?token=' + token);
             }
         }
     })
@@ -93,18 +137,88 @@ angular.module('services', [])
         }
     })
 
+    .factory('serviceGroup', function($http) {
+        return {
+            getGroups : function(token){
+                return $http.get('api/groups?token=' + token);
+            }
+        }
+    })
+
+    .factory('serviceRoom', function($http) {
+        return {
+            create : function(token, name, code) {
+                return $http({
+                    method: 'POST',
+                    url: 'api/rooms?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"name" : name, "code" : code})
+                });
+            },
+        }
+    })
+
+    .factory('serviceTeam', function($http) {
+        return {
+            getTeams : function(token){
+                return $http.get('api/teams?token=' + token);
+            }
+        }
+    })
+
+    .factory('serviceBetBonusType', function($http) {
+        return {
+            getBbts : function(token){
+                return $http.get('api/bbts?token=' + token);
+            }
+        }
+    })
+
+    .factory('serviceRole', function($http) {
+        return {
+            getRoles : function(token){
+                return $http.get('api/roles?token=' + token);
+            }
+        }
+    })
+
     .factory('serviceBet', function($http) {
         return {
-            placeBet : function(token, userId, gameId, points, team1Goals, team2Goals, winnerId){
+            placeBet : function(token, userId, gameId, winnerId, team1_points, team2_points){
                 return $http({
                    method: 'POST',
                     url: 'api/bets?token=' + token,
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
-                    data: $.param({"user_id" : userId, "game_id" : gameId, "points" : points, "team1_goals" : team1Goals, "team2_goals" : team2Goals, "winner_id" : winnerId})
+                    data: $.param({"user_id" : userId, "game_id" : gameId, "team1_points" : team1_points, "team2_points" : team2_points, "winner_id" : winnerId})
+                });
+            },
+            updateBet : function(token, betId, winnerId, team1_points, team2_points){
+                return $http({
+                    method: 'PUT',
+                    url: 'api/bets/'+betId+'/?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"team1_points" : team1_points, "team2_points" : team2_points, "winner_id" : winnerId})
                 });
             },
             GetBet : function(token, gameId){
                 return $http.get('api/bets?token=' + token + '&game_id=' + gameId);
             }
+        }
+    })
+
+    .factory('serviceBonusBet', function($http) {
+        return {
+
+            GetBonusBets : function(token){
+                return $http.get('api/bets_bonus?token=' + token);
+            },
+            storeBet : function(token, userId, bbtId, teamId){
+                return $http({
+                    method: 'POST',
+                    url: 'api/bets_bonus?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"user_id" : userId, "bbt_id" : bbtId, "team_id" : teamId})
+                });
+            },
         }
     })

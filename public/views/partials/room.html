@@ -1,0 +1,58 @@
+<div class="room">
+    <div class="modal-header">
+        <img src="images/room.png" height="55" style="float:right;margin-left:20px;margin-top:-5px"/>
+        <h2 class="modal-title">
+
+            Mes salons</h2>
+    </div>
+    <div class="modal-body">
+        <div ng-repeat="room in user.rooms">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=https%3A//kupi.fr/r/@@room.code@@" target="_blank">
+                <img src="images/share-fb.jpg" width="100" style="float:right">
+            </a>
+            <h3>@@room.name@@</h3>
+            <ul class="list-group">
+                <li class="list-group-item">
+                    <b>@@room.nbUsers@@ joueurs</b>
+                    <div class="nbUsers"><i class="fa fa-link"></i> https://kupi.fr/r/@@room.code@@</div>
+                </li>
+                <li class="list-group-item">
+                    <span class="hidden-xs">Invitez vos amis avec ce code</span>
+                    <span class="hidden-sm hidden-md hidden-lg">Code</span>
+                    <div class="code"><b>@@room.code@@</b></div>
+                </li>
+            </ul>
+        </div>
+        <div class="alert alert-info" ng-show="user.rooms.length == 0" role="alert">Rejoignez ou créez un nouveau salon pour jouer avec vos amis et partager vos résultats</div>
+
+        <hr>
+
+        <div class="row"  style="margin-top:-25px">
+            <h3 class="col-xs-12">Rejoindre un salon</h3>
+            <div class="col-xs-9" >
+
+                <input type="text" ng-model="roomCode" class="form-control" placeholder="Code du salon"/>
+            </div>
+            <div class="col-xs-3" >
+                <button style="float:right;" class="btn btn-primary" ng-click="addRoom()">Rejoindre</button>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row" style="margin-top:-25px">
+            <div class="col-xs-12" >
+                <h3>Créer un nouveau salon</h3>
+            </div>
+            <div class="col-sm-5  col-xs-9" >
+                <input type="text" ng-model="newRoomName" class="form-control" placeholder="Nom du salon"/>
+            </div>
+            <div class="col-sm-4 col-xs-9" >
+                <input type="text" ng-model="newRoomCode" class="form-control" placeholder="Code du salon"/>
+            </div>
+            <div class="col-xs-3" >
+                <button style="float:right;" class="btn btn-success" ng-click="createRoom()">Créer</button>
+            </div>
+        </div>
+    </div>
+</div>

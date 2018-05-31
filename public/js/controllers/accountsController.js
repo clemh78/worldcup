@@ -13,10 +13,12 @@
 
 angular.module('accountsController', [])
 
-    .controller('accountsControllerRegister', ["$scope", "$http", "serviceUser", "$rootScope", "$state", function($scope, $http, User, $rootScope, $state) {
+    .controller('accountsControllerRegister', ["$scope", "$http", "serviceUser", "$rootScope", "$state", "code", function($scope, $http, User, $rootScope, $state, code) {
+
+        $scope.codeStr = code;
 
         $scope.registerSubmit = function(){
-            User.register($scope.email, $scope.password, $scope.firstname, $scope.lastname)
+            User.register($scope.loginStr, $scope.password, $scope.firstnameStr, $scope.lastnameStr, $scope.codeStr, $scope.emailStr)
                 .success(function() {
                    $state.transitionTo("login");
                 });
@@ -25,13 +27,15 @@ angular.module('accountsController', [])
 
     .controller('accountsControllerLogin', ["$scope", "$http", "serviceUser", "$rootScope", "$state", "$cookies", function($scope, $http, User, $rootScope, $state, $cookies) {
 
+        $scope.REGISTER_ON = REGISTER_ON;
+
         $scope.loginSubmit = function(){
-            User.login($scope.email, $scope.password)
+            User.login($scope.loginStr, $scope.password)
                 .success(function(data) {
                     $rootScope.isConnected = true;
 
-                    $cookies.token = data.id;
-                    $cookies.user_id = data.user_id;
+                    $cookies['token'] = data.id;
+                    $cookies['user_id'] = data.user_id;
 
                     $state.transitionTo("index");
                 });

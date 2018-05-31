@@ -1,0 +1,52 @@
+<div class="admin">
+    <div class="modal-header" >
+        <h3 class="modal-title" >Administration</h3>
+        <div id="menu-admin">
+            <ul class="nav nav-pills">
+                <li class="active" ><a href="#" id="users-list-menu" ng-click="usersList()" >Liste des utilisateurs</a></li>
+                <li ><a href="#" id="users-add-menu" ng-click="usersAdd()" >Ajout d'un utilisateur</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-xs-12" id="users-list">
+                <table class="table table-bordered">
+                    <thead>
+                    <td>Login</td>
+                    <td>Rôle</td>
+                    <td style="width: 100px;"></td>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="userList in users">
+                        <td>@@userList.login@@</td>
+                        <td>@@userList.role.label@@</td>
+                        <td>
+                            <btn ng-click="login(userList)" ng-show="userList.login != user.login" class="btn btn-success" >Être @@userList.login@@</btn>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-xs-6 col-xs-offset-3" id="users-add" style="display: none;">
+                <form ng-submit="registerSubmit()" role="form" name="register">
+                    <input type="text" ng-model="newUser.login" name="login" class="form-control" placeholder="Login"><br />
+                    <input type="text" ng-model="newUser.firstname" name="login" class="form-control" placeholder="Prénom"><br />
+                    <input type="text" ng-model="newUser.lastname" name="login" class="form-control" placeholder="Nom (initial)"><br />
+                    <select ng-model="newUser.role_id" class="form-control" ng-options="role.id as role.label for role in roles" />
+                    <br />
+                    <button class="btn btn-lg btn-primary btn-block" type="submit">Ajouter l'utilisateur</button>
+                </form>
+            </div>
+            <div class="col-xs-6 col-xs-offset-3" id="users-welcome" style="display: none;">
+                <div class="alert alert-success" role="alert">Nouvel utilisateur créé !</div>
+                Login : <b>@@newUser.login@@</b><br />
+                Mot de passe : <b>@@newUser.password@@</b><br /><br />
+                <btn ng-click="usersList()" class="btn btn-success" >Revenir à liste des utilisateurs</btn>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer" >
+        <button class="btn btn-warning" ng-click="cancel()">Fermer</button>
+    </div>
+</div>

@@ -26,21 +26,21 @@ class Bet extends Eloquent {
      *
      * @var array
      */
-    protected $with = array('game');
+    protected $with = array('user');
 
     /**
      * Liste des champs assignable en masse
      *
      * @var array
      */
-    protected $fillable = array('user_id', 'game_id', 'points', 'team1_goals', 'team2_goals', 'winner_id');
+    protected $fillable = array('user_id', 'game_id', 'winner_id', 'team1_points', 'team2_points');
 
     /**
      * Liste des champs qui peuvent servir de filter dans l'url
      *
      * @var array
      */
-    public $filters = array('game_id', 'user_id', 'points', 'team1_goals', 'team2_goals');
+    public $filters = array('game_id', 'user_id', 'team1_points', 'team2_points');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -60,6 +60,41 @@ class Bet extends Eloquent {
     }
 
     /**
+     * Récupère l'objet User
+     *
+     * @var Stage
+     */
+    public function user()
+    {
+        return $this->belongsTo('User', 'user_id', 'id');
+    }
+
+    public function getWinPointsAttribute()
+    {
+        $user = User::getUserWithToken($_GET['token']);
+        if($user){
+            $total = DB::table('transaction')->where('user_id', '=', $user->id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+            $total = $total - DB::table('transaction')->where('user_id', '=', $user->id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
+
+            return $total;
+        }
+
+        return null;
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+        foreach ($this->getMutatedAttributes() as $key)
+        {
+            if ( ! array_key_exists($key, $array)) {
+                $array[$key] = $this->{$key};
+            }
+        }
+        return $array;
+    }
+
+    /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *
      * @var array
@@ -67,9 +102,8 @@ class Bet extends Eloquent {
     public static $rules = array(
         'user_id' => 'exists:user,id',
         'game_id' => 'exists:game,id',
-        'points' => 'required|integer',
-        'team1_goals' => 'required|integer',
-        'team2_goals' => 'required|integer',
-        'winner_id' => 'required|exists:team,id',
+        'team1_points' => 'required|integer',
+        'team2_points' => 'required|integer',
+        'winner_id' => 'exists:team,id',
     );
 }

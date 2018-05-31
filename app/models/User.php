@@ -28,7 +28,7 @@ class User extends Eloquent {
      *
      * @var array
      */
-    protected $fillable = array('email', 'password', 'firstname', 'lastname');
+    protected $fillable = array('login', 'password', 'role_id', 'firstname', 'lastname', 'email');
 
     /**
      * Table corespondant au champ caché sur les retours JSON
@@ -42,10 +42,17 @@ class User extends Eloquent {
      *
      * @var array
      */
-    public $filters = array('email',
-        'firstname',
-        'lastname',
-        'points');
+    public $filters = array('login');
+
+
+    protected $with = array('role', 'rooms');
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+        $array['winPoints'] = $this->winPoints;
+        return $array;
+    }
 
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
@@ -53,11 +60,12 @@ class User extends Eloquent {
      * @var array
      */
     public static $rules = array(
-        'email' => 'required|email|max:255',
-        'password' => 'required|max:255',
-        /*'points' => 'required|integer',*/
+        'login' => 'required|unique:user|max:255',
         'firstname' => 'required|max:255',
-        'lastname' => 'required|max:255',
+        'lastname' => 'required|max:1',
+        'password' => 'required|max:255',
+        'email' => 'email|max:255',
+        'role_id' => 'exists:role,id'
     );
 
     /**
@@ -66,10 +74,12 @@ class User extends Eloquent {
      * @var array
      */
     public static $rulesUpdate = array(
-        'email' => 'email|max:255',
+        'login' => 'max:255',
         'password' => 'max:255',
         'firstname' => 'max:255',
-        'lastname' => 'max:255',
+        'lastname' => 'max:1',
+        'email' => 'email|max:255',
+        'role_id' => 'exists:role,id'
     );
 
     /**
@@ -78,8 +88,8 @@ class User extends Eloquent {
      * @param $password
      * @return mixed
      */
-    public static function getUserWithEmail($email){
-        return User::where('email', $email)->first();
+    public static function getUserWithLogin($login){
+        return User::where('login', $login)->first();
     }
 
     /**
@@ -92,6 +102,19 @@ class User extends Eloquent {
             ->select('user.*')
             ->where('token.id', $token)
             ->first();
+    }
+
+    public function getWinPointsAttribute()
+    {
+        $total = DB::table('transaction')->where('user_id', '=', $this->id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+        $total = $total - DB::table('transaction')->where('user_id', '=', $this->id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
+
+        return $total;
+    }
+
+    public function role()
+    {
+        return $this->belongsTo('Role', 'role_id', 'id');
     }
 
     /**
@@ -108,5 +131,10 @@ class User extends Eloquent {
         $token->id = $id;
 
         return $token;
+    }
+
+    public function rooms()
+    {
+        return $this->belongsToMany('Room');
     }
 }
