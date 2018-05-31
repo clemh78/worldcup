@@ -24,6 +24,11 @@
     <link rel="stylesheet" type="text/css" href="/css/worldcup.css" media="screen" />
     <link rel="stylesheet" type="text/css" href="/css/animate.css" media="screen" />
     <link rel="icon" type="image/png" href="/images/favicon.png" />
+
+    <link rel="apple-touch-icon" type="image/png" href="/images/favicon.57.png"><!-- iPhone -->
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/images/favicon.72.png"><!-- iPad -->
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/images/favicon.114.png"><!-- iPhone4 -->
+    <link rel="icon" type="image/png" href="icon.114.png"><!-- Opera Speed Dial, at least 144×114 px -->
 	
 	<base href="https://worldcup.hemidy.fr/">
 
@@ -49,10 +54,10 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="/"><img src="/images/KUPILogo.png"/></a>
             <ul class="top-menu pull-right">
-                <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i></a>
-                <a href="#" ng-click="room(user)" ng-controller="usersControllerModal"><i class="fa fa-users"></i></a>
-                <a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-trophy"></i></a>
-                <a ng-show="user.isAdmin" href="#" ng-click="admin()" ng-controller="adminControllerModal" ><i class="fa fa-cog"></i></a>
+                <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i> <span class="hidden-xs">Compte</span></a>
+                <a href="#" ng-click="room(user)" ng-controller="usersControllerModal"><i class="fa fa-users"></i> <span class="hidden-xs">Salons</span></a>
+                <a href="#" ng-click="ranking()" ng-controller="usersControllerModal"><i class="fa fa-trophy"></i> <span class="hidden-xs">Classements</span></a>
+                <a ng-show="user.isAdmin" href="#" ng-click="admin()" ng-controller="adminControllerModal" ><i class="fa fa-cog"></i> <span class="hidden-xs">Admin</span></a>
                 <a href="#" ng-click="logout()"><i class="fa fa-sign-out"></i></a>
             </ul>
         </div>
