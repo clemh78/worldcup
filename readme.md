@@ -4,5 +4,5 @@
 
 <br/><br/>
 
-## Homepage :
+## Homepage
 <p><img src="http://img4.hostingpics.net/pics/262101Homepage.png" alt="Homepage" title="Homepage" style="width:100%"></p>
