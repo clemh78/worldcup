@@ -69,6 +69,31 @@ class Bet extends Eloquent {
         return $this->belongsTo('User', 'user_id', 'id');
     }
 
+    public function getWinPointsAttribute()
+    {
+        $user = User::getUserWithToken($_GET['token']);
+        if($user){
+            $total = DB::table('transaction')->where('user_id', '=', $user->id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+            $total = $total - DB::table('transaction')->where('user_id', '=', $user->id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
+
+            return $total;
+        }
+
+        return null;
+    }
+
+    public function toArray()
+    {
+        $array = parent::toArray();
+        foreach ($this->getMutatedAttributes() as $key)
+        {
+            if ( ! array_key_exists($key, $array)) {
+                $array[$key] = $this->{$key};
+            }
+        }
+        return $array;
+    }
+
     /**
      * Définition des règles de vérifications pour les entrées utilisateurs et le non retour des erreur mysql
      *

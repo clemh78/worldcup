@@ -54,21 +54,22 @@ angular.module('usersController', [])
 
     }])
 
-    .controller('usersControllerListModalInstance', ["$scope", "serviceUser","$cookies", "$modalInstance", "users", function($scope, User, $cookies, $modalInstance, users) {
+    .controller('usersControllerListModalInstance', ["$scope", "$rootScope", "serviceUser","$cookies", "$modalInstance", "users", function($scope, $rootScope, User, $cookies, $modalInstance, users) {
         $scope.users = users.data;
+        $scope.roomsTmp = [];
         $scope.rooms = [];
+
+        angular.forEach($rootScope.user.rooms, function(room, key) {
+            $scope.roomsTmp[room.id] = room;
+            $scope.roomsTmp[room.id].users = [];
+        });
 
         angular.forEach($scope.users, function(user, key) {
             angular.forEach(user.rooms, function(room, key) {
                 if(room.id){
-                    if(!$scope.rooms[room.id]){
-                        $scope.rooms[room.id] = {
-                            'room' : room,
-                            'users' : []
-                        }
+                    if($scope.roomsTmp[room.id] != undefined){
+                        $scope.roomsTmp[room.id].users.push(user);
                     }
-
-                    $scope.rooms[room.id].users.push(user);
                 }
             });
         });
@@ -81,7 +82,10 @@ angular.module('usersController', [])
             $scope.usersSelect = users;
         };
 
-        $scope.rooms.shift();
+        angular.forEach($scope.roomsTmp, function(room, key) {
+            if(room != undefined)
+                $scope.rooms.push(room);
+        });
     }])
 
     .controller('usersControllerAccountModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {
@@ -102,7 +106,7 @@ angular.module('usersController', [])
         };
     }])
 
-    .controller('usersControllerRoomModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {
+    .controller('usersControllerRoomModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", "serviceRoom", function($scope, $rootScope, $modalInstance, $cookies, User, user, Room) {
         $scope.user = user;
 
         $scope.addRoom = function(){
@@ -110,6 +114,13 @@ angular.module('usersController', [])
                 .success(function(data){
                     $rootScope.user = data;
                     $scope.user = data;
+                });
+        };
+
+        $scope.createRoom = function(){
+            Room.create($cookies['token'], $scope.newRoomName, $scope.newRoomCode)
+                .success(function(data){
+                    $rootScope.user.rooms.push(data);
                 });
         };
 

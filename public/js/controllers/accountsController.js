@@ -13,7 +13,9 @@
 
 angular.module('accountsController', [])
 
-    .controller('accountsControllerRegister', ["$scope", "$http", "serviceUser", "$rootScope", "$state", function($scope, $http, User, $rootScope, $state) {
+    .controller('accountsControllerRegister', ["$scope", "$http", "serviceUser", "$rootScope", "$state", "code", function($scope, $http, User, $rootScope, $state, code) {
+
+        $scope.codeStr = code;
 
         $scope.registerSubmit = function(){
             User.register($scope.loginStr, $scope.password, $scope.firstnameStr, $scope.lastnameStr, $scope.codeStr, $scope.emailStr)

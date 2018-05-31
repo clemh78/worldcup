@@ -197,19 +197,19 @@ class GameTableSeeder extends Seeder {
         Game::create(array('kick_at_goal' => false, 'fifa_match_id' => 300331520, 'team1_id' => 26, 'team2_id' => 27, 'date' => DateTime::createFromFormat("U", strtotime("2018-06-28T20:00:00.000Z"))));
 
         //8e
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331544, 'stage_id' => 4, 'team1_tmp_name' => '1A', 'team2_tmp_name' => '2B', 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', strtotime("2018-06-30T20:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331537, 'stage_id' => 4, 'team1_tmp_name' => '1C', 'team2_tmp_name' => '2D', 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', strtotime("2018-06-30T16:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331517, 'stage_id' => 4, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-01T16:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331498, 'stage_id' => 4, 'team1_tmp_name' => '1D', 'team2_tmp_name' => '2C', 'stage_game_num' => 4, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-01T20:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331535, 'stage_id' => 4, 'team1_tmp_name' => '1E', 'team2_tmp_name' => '2F', 'stage_game_num' => 5, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-02T16:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331551, 'stage_id' => 4, 'team1_tmp_name' => '1G', 'team2_tmp_name' => '2H', 'stage_game_num' => 6, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-02T20:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331514, 'stage_id' => 4, 'team1_tmp_name' => '1F', 'team2_tmp_name' => '2E', 'stage_game_num' => 7, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-03T16:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331542, 'stage_id' => 4, 'team1_tmp_name' => '1H', 'team2_tmp_name' => '2G', 'stage_game_num' => 8, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-03T20:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331544, 'stage_id' => 4, 'team1_tmp_name' => '1A', 'team2_tmp_name' => '2B', 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', strtotime("2018-06-30T21:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331537, 'stage_id' => 4, 'team1_tmp_name' => '1C', 'team2_tmp_name' => '2D', 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', strtotime("2018-06-30T17:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331535, 'stage_id' => 4, 'team1_tmp_name' => '1E', 'team2_tmp_name' => '2F', 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-02T18:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331551, 'stage_id' => 4, 'team1_tmp_name' => '1G', 'team2_tmp_name' => '2H', 'stage_game_num' => 4, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-02T21:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331517, 'stage_id' => 4, 'team1_tmp_name' => '1B', 'team2_tmp_name' => '2A', 'stage_game_num' => 5, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-01T17:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331498, 'stage_id' => 4, 'team1_tmp_name' => '1D', 'team2_tmp_name' => '2C', 'stage_game_num' => 6, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-01T21:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331514, 'stage_id' => 4, 'team1_tmp_name' => '1F', 'team2_tmp_name' => '2E', 'stage_game_num' => 7, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-03T17:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331542, 'stage_id' => 4, 'team1_tmp_name' => '1H', 'team2_tmp_name' => '2G', 'stage_game_num' => 8, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-03T21:00:00.000Z"))));
 
         //Quarts
         Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331543, 'stage_id' => 3, 'stage_game_num' => 1, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-06T16:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331504, 'stage_id' => 3, 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-07T20:00:00.000Z"))));
-        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331538, 'stage_id' => 3, 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-06T20:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331538, 'stage_id' => 3, 'stage_game_num' => 2, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-07T20:00:00.000Z"))));
+        Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331504, 'stage_id' => 3, 'stage_game_num' => 3, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-06T20:00:00.000Z"))));
         Game::create(array('kick_at_goal' => true, 'fifa_match_id' => 300331541, 'stage_id' => 3, 'stage_game_num' => 4, 'date' => DateTime::createFromFormat('U', strtotime("2018-07-07T16:00:00.000Z"))));
 
         //Demi

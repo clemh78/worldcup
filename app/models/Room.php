@@ -23,6 +23,8 @@ class Room extends Eloquent {
 
     public $timestamps = false;
 
+    protected $fillable = array('name', 'code');
+
     public function toArray()
     {
         $array = parent::toArray();
@@ -44,7 +46,7 @@ class Room extends Eloquent {
      */
     public static $rules = array(
         'name' => 'required|alpha_num|max:255',
-        'code' => 'required|alpha_num|max:10',
+        'code' => 'required|unique:room|alpha_num|max:10',
     );
 
     public function users()

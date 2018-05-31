@@ -145,6 +145,19 @@ angular.module('services', [])
         }
     })
 
+    .factory('serviceRoom', function($http) {
+        return {
+            create : function(token, name, code) {
+                return $http({
+                    method: 'POST',
+                    url: 'api/rooms?token=' + token,
+                    headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
+                    data: $.param({"name" : name, "code" : code})
+                });
+            },
+        }
+    })
+
     .factory('serviceTeam', function($http) {
         return {
             getTeams : function(token){

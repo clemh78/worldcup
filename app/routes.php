@@ -62,6 +62,9 @@ Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
     Route::resource('roles', 'RoleController',
         array('only' => array('index', 'show')));
+
+    Route::resource('rooms', 'RoomController',
+        array('only' => array('store')));
 });
 
 Route::post('/api/admin/login', array('before' => ['token', 'admin'], 'uses' => 'AuthController@loginWithoutPassword'));

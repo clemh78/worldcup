@@ -52,15 +52,15 @@ angular.module('betsController', [])
             if(bet.data[0] == undefined){
                 $modalInstance.close(
                     Bet.placeBet($cookies['token'], user.id, game.id, $scope.bet.winner_id, $scope.bet.team1_points, $scope.bet.team2_points)
-                        .success(function() {
-                            $scope.game.user_has_bet = true;
+                        .success(function(data) {
+                            $scope.game.user_bet = data;
                         })
                 );
             }else{
                 $modalInstance.close(
                     Bet.updateBet($cookies['token'], $scope.bet.id, $scope.bet.winner_id, $scope.bet.team1_points, $scope.bet.team2_points)
                         .success(function(data) {
-                            $scope.game.user_has_bet = true;
+                            $scope.game.user_bet = data;
                         })
                 );
             }

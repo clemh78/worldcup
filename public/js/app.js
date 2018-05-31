@@ -26,7 +26,23 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
             url: '/register',
             templateUrl: '/views/partials/registerForm.html',
             controller: 'accountsControllerRegister',
-            access: accessLevels.public
+            access: accessLevels.public,
+            resolve: {
+                code: [ function(){
+                    return null;
+                }]
+            }
+        })
+        .state('registerWithCode', {
+            url: '/r/:code',
+            templateUrl: '/views/partials/registerForm.html',
+            controller: 'accountsControllerRegister',
+            access: accessLevels.public,
+            resolve: {
+                code: [ "$stateParams", function($stateParams){
+                    return $stateParams.code;
+                }]
+            }
         })
         .state('login', {
             url: '/login',

@@ -20,11 +20,7 @@ class Game extends Eloquent {
      * @var string
      */
     protected $table = 'game';
-
-    private $MAX_COTE = 5;
-    private $MIN_COTE = 1.10;
-
-
+    
     public $timestamps = false;
 
 
@@ -108,7 +104,7 @@ class Game extends Eloquent {
         return $this->hasMany('Bet', 'game_id', 'id');
     }
 
-    public function getUserHasBetAttribute()
+    public function getUserBetAttribute()
     {
         $user = User::getUserWithToken($_GET['token']);
         if($user)
@@ -116,10 +112,7 @@ class Game extends Eloquent {
         else
             $bet = null;
 
-        if($bet)
-            return true;
-        else
-            return false;
+        return $bet;
     }
 
     public function toArray()
