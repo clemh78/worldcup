@@ -124,12 +124,19 @@ worldcup.alert = function($scope, infos){
     if(infos.status != undefined){
         if(infos.status == 500)
             $scope.alerts.push({message: infos.data.error.message, type: infos.data.error.type, file: infos.data.error.file, line: infos.data.error.line, cat: 'exception', class: 'danger'});
-
-
+        
         if(infos.status != 500)
-            $scope.alerts.push({message: infos.data.error, cat: 'error', class: 'danger'});
+            if(typeof infos.data.error == "object") {
+                message = "" ;
+                $.each(infos.data.error, function(index, value) {
+                    message += value + "<br />";
+                });
+
+                $scope.alerts.push({message: message, cat: 'error', class: 'danger'});
+            }else
+                $scope.alerts.push({message: infos.data.error, cat: 'error', class: 'danger'});
     }
-}
+};
 
 worldcup.closeAlert = function($scope ,index) {
     $scope.alerts.splice(index, 1);
