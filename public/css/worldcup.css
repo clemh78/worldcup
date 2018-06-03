@@ -872,3 +872,40 @@ ul.nav.nav-pills li.active a{
     color:#fff;
     border-bottom: 1px solid #002e6b;
 }
+
+
+
+#alerts {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px 15px;
+    z-index: 1051;
+    border-radius: 0px;
+}
+
+#alerts.alert-dismissable,
+#alerts.alert-dismissible {
+    padding-right: 35px;
+}
+
+.alert-info {
+    color: #fff;
+    background-color: #0092FF;
+    border: none;
+}
+
+.alert-success {
+    color: #fff;
+    background-color: #47a447;
+    border: none;
+}
+
+.alert-danger {
+    color: #FFFFFF;
+    background-color: #c5181f;
+    border: none;
+}

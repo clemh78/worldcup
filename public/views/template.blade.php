@@ -72,7 +72,7 @@
     <div>Le site est affiché en tant que "@@ user.login @@" mais vous êtes connecté en "@@ primary.login @@".</div>
 </alert>
 
-<alert ng-repeat="alert in alerts" type="@@ alert.class @@" close="closeAlert($index)" id="infos" >
+<alert ng-show="alerts" class="fadeInUp animated" ng-repeat="alert in alerts" type="@@ alert.class @@" close="closeAlert($index)" id="alerts">
     <div ng-show="alert.cat == 'success'">
         @@ alert.message @@
     </div>

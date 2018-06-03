@@ -118,6 +118,7 @@ worldcup.alert = function($scope, infos){
     $scope.alerts = [];
 
     if(infos.success){
+        fadeOutDownAfter3sec();
         $scope.alerts.push({message: infos.message, cat: 'success', class: 'success'});
     }
 
@@ -218,3 +219,7 @@ worldcup.filter('groupBy', ['$parse', function ($parse) {
         return filtered;
     };
 }]);
+
+function fadeOutDownAfter3sec(){
+    setTimeout(function(){$('#alerts').addClass('fadeOutDown');},3000)
+}
