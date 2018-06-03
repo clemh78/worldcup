@@ -849,3 +849,16 @@ ul.nav.nav-pills li.active a{
 .room input, .room button{
     margin-top:2px;
 }
+
+
+.help .modal-body {
+    background-color: #0057b8;
+    background-image: url(../images/fwc_darkbg.jpg);
+    color: white;
+}
+
+.help .modal-header{
+    background-color: #0057b8;
+    color:#fff;
+    border-bottom: 1px solid #002e6b;
+}

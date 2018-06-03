@@ -124,7 +124,7 @@ worldcup.alert = function($scope, infos){
     if(infos.status != undefined){
         if(infos.status == 500)
             $scope.alerts.push({message: infos.data.error.message, type: infos.data.error.type, file: infos.data.error.file, line: infos.data.error.line, cat: 'exception', class: 'danger'});
-        
+
         if(infos.status != 500)
             if(typeof infos.data.error == "object") {
                 message = "" ;

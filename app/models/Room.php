@@ -45,7 +45,7 @@ class Room extends Eloquent {
      * @var array
      */
     public static $rules = array(
-        'name' => 'required|alpha_num|max:255',
+        'name' => 'required|string|max:255',
         'code' => 'required|unique:room|alpha_num|max:10',
     );
 
