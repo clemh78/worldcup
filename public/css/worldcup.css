@@ -646,6 +646,26 @@ ul.nav.nav-pills li.active a{
 
 /************************** Bets **************************/
 
+.bet .modal-body {
+    background-color: #0057b8;
+    background-image: url(../images/fwc_darkbg.jpg);
+    color: white;
+}
+
+.bet .modal-header{
+    background-color: #0057b8;
+    color:#fff;
+    border-bottom: 1px solid #002e6b;
+}
+
+.bet .modal-footer{
+    background-color: #0057b8;
+    color:#fff;
+    border-bottom: 1px solid #002e6b;
+    margin-top: 0px;
+    border-top: 0px;
+}
+
 .modal-content{
     border-radius: 2px;
 }
@@ -672,8 +692,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .modal-body{
-    padding: 0px 15px;
-    background-color: #fff;
+    padding: 1px 15px;
 }
 
 .bet .modal-footer{
@@ -719,12 +738,11 @@ ul.nav.nav-pills li.active a{
 
 .bet .modal-body .row{
     padding: 5px 0px;
-    background-color: #fff;
 }
 
 .bet .modal-body .row .score{
     padding: 10px 0px;
-    box-shadow: 0px 2px 2px #aaa;
+    box-shadow: 0px 2px 2px #16191d;
 }
 
 .bet button.btn-primary{
@@ -768,6 +786,40 @@ ul.nav.nav-pills li.active a{
 
 .bet_bonus .modal-body {
     padding:0px;
+}
+
+.bet .userBet .userLogin {
+    margin-left: 20px;
+    font-size: 25px;
+    padding-top: 7px;
+    text-transform: uppercase;
+}
+
+.bet .userBet .userScore {
+    font-size: 20px;
+    background-color: #c5181f;
+    color: white;
+    padding: 5px;
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+}
+
+.bet .userBet .userPoints {
+    float: right;
+    background-color: #47a447;
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    font-size: 17px;
+}
+
+.bet .finished h2 {
+    font-size: 30px;
+    display: inline;
+    line-height: 1em;
 }
 
 .bbt {
@@ -872,8 +924,6 @@ ul.nav.nav-pills li.active a{
     color:#fff;
     border-bottom: 1px solid #002e6b;
 }
-
-
 
 #alerts {
     position: fixed;
