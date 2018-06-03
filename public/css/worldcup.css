@@ -836,6 +836,25 @@ ul.nav.nav-pills li.active a{
     margin-top: 20px;
 }
 
+.bet .winnerFlag {
+    color:#47a447;
+    font-size: 25px;
+}
+
+.bet .winnerFlag.one {
+    float: right;
+    position: absolute;
+    left: 20px;
+    top: 15px;
+}
+
+.bet .winnerFlag.two {
+    float: left;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+}
+
 .bbt {
     background-color: #0057b8;
     background-image: url(../images/fwc_darkbluebg.png);

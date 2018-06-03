@@ -49,9 +49,9 @@ angular.module('gamesController', [])
 
         $scope.betColor = function(game, teamDisplay){
 
-            game.user_bet.team2_points, game.user_bet.team1_points
-
-
+            if(!game.user_bet)
+                return null;
+            
             if(game.user_bet.team1_points == game.user_bet.team2_points && game.user_bet.winner_id != null) {
                 if (game.user_bet.winner_id == game.team1_id && teamDisplay == 1)
                     return 'btn-success';
