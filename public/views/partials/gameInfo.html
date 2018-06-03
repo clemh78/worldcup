@@ -25,6 +25,7 @@
                         <td>@@ bet.user.firstname @@ @@ bet.user.lastname @@.</td>
                         <td>Vainqueur : <b><span ng-show="bet.winner_id != game.team1_id && bet.winner_id != game.team2_id" >Match nul</span><span ng-show="bet.winner_id == game.team1_id" >@@ game.team1.name @@</span><span ng-show="bet.winner_id == game.team2_id">@@ game.team2.name @@</span></b></td>
 						<td>Score : <b>@@ bet.team1_points @@</b> - <b>@@ bet.team2_points @@</b></td>
+                        <td><span class="label label-success" ng-show="bet.win_points > 0" >+ @@ bet.win_points @@ XP</span> <span class="label label-danger" ng-show="bet.win_points == 0" >+ @@ bet.win_points @@ XP</span></td>
 					</tr>
                 </table>
             </div>

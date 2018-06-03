@@ -412,9 +412,11 @@ ul.nav.nav-pills li.active a{
 
 .game .team1-name .bet{
     left:10px;
+    cursor: default;
 }
 .game .team2-name .bet{
     right:10px;
+    cursor: default;
 }
 
 
