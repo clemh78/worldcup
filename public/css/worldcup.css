@@ -707,10 +707,16 @@ ul.nav.nav-pills li.active a{
 
 .bet .modal-body select{
     border-radius: 2px;
+    background-color: #313840;
+    border: 1px solid #16191d;
+    color: white;
 }
 
 .bet .modal-body input[type="text"]{
     border-radius: 2px;
+    background-color: #313840;
+    border: 1px solid #16191d;
+    color: white;
 }
 
 .bet .modal-body input[type="text"].team{
