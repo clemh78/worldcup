@@ -67,7 +67,7 @@
                         <h2 class="subheader" ng-hide="game.stage != null"><span class="hidden-xs">Phase de poule</span><span class="hidden-lg hidden-md hidden-sm">Poules</span></h2>
                     </div>
                     <div class="col-xs-4 team1-name">
-                        <span class="btn bet" ng-show="game.user_bet" ng-class="betColor(game.user_bet.team1_points, game.user_bet.team2_points)" >@@ game.user_bet.team1_points @@</span>
+                        <span class="btn bet" ng-show="game.user_bet" ng-class="betColor(game, 1)" >@@ game.user_bet.team1_points @@</span>
                         <img src="images/flags/@@ game.team1.code.toLowerCase() @@"/><span>@@ game.team1.name @@</span>
                     </div>
                     <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">
@@ -83,7 +83,7 @@
                     </div>
 
                     <div class="col-xs-4  team2-name">
-                        <span class="btn bet" ng-show="game.user_bet" ng-class="betColor(game.user_bet.team2_points, game.user_bet.team1_points)" >@@ game.user_bet.team2_points @@</span>
+                        <span class="btn bet" ng-show="game.user_bet" ng-class="betColor(game, 2)" >@@ game.user_bet.team2_points @@</span>
                         <img src="images/flags/@@ game.team2.code.toLowerCase() @@" /><span>@@ game.team2.name @@</span>
                     </div>
                 </div>
