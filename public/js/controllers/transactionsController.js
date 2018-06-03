@@ -17,7 +17,7 @@ angular.module('transactionsController', [])
 
         $scope.open = function () {
             $modal.open({
-                templateUrl: '/views/partials/transactionsList.html',
+                templateUrl: '/views/partials/transactionsList.html?v=' + VERSION,
                 controller: 'transactionsControllerModalInstance',
                 resolve: {
                     transactions: [ "serviceTransaction", "$cookies", function(Transaction, $cookies){

@@ -17,7 +17,7 @@ angular.module('usersController', [])
 
         $scope.ranking = function(){
             $modal.open({
-                templateUrl: '/views/partials/rankingList.html',
+                templateUrl: '/views/partials/rankingList.html?v=' + VERSION,
                 controller: 'usersControllerListModalInstance',
                 size: 'lg',
                 resolve: {
@@ -30,7 +30,7 @@ angular.module('usersController', [])
 
         $scope.account = function(user){
             $modal.open({
-                templateUrl:'/views/partials/accountForm.html',
+                templateUrl:'/views/partials/accountForm.html?v=' + VERSION,
                 controller: 'usersControllerAccountModalInstance',
                 resolve:{
                     user: function(){
@@ -42,7 +42,7 @@ angular.module('usersController', [])
 
         $scope.room = function(user){
             $modal.open({
-                templateUrl:'/views/partials/room.html',
+                templateUrl:'/views/partials/room.html?v=' + VERSION,
                 controller: 'usersControllerRoomModalInstance',
                 resolve:{
                     user: function(){

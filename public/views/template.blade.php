@@ -21,16 +21,16 @@
     <script src="/js/jquery.gracket.min.js"></script>
 
     <!-- CUSTOM -->
-    <link rel="stylesheet" type="text/css" href="/css/worldcup.css" media="screen" />
-    <link rel="stylesheet" type="text/css" href="/css/animate.css" media="screen" />
-    <link rel="icon" type="image/png" href="/images/favicon.png" />
+    <link rel="stylesheet" type="text/css" href="/css/worldcup.css?v={{Config::get('app.version')}}" media="screen" />
+    <link rel="stylesheet" type="text/css" href="/css/animate.css?v={{Config::get('app.version')}}" media="screen" />
+    <link rel="icon" type="image/png" href="/images/favicon.png?v={{Config::get('app.version')}}" />
 
-    <link rel="apple-touch-icon" type="image/png" href="/images/favicon.57.png"><!-- iPhone -->
-    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/images/favicon.72.png"><!-- iPad -->
-    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/images/favicon.114.png"><!-- iPhone4 -->
-    <link rel="icon" type="image/png" href="icon.114.png"><!-- Opera Speed Dial, at least 144×114 px -->
+    <link rel="apple-touch-icon" type="image/png" href="/images/favicon.57.png?v={{Config::get('app.version')}}"><!-- iPhone -->
+    <link rel="apple-touch-icon" type="image/png" sizes="72x72" href="/images/favicon.72.png?v={{Config::get('app.version')}}"><!-- iPad -->
+    <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/images/favicon.114.png?v={{Config::get('app.version')}}"><!-- iPhone4 -->
+    <link rel="icon" type="image/png" href="icon.114.png?v={{Config::get('app.version')}}"><!-- Opera Speed Dial, at least 144×114 px -->
 	
-	<base href="https://worldcup.hemidy.fr/">
+	<base href="{{ Config::get('app.url') }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
@@ -40,6 +40,7 @@
 
     <script>
         REGISTER_ON = {{ (Config::get('app.register_on')==1)?1:0 }};
+        VERSION = "{{Config::get('app.version')}}";
     </script>
 
 </head>
@@ -52,7 +53,10 @@
 <header ng-show="isConnected">
     <div class="navbar navbar-inverse" role="navigation" >
         <div class="container-fluid">
-            <a class="navbar-brand" href="/"><img src="/images/KUPILogo.png"/></a>
+            <a class="navbar-brand" href="/">
+                <img src="/images/KUPILogo.png"/><br/>
+                <div class="version" >v{{Config::get('app.version')}}</div>
+            </a>
             <ul class="top-menu pull-right">
                 <a href="#" ng-click="account(user)" ng-controller="usersControllerModal"><i class="fa fa-user"></i> <span class="hidden-xs">Compte</span></a>
                 <a href="#" ng-click="room(user)" ng-controller="usersControllerModal"><i class="fa fa-users"></i> <span class="hidden-xs">Salons</span></a>
@@ -88,16 +92,16 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-moment/1.2.0/angular-moment.min.js" ></script>
 
 <!-- ANGULARJS -->
-<script src="/js/access.js"></script>
-<script src="/js/auth.js"></script>
-<script src="/js/services.js"></script>
-<script src="/js/controllers/accountsController.js"></script>
-<script src="/js/controllers/gamesController.js"></script>
-<script src="/js/controllers/usersController.js"></script>
-<script src="/js/controllers/betsController.js"></script>
-<script src="/js/controllers/transactionsController.js"></script>
-<script src="/js/controllers/adminController.js"></script>
-<script src="/js/app.js"></script>
+<script src="/js/access.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/auth.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/services.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/controllers/accountsController.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/controllers/gamesController.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/controllers/usersController.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/controllers/betsController.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/controllers/transactionsController.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/controllers/adminController.js?v={{Config::get('app.version')}}"></script>
+<script src="/js/app.js?v={{Config::get('app.version')}}"></script>
 
 
 </body>

@@ -26,7 +26,9 @@ return array(
 	|
 	*/
 
-	'url' => 'http://worldcup.dev',
+	'url' => 'https://worldcup.hemidy.fr',
+
+    'version' => '1.0.0',
 
 	/*
 	|--------------------------------------------------------------------------

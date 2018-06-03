@@ -24,7 +24,7 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
     $stateProvider
         .state('register', {
             url: '/register',
-            templateUrl: '/views/partials/registerForm.html',
+            templateUrl: '/views/partials/registerForm.html?v=' + VERSION,
             controller: 'accountsControllerRegister',
             access: accessLevels.public,
             resolve: {
@@ -35,7 +35,7 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
         })
         .state('registerWithCode', {
             url: '/r/:code',
-            templateUrl: '/views/partials/registerForm.html',
+            templateUrl: '/views/partials/registerForm.html?v=' + VERSION,
             controller: 'accountsControllerRegister',
             access: accessLevels.public,
             resolve: {
@@ -46,18 +46,18 @@ worldcup.config(function($locationProvider, $stateProvider, $urlRouterProvider) 
         })
         .state('login', {
             url: '/login',
-            templateUrl: '/views/partials/loginForm.html',
+            templateUrl: '/views/partials/loginForm.html?v=' + VERSION,
             controller: 'accountsControllerLogin',
             access: accessLevels.public
         })
         .state('account', {
             url: '/account',
-            templateUrl: '/views/partials/accountForm.html',
+            templateUrl: '/views/partials/accountForm.html?v=' + VERSION,
             access: accessLevels.user
         })
         .state('index', {
             url: '/',
-            templateUrl: '/views/partials/gamesList.html',
+            templateUrl: '/views/partials/gamesList.html?v=' + VERSION,
             controller: 'gamesControllerList',
             access: accessLevels.user,
             resolve: {
