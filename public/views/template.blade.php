@@ -30,7 +30,7 @@
     <link rel="apple-touch-icon" type="image/png" sizes="114x114" href="/images/favicon.114.png"><!-- iPhone4 -->
     <link rel="icon" type="image/png" href="icon.114.png"><!-- Opera Speed Dial, at least 144×114 px -->
 	
-	<base href="https://worldcup.hemidy.fr/">
+	<base href="{{ Config::get('app.url') }}">
 
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
