@@ -5,7 +5,7 @@
     </div>
     <div class="modal-body">
         <div class="row">
-            <div class="col-xs-12 score">
+            <div class="col-xs-12 score" ng-class="{'hasBottom' : game.kick_at_goal == 1 && bet.team2_points == bet.team1_points}">
                 <div class="col-xs-4 text-center">
                     <h4>@@ game.team1.name @@</h4><br />
                     <img width="50px" src="images/flags/@@ game.team1.code.toLowerCase() @@"/>

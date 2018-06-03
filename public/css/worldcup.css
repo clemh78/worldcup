@@ -683,14 +683,6 @@ ul.nav.nav-pills li.active a{
     margin-bottom: 5px;
 }
 
-.bet .team1{
-    float: left;
-}
-
-.bet .team2{
-    float: right;
-}
-
 .bet .modal-body{
     padding: 1px 15px;
 }
@@ -738,11 +730,19 @@ ul.nav.nav-pills li.active a{
 
 .bet .modal-body .row{
     padding: 5px 0px;
+    margin-bottom: 0px;
 }
 
-.bet .modal-body .row .score{
+.bet .modal-body .row .score {
     padding: 10px 0px;
+}
+
+.bet .modal-body .row .score.hasBottom{
     box-shadow: 0px 2px 2px #16191d;
+}
+
+.bet .modal-body #winner {
+    margin-bottom: 15px;
 }
 
 .bet button.btn-primary{
@@ -788,9 +788,13 @@ ul.nav.nav-pills li.active a{
     padding:0px;
 }
 
+.bet .userBet:last-child {
+    margin-bottom: 15px;
+}
+
 .bet .userBet .userLogin {
     margin-left: 20px;
-    font-size: 25px;
+    font-size: 20px;
     padding-top: 7px;
     text-transform: uppercase;
 }
@@ -820,6 +824,10 @@ ul.nav.nav-pills li.active a{
     font-size: 30px;
     display: inline;
     line-height: 1em;
+}
+
+.bet .finished .dash {
+    margin-top: 20px;
 }
 
 .bbt {
