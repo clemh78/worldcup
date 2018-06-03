@@ -20,7 +20,7 @@ class Game extends Eloquent {
      * @var string
      */
     protected $table = 'game';
-    
+
     public $timestamps = false;
 
 
@@ -129,9 +129,9 @@ class Game extends Eloquent {
 
     public function setFinished($num_team){
 
-        $POINTS_BON_WINNER = 1;
-        $POINTS_SCORE_EXACT = 4;
-        $POINTS_ECART = 2;
+        $POINTS_BON_WINNER = 10;
+        $POINTS_SCORE_EXACT = 40;
+        $POINTS_ECART = 20;
 
         //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
         if($num_team == 1){

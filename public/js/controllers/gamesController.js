@@ -141,4 +141,21 @@ angular.module('gamesController', [])
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
+    }])
+
+    .controller('helpControllerModal', function ($scope, $modal) {
+
+        $scope.open = function () {
+            $modal.open({
+                templateUrl: '/views/partials/help.html',
+                controller: 'helpControllerModalInstance',
+                resolve: {
+                }
+            });
+        };
+    })
+
+
+    .controller('helpControllerModalInstance', ["$scope", "$modalInstance", "$cookies", function ($scope, $modalInstance, $cookies) {
+
     }]);

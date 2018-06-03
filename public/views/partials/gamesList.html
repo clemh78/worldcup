@@ -1,9 +1,9 @@
 <div class="container" id="games-panel" ng-show="isConnected">
 
     <div class="my-points">
-        <div class="btn-group" ng-controller="transactionsControllerModal" ng-click="open()">
-            <button type="button" class="btn btn-default"  >Mon score</button>
-            <button type="button" class="btn btn-default" style="border-left: 1px solid #426cca;"  >@@ user.winPoints @@ XP</button>
+        <div class="btn-group" >
+            <button type="button" class="btn btn-default" style="border-left: 1px solid #426cca;"  ng-controller="transactionsControllerModal" ng-click="open()" >@@ user.winPoints @@ XP</button>
+            <button type="button" class="btn btn-default" ng-controller="helpControllerModal" ng-click="open()" >Aide <i class="fa fa-question-circle"></i></button>
         </div>
     </div>
 
