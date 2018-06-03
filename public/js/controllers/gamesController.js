@@ -116,7 +116,7 @@ angular.module('gamesController', [])
 
         $scope.open = function (game) {
             $modal.open({
-                templateUrl: '/views/partials/gameInfo.html',
+                templateUrl: '/views/partials/gameInfo.html?v=' + VERSION,
                 controller: 'gamesControllerModalInstance',
                 resolve: {
                     game: function(){
@@ -147,7 +147,7 @@ angular.module('gamesController', [])
 
         $scope.open = function () {
             $modal.open({
-                templateUrl: '/views/partials/help.html',
+                templateUrl: '/views/partials/help.html?v=' + VERSION,
                 controller: 'helpControllerModalInstance',
                 resolve: {
                 }

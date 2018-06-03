@@ -78,7 +78,7 @@ angular.module('adminController', [])
 
         $scope.admin = function(){
             $modal.open({
-                templateUrl: '/views/partials/admin.html',
+                templateUrl: '/views/partials/admin.html?v=' + VERSION,
                 controller: 'adminControllerList',
                 size: 'lg',
                 resolve: {

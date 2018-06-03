@@ -17,7 +17,7 @@ angular.module('betsController', [])
 
         $scope.open = function (game, user) {
             $modal.open({
-                templateUrl: '/views/partials/betForm.html',
+                templateUrl: '/views/partials/betForm.html?v=' + VERSION,
                 controller: 'betsControllerModalInstance',
                 resolve: {
                     game: function(){
@@ -88,7 +88,7 @@ angular.module('betsController', [])
 
         $scope.open = function () {
             $modal.open({
-                templateUrl: '/views/partials/betBonus.html',
+                templateUrl: '/views/partials/betBonus.html?v=' + VERSION,
                 controller: 'betBonusControllerModalInstance',
                 resolve: {
                     bbts: [ "serviceBetBonusType", "$cookies", function(BetBonusType, $cookies){
