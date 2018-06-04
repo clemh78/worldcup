@@ -6,17 +6,24 @@
     <div class="modal-body">
         <div class="row">
             <div class="col-xs-12 score" ng-class="{'hasBottom' : game.kick_at_goal == 1 && bet.team2_points == bet.team1_points}">
-                <div class="col-xs-4 text-center">
+                <div class="col-xs-6 dash hidden-sm hidden-lg hidden-md">
+                    <input ng-change="updateWinner()" placeholder="?" onFocus="this.selectionStart=0; this.selectionEnd=this.value.length;" onTouchEnd="this.selectionStart=0; this.selectionEnd=this.value.length;" onMouseUp="return false" ng-model="bet.team1_points"   min="0" max="99" step="1" type="number" class="form-control team two" ng-change="check()" required/>
+                </div>
+                <div class="col-xs-6 dash hidden-sm hidden-lg hidden-md">
+                    <input ng-change="updateWinner()" placeholder="?"  onFocus="this.selectionStart=0; this.selectionEnd=this.value.length;" onTouchEnd="this.selectionStart=0; this.selectionEnd=this.value.length;" onMouseUp="return false" ng-model="bet.team2_points"  min="0" max="99" step="1" type="number" class="form-control team one" ng-change="check()" required/>
+                </div>
+
+                <div class="col-xs-6  col-sm-4 text-center">
                     <h4>@@ game.team1.name @@</h4><br />
                     <img width="50px" src="images/flags/@@ game.team1.code.toLowerCase() @@"/>
                     <div ng-show="bet.winner_id == game.team1.id" class="winnerFlag one" ><i class="fa fa-check"></i></div>
                 </div>
-                <div class="col-xs-4 bet-input-form dash">
-                    <input ng-change="updateWinner()" ng-model="bet.team2_points" id="team1Score" type="text" class="form-control team one" ng-change="check()" required/>
+                <div class="col-xs-4 dash hidden-xs">
+                    <input ng-change="updateWinner()" ng-model="bet.team1_points" type="text" class="form-control team one" ng-change="check()"  required/>
                     <span>-</span>
-                    <input ng-change="updateWinner()" ng-model="bet.team1_points" id="team2Score" type="text" class="form-control team two" ng-change="check()"  required/>
+                    <input ng-change="updateWinner()" ng-model="bet.team2_points" type="text" class="form-control team two" ng-change="check()" required/>
                 </div>
-                <div class="col-xs-4  text-center">
+                <div class="col-xs-6 col-sm-4 text-center">
                     <div class="team2">
                         <h4>@@ game.team2.name @@</h4><br />
                         <img width="50px" src="images/flags/@@ game.team2.code.toLowerCase() @@"/>
