@@ -13,17 +13,17 @@
                     <input ng-change="updateWinner()" placeholder="?"  onFocus="this.selectionStart=0; this.selectionEnd=this.value.length;" onTouchEnd="this.selectionStart=0; this.selectionEnd=this.value.length;" onMouseUp="return false" ng-model="bet.team2_points"  min="0" max="99" step="1" type="number" class="form-control team one" ng-change="check()" required/>
                 </div>
 
-                <div class="col-xs-6  col-sm-4 text-center">
+                <div class="col-xs-6  col-sm-4 text-center" style="margin-top: 10px;">
                     <h4>@@ game.team1.name @@</h4><br />
                     <img width="50px" src="images/flags/@@ game.team1.code.toLowerCase() @@"/>
                     <div ng-show="bet.winner_id == game.team1.id" class="winnerFlag one" ><i class="fa fa-check"></i></div>
                 </div>
                 <div class="col-xs-4 dash hidden-xs">
                     <input ng-change="updateWinner()" ng-model="bet.team1_points" type="text" class="form-control team one" ng-change="check()"  required/>
-                    <span>-</span>
+
                     <input ng-change="updateWinner()" ng-model="bet.team2_points" type="text" class="form-control team two" ng-change="check()" required/>
                 </div>
-                <div class="col-xs-6 col-sm-4 text-center">
+                <div class="col-xs-6 col-sm-4 text-center" style="margin-top: 10px;">
                     <div class="team2">
                         <h4>@@ game.team2.name @@</h4><br />
                         <img width="50px" src="images/flags/@@ game.team2.code.toLowerCase() @@"/>
