@@ -139,6 +139,14 @@ header{
 .top-menu a{
     color:#fff;
     padding:10px;
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.top-menu a:hover {
+    opacity: 0.7;
 }
 
     /************************** Connection **************************/
@@ -950,6 +958,12 @@ ul.nav.nav-pills li.active a{
 .room .modal-body {
     background: #0057b8 url(../images/fwc_darkbg.jpg);
     color: white;
+}
+
+.room .modal-body h3 {
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .room .modal-header{

@@ -37,7 +37,7 @@
                         </div>
                         <span class="minute label label-primary"><span class="point" >•</span> @@ game.minute @@'</span>
                     </div>
-                    <div class="col-xs-4" ng-show="game.team1_points == null && game.team2_points == null">
+                    <div class="col-xs-4" ng-show="game.team1_points == null && game.team2_points == null" style="margin-top: 10px;">
                         <div class="col-xs-12 col-centered text-center" >
                             <button ng-hide="game.user_bet"class="btn btn-success" ng-controller="betsControllerModal" ng-click="open(game, user)">
                                 <i class="fa fa-plus"></i>
