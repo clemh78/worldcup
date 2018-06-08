@@ -400,7 +400,8 @@ ul.nav.nav-pills li.active a{
 .game .team1-name .bet, .game .team2-name .bet{
     position:absolute;
     border-radius: 50px;
-    padding: 3px 6px;
+    padding: 5px 8px;
+    padding-top: 8px;
     line-height: 1em; font-weight: bold;
     margin-top:0px;
 }
