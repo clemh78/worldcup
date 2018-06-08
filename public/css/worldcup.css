@@ -338,7 +338,8 @@ ul.nav.nav-pills li.active a{
 .game .team1-name,.game .team2-name{
 	padding: 25px 0px;
 	font-size:1.8em;
-	font-family: 'Open Sans', sans-serif;
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
 	font-weight:bold;
 	padding:10px;
 }
@@ -432,8 +433,9 @@ ul.nav.nav-pills li.active a{
 
 .game h2.subheader{
     padding: 0;
-	font-family: 'Open Sans', sans-serif;
-	font-weight:normal;
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+	font-weight:bold;
 }
 
 .game h3.goals-team1{
@@ -501,7 +503,11 @@ ul.nav.nav-pills li.active a{
     background-color: #0057b8;
     color: #fff;
     height: 60px;
-    padding: 12px 30px;
+    padding: 16px 30px;
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight:bold;
 }
 
 .group ul {
@@ -573,7 +579,12 @@ ul.nav.nav-pills li.active a{
     margin-left: 20px;
     font-size: 25px;
     padding-top: 5px;
+
+
+
+    font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;
+    font-weight:bold;
 }
 
 .users .modal-body .user .points {
@@ -706,6 +717,10 @@ ul.nav.nav-pills li.active a{
 .bet .modal-body h4{
     display: inline;
     line-height: 1em;
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight:bold;
 }
 
 .bet .modal-body select, .bet input[type="number"]{
@@ -797,7 +812,12 @@ ul.nav.nav-pills li.active a{
     margin-left: 20px;
     font-size: 20px;
     padding-top: 7px;
+
+
+
+    font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;
+    font-weight:bold;
 }
 
 .bet .userBet .userScore {
@@ -837,14 +857,14 @@ ul.nav.nav-pills li.active a{
 .bet .winnerFlag.one {
     float: right;
     position: absolute;
-    left: 20px;
+    left: 10px;
     top: 15px;
 }
 
 .bet .winnerFlag.two {
     float: left;
     position: absolute;
-    right: 20px;
+    right: 10px;
     top: 15px;
 }
 
