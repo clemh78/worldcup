@@ -865,6 +865,14 @@ ul.nav.nav-pills li.active a{
     float: left;
 }
 
+.bbt h5 {
+    font-size: 10px;
+    margin: 10px;
+    float: left;
+    margin-top: 18px;
+    font-style: italic;
+}
+
 .bbt select {
     background-color: #47a447;
     border-color: #47a447;
