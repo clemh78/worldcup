@@ -345,6 +345,7 @@ ul.nav.nav-pills li.active a{
 .game.inprogress {
     background: #0057b8 url(../images/fwc_darkbg.jpg);
     color: white;
+    border-color: #777777;
 }
 
 .game .team1-name,.game .team2-name{
