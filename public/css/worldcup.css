@@ -342,6 +342,10 @@ ul.nav.nav-pills li.active a{
     border-top: none;
 }
 
+.game.inprogress {
+    background: #0057b8 url(../images/fwc_darkbg.jpg);
+    color: white;
+}
 
 .game .team1-name,.game .team2-name{
 	padding: 25px 0px;
