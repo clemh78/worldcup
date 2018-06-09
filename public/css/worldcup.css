@@ -374,7 +374,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .game .team2-name span{
-	margin-top: 30px;
+	margin-top: 40px;
     display: block;
 }
 
@@ -668,7 +668,11 @@ ul.nav.nav-pills li.active a{
 /* secondary-bracket */
 .container-secondary { position: relative; overflow: hidden; }
 .secondary-bracket { bottom: 50px; left: 690px; position: absolute; width: 450px; }
-#bracket h4 { color: #CCCCCC; font-weight: normal; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999; }
+#bracket h4 { color: #0057b8; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999;
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 .secondary-bracket .g_round_label { top: -30px; }
 .secondary-bracket > div { padding-top: 35px;}
 
@@ -861,8 +865,6 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .finished .dash {
-    margin-top: 20px;
-
     font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;
     font-weight: bold;
