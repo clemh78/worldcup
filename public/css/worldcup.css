@@ -537,6 +537,13 @@ ul.nav.nav-pills li.active a{
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
+
+    width: 35px;
+    text-align: center;
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight:bold;
 }
 
 .group ul li img {
