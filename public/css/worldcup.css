@@ -414,9 +414,10 @@ ul.nav.nav-pills li.active a{
     position:absolute;
     border-radius: 50px;
     padding: 5px 8px;
-    padding-top: 8px;
     line-height: 1em; font-weight: bold;
     margin-top:0px;
+
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .game .team1-name .bet{
@@ -545,10 +546,6 @@ ul.nav.nav-pills li.active a{
 
     width: 35px;
     text-align: center;
-
-    font-family: 'El Messiri', sans-serif;
-    text-transform: uppercase;
-    font-weight:bold;
 }
 
 .group ul li img {
