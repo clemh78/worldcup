@@ -5,7 +5,7 @@
     <div class="modal-body">
         <div class="bbt" ng-repeat="bbt in bbts | filter : {linked_bbt_id : null}" >
             <h2>@@bbt.label@@</h2>
-            <h5>(verrouillage le @@bbt.date | amDateFormat:'DD/MM/YYYY HH:mm'@@)</h5>
+            <h5 class="hidden-xs" >(verrouillage le @@bbt.date | amDateFormat:'DD/MM/YYYY HH:mm'@@)</h5>
             <select ng-disabled="!isActive(bbt)" ng-change="updateBet(bbt.id)" class="form-control" ng-model="bets_bonus[bbt.id]" ng-options="team.id as team.name for team in teams"></select>
         </div>
     </div>
