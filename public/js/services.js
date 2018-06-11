@@ -195,7 +195,7 @@ angular.module('services', [])
             updateBet : function(token, betId, winnerId, team1_points, team2_points){
                 return $http({
                     method: 'PUT',
-                    url: 'api/bets/'+betId+'/?token=' + token,
+                    url: 'api/bets/'+betId+'?token=' + token,
                     headers: { 'Content-Type' : 'application/x-www-form-urlencoded' },
                     data: $.param({"team1_points" : team1_points, "team2_points" : team2_points, "winner_id" : winnerId})
                 });
