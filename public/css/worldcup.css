@@ -60,19 +60,16 @@ header{
     height: 400px;
     width: 100%;
     border-bottom: 2px solid #333;
-    background-color: #0057b8;
     z-index: -1;
-    background-image: url(../images/fwc_darkbluebg.png);
+    background: #0057b8 url(../images/fwc_darkbluebg.png);
 }
 
 .navbar-inverse{
     height: 90px;
     margin-top: 10px;
     background-color: transparent;
-    border: none;
     border-radius: 0px;
-    border-color: #fff;
-    border-width: 1px;
+    border: 1px none #fff;
     color: #333;
 }
 
@@ -142,6 +139,14 @@ header{
 .top-menu a{
     color:#fff;
     padding:10px;
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.top-menu a:hover {
+    opacity: 0.7;
 }
 
     /************************** Connection **************************/
@@ -162,8 +167,7 @@ header{
 }
 
 .login-form input {
-    margin: 20px auto;
-    margin-bottom: 10px;
+    margin: 20px auto 10px;
 }
 
 .login-form button, .login-form a{
@@ -237,7 +241,6 @@ header{
 
 #games-list{
     background-color: #fff;
-    /*box-shadow: 0px 2px 7px #aaa;*/
     padding-bottom: 25px;
     margin-bottom: 30px;
 }
@@ -339,11 +342,17 @@ ul.nav.nav-pills li.active a{
     border-top: none;
 }
 
+.game.inprogress {
+    background: #0057b8 url(../images/fwc_darkbg.jpg);
+    color: white;
+    border-color: #777777;
+}
 
 .game .team1-name,.game .team2-name{
 	padding: 25px 0px;
 	font-size:1.8em;
-	font-family: 'Open Sans', sans-serif;
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
 	font-weight:bold;
 	padding:10px;
 }
@@ -370,7 +379,7 @@ ul.nav.nav-pills li.active a{
 }
 
 .game .team2-name span{
-	margin-top: 30px;
+	margin-top: 40px;
     display: block;
 }
 
@@ -404,17 +413,30 @@ ul.nav.nav-pills li.active a{
 .game .team1-name .bet, .game .team2-name .bet{
     position:absolute;
     border-radius: 50px;
-    padding:3px; padding-left:6px;
-    padding-right:6px;
+    padding: 5px 8px;
     line-height: 1em; font-weight: bold;
     margin-top:0px;
+
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
 
 .game .team1-name .bet{
     left:10px;
+    cursor: default;
 }
 .game .team2-name .bet{
     right:10px;
+    cursor: default;
+}
+
+.bet input[type=number]{
+    font-size: 20px;
+    width: 60px;
+    height: 60px;
+    margin: auto;
+    text-align: center;
+    color: #fff;
+    margin: auto;
 }
 
 
@@ -426,8 +448,9 @@ ul.nav.nav-pills li.active a{
 
 .game h2.subheader{
     padding: 0;
-	font-family: 'Open Sans', sans-serif;
-	font-weight:normal;
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+	font-weight:bold;
 }
 
 .game h3.goals-team1{
@@ -447,8 +470,7 @@ ul.nav.nav-pills li.active a{
     display: block;
     float: none;
     border-radius: 50px;
-    margin: 15px auto;
-    margin-bottom:20px;
+    margin: 15px auto 20px;
     background-color: #333; 
     border: none;
     color: #fff;
@@ -496,7 +518,11 @@ ul.nav.nav-pills li.active a{
     background-color: #0057b8;
     color: #fff;
     height: 60px;
-    padding: 12px 30px;
+    padding: 16px 30px;
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight:bold;
 }
 
 .group ul {
@@ -517,6 +543,9 @@ ul.nav.nav-pills li.active a{
     padding: 5px;
     padding-left: 10px;
     padding-right: 10px;
+
+    width: 35px;
+    text-align: center;
 }
 
 .group ul li img {
@@ -568,7 +597,12 @@ ul.nav.nav-pills li.active a{
     margin-left: 20px;
     font-size: 25px;
     padding-top: 5px;
+
+
+
+    font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;
+    font-weight:bold;
 }
 
 .users .modal-body .user .points {
@@ -620,11 +654,17 @@ ul.nav.nav-pills li.active a{
 .g_gracket { width: 9999px; background-color: #fff; padding: 55px 15px 5px; line-height: 100%; position: relative; overflow: hidden;}
 .g_round { float: left; margin-right: 45px; width:170px; }
 .g_game { position: relative; margin-bottom: 15px; box-shadow: 3px 4px 0px #ddd; border: 1px solid #fff; border-top: 0; border-left: 0; }
-.g_gracket h3 { min-width: 180px; margin: 0; padding: 10px 8px 8px; font-size: 15px!important; font-weight: normal; color: #b3afa7; font-size: 20px; text-shadow: 1px 1px 1px #333;} /* @note: this width determinds node size */
-.g_team { background: #423c3c; }
+.g_gracket h3 { min-width: 180px; margin: 0; padding: 10px 8px 8px; font-size: 15px!important; font-weight: normal; color: white; font-size: 20px; text-shadow: 1px 1px 1px #333;} /* @note: this width determinds node size */
+.g_team {
+    background: #0057b8 url(../images/fwc_darkbluebg.png);
+}
 .g_team h3 small{font-size: 65%;color: #fff;float: right;font-weight: bold;margin-right: 10px;margin-top: 5px;}
-.g_round_label { top: -5px; font-weight: normal; color: #ccc; text-align: center; font-size: 18px}
-.g_team:last-child {  /*background: #FCB821;*/ border-top: 1px solid #47a447; }
+.g_round_label { top: -5px; font-weight: normal; color: #0057b8; text-align: center; font-size: 18px;
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+.g_team:last-child {  /*background: #FCB821;*/ border-top: 1px solid white; }
 .g_round:last-child { margin-right: 20px; }
 .g_winner { background: #47a447; }
 .g_winner .g_team { background: none; }
@@ -637,12 +677,36 @@ ul.nav.nav-pills li.active a{
 /* secondary-bracket */
 .container-secondary { position: relative; overflow: hidden; }
 .secondary-bracket { bottom: 50px; left: 690px; position: absolute; width: 450px; }
-#bracket h4 { color: #CCCCCC; font-weight: normal; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999; }
+#bracket h4 { color: #0057b8; left: 0; margin: 0; padding: 0; position: absolute; bottom: 60px; z-index: 9999;
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
 .secondary-bracket .g_round_label { top: -30px; }
 .secondary-bracket > div { padding-top: 35px;}
 
 
 /************************** Bets **************************/
+
+.bet .modal-body {
+    background-color: #0057b8;
+    background-image: url(../images/fwc_darkbg.jpg);
+    color: white;
+}
+
+.bet .modal-header{
+    background-color: #0057b8;
+    color:#fff;
+    border-bottom: 1px solid #002e6b;
+}
+
+.bet .modal-footer{
+    background-color: #0057b8;
+    color:#fff;
+    border-bottom: 1px solid #002e6b;
+    margin-top: 0px;
+    border-top: 0px;
+}
 
 .modal-content{
     border-radius: 2px;
@@ -661,17 +725,8 @@ ul.nav.nav-pills li.active a{
     margin-bottom: 5px;
 }
 
-.bet .team1{
-    float: left;
-}
-
-.bet .team2{
-    float: right;
-}
-
 .bet .modal-body{
-    padding: 0px 15px;
-    background-color: #fff;
+    padding: 1px 15px;
 }
 
 .bet .modal-footer{
@@ -690,14 +745,24 @@ ul.nav.nav-pills li.active a{
 .bet .modal-body h4{
     display: inline;
     line-height: 1em;
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight:bold;
 }
 
-.bet .modal-body select{
+.bet .modal-body select, .bet input[type="number"]{
     border-radius: 2px;
+    background-color: #46505a;
+    border: 1px solid #16191d;
+    color: white;
 }
 
 .bet .modal-body input[type="text"]{
     border-radius: 2px;
+    background-color: #313840;
+    border: 1px solid #0057b8;
+    color: white;
 }
 
 .bet .modal-body input[type="text"].team{
@@ -708,21 +773,28 @@ ul.nav.nav-pills li.active a{
 }
 
 .bet .modal-body input[type="text"].team.one{
-    float: right;
+    float: left;
 }
 
 .bet .modal-body input[type="text"].team.two{
-    float: left;
+    float: right;
 }
 
 .bet .modal-body .row{
     padding: 5px 0px;
-    background-color: #fff;
+    margin-bottom: 0px;
 }
 
-.bet .modal-body .row .score{
+.bet .modal-body .row .score {
     padding: 10px 0px;
-    box-shadow: 0px 2px 2px #aaa;
+}
+
+.bet .modal-body .row .score.hasBottom{
+    box-shadow: 0px 2px 2px #16191d;
+}
+
+.bet .modal-body #winner {
+    margin-bottom: 15px;
 }
 
 .bet button.btn-primary{
@@ -751,14 +823,6 @@ ul.nav.nav-pills li.active a{
     line-height: 40px;
 }
 
-.bet-input-form #team1Score{
-     margin-right:-10px;
- }
-
-.bet-input-form #team2Score{
-    margin-left:-10px;
-}
-
 .bet-input-form span{
     margin-top:14px; display:inline-block
 }
@@ -768,9 +832,74 @@ ul.nav.nav-pills li.active a{
     padding:0px;
 }
 
+.bet .userBet:last-child {
+    margin-bottom: 15px;
+}
+
+.bet .userBet .userLogin {
+    margin-left: 20px;
+    font-size: 20px;
+    padding-top: 7px;
+
+
+
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight:bold;
+}
+
+.bet .userBet .userScore {
+    font-size: 20px;
+    background-color: #c5181f;
+    color: white;
+    padding: 5px 10px;
+    display: inline-block;
+    width: 100px;
+    text-align: center;
+}
+
+.bet .userBet .userPoints {
+    float: right;
+    background-color: #47a447;
+    padding: 10px;
+    border-radius: 50px;
+    color: white;
+    font-size: 17px;
+}
+
+.bet .finished h2 {
+    font-size: 30px;
+    display: inline;
+    line-height: 1em;
+}
+
+.bet .finished .dash {
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
+}
+
+.bet .winnerFlag {
+    color:#47a447;
+    font-size: 25px;
+}
+
+.bet .winnerFlag.one {
+    float: right;
+    position: absolute;
+    left: 10px;
+    top: 10px;
+}
+
+.bet .winnerFlag.two {
+    float: left;
+    position: absolute;
+    right: 10px;
+    top: 10px;
+}
+
 .bbt {
-    background-color: #0057b8;
-    background-image: url(../images/fwc_darkbluebg.png);
+    background: #0057b8 url(../images/fwc_darkbluebg.png);
     color: white;
     padding: 10px;
     height: 65px;
@@ -784,6 +913,14 @@ ul.nav.nav-pills li.active a{
     font-size: 20px;
     margin: 10px;
     float: left;
+}
+
+.bbt h5 {
+    font-size: 10px;
+    margin: 10px;
+    float: left;
+    margin-top: 18px;
+    font-style: italic;
 }
 
 .bbt select {
@@ -830,9 +967,14 @@ ul.nav.nav-pills li.active a{
 }
 
 .room .modal-body {
-    background-color: #0057b8;
-    background-image: url(../images/fwc_darkbg.jpg);
+    background: #0057b8 url(../images/fwc_darkbg.jpg);
     color: white;
+}
+
+.room .modal-body h3 {
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight: bold;
 }
 
 .room .modal-header{
@@ -848,7 +990,6 @@ ul.nav.nav-pills li.active a{
 .room .list-group-item{
     background-color: #666;
     border: 1px solid #777777;
-    font-size: 1.2em;
 }
 
 .room input{
@@ -858,10 +999,8 @@ ul.nav.nav-pills li.active a{
     margin-top:2px;
 }
 
-
 .help .modal-body {
-    background-color: #0057b8;
-    background-image: url(../images/fwc_darkbg.jpg);
+    background: #0057b8 url(../images/fwc_darkbg.jpg);
     color: white;
 }
 
@@ -869,4 +1008,45 @@ ul.nav.nav-pills li.active a{
     background-color: #0057b8;
     color:#fff;
     border-bottom: 1px solid #002e6b;
+}
+
+#alerts {
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 0;
+    text-align: center;
+    padding: 10px 15px;
+    z-index: 1051;
+    border-radius: 0px;
+}
+
+#alerts.alert-dismissable,
+#alerts.alert-dismissible {
+    padding-right: 35px;
+}
+
+.alert-info {
+    color: #fff;
+    background-color: #0092FF;
+    border: none;
+}
+
+.alert-success {
+    color: #fff;
+    background-color: #47a447;
+    border: none;
+}
+
+.alert-danger {
+    color: #FFFFFF;
+    background-color: #c5181f;
+    border: none;
+}
+
+.modal-title {
+    font-family: 'El Messiri', sans-serif;
+    text-transform: uppercase;
+    font-weight:bold;
 }

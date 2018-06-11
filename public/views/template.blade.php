@@ -35,6 +35,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
 
     <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=El+Messiri:400,500,600,700" rel="stylesheet">
 
     @yield('scripts')
 
@@ -72,7 +73,7 @@
     <div>Le site est affiché en tant que "@@ user.login @@" mais vous êtes connecté en "@@ primary.login @@".</div>
 </alert>
 
-<alert ng-repeat="alert in alerts" type="@@ alert.class @@" close="closeAlert($index)" id="infos" >
+<alert ng-show="alerts" class="fadeInUp animated" ng-repeat="alert in alerts" type="@@ alert.class @@" close="closeAlert($index)" id="alerts">
     <div ng-show="alert.cat == 'success'">
         @@ alert.message @@
     </div>

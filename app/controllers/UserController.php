@@ -121,7 +121,7 @@ class UserController extends BaseController {
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'error' => "Veuillez indique un salon"
+                    'error' => "Veuillez indiquer un salon"
                 ),
                 400);
 

@@ -45,7 +45,8 @@ class Game extends Eloquent {
         'team2_tmp_name',
         'winner_id',
         'stage_game_num',
-        'date');
+        'date',
+        'finished');
 
     /**
      * Tableau indiquant les sous élements à imbriquer
@@ -133,44 +134,57 @@ class Game extends Eloquent {
         $POINTS_SCORE_EXACT = 40;
         $POINTS_ECART = 20;
 
-        //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
-        if($num_team == 1){
-            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
+        if($num_team != null){
+            //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
+            if($num_team == 1){
+                foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
 
-                if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
-                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
-                else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
-                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
-                else
-                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
+                    if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                        Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
+                    else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
+                        Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
+                    else
+                        Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
+                }
+
+                $this->winner_id = $this->team1_id;
+                $looser_id = $this->team2_id;
+
+                //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
+            }else{
+                foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
+                    if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                        Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
+                    else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
+                        Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
+                    else
+                        Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
+                }
+
+                $this->winner_id = $this->team2_id;
+                $looser_id = $this->team1_id;
             }
 
-            $this->winner_id = $this->team1_id;
-            $looser_id = $this->team2_id;
-
-        //Si l'équipe deux a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe deux)
-        }else{
-            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet){
-                if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
-                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
-                else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
-                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
-                else
-                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
-            }
-
-            $this->winner_id = $this->team2_id;
-            $looser_id = $this->team1_id;
-        }
-
-        //On check les paris bonus
-        foreach(BetBonusType::whereRaw('trigger_data_type = "GAME" && trigger_data_id = ?', array($this->id))->get() as $betBonusType){
-            foreach($betBonusType->bets()->get() as $bet){
-                if($betBonusType->trigger_condition == "WINNER" && $bet->team_id == $this->winner_id || $betBonusType->trigger_condition == "LOOSER" && $bet->team_id == $looser_id){
-                    Transaction::addTransaction($bet->user_id, $this->id, $betBonusType->trigger_points, 'bonus', $betBonusType->label);
+            //On check les paris bonus
+            foreach(BetBonusType::whereRaw('trigger_data_type = "GAME" && trigger_data_id = ?', array($this->id))->get() as $betBonusType){
+                foreach($betBonusType->bets()->get() as $bet){
+                    if($betBonusType->trigger_condition == "WINNER" && $bet->team_id == $this->winner_id || $betBonusType->trigger_condition == "LOOSER" && $bet->team_id == $looser_id){
+                        Transaction::addTransaction($bet->user_id, $this->id, $betBonusType->trigger_points, 'bonus', $betBonusType->label);
+                    }
                 }
             }
+        }else{
+            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, null))->get() as $bet){
+                if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
+                else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
+                else
+                    Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
+            }
         }
+
+        $this->finished = true;
 
         /////////////////////////////////////////////////
         //******************* ROUND X *****************//
@@ -217,6 +231,31 @@ class Game extends Eloquent {
 
                 $gamme_third->save();
             }
+        }
+
+        //Distribution des points pour les équipes
+        if($num_team != null){
+            //Si l'équipe une a gagnée, on lui donne 3 points
+            if($num_team == 1){
+                $team1 = Team::find($this->team1_id)->get();
+                $team1->points = $team1->points + 3;
+                $team1->save();
+
+                //Si l'équipe deux a gagnée, on lui donne 3 points
+            }else{
+                $team2 = Team::find($this->team2_id)->get();
+                $team2->points = $team2->points + 3;
+                $team2->save();
+            }
+
+            //Si match nul, on donne 1 points aux deux
+        }else{
+            $team1 = Team::find($this->team1_id)->get();
+            $team1->points = $team1->points + 1;
+            $team1->save();
+            $team2 = Team::find($this->team2_id)->get();
+            $team2->points = $team2->points + 1;
+            $team2->save();
         }
 
         $this->save();

@@ -29,6 +29,9 @@ angular.module('accountsController', [])
 
         $scope.REGISTER_ON = REGISTER_ON;
 
+        if($cookies['user_id'] != undefined)
+            $state.transitionTo("index");
+
         $scope.loginSubmit = function(){
             User.login($scope.loginStr, $scope.password)
                 .success(function(data) {

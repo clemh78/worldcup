@@ -47,8 +47,25 @@ angular.module('gamesController', [])
         $('#gamesPrevious').hide();
         $('#games').show();
 
-        $scope.betColor = function(score1, score2){
-            return (score1>score2) ? 'btn-success' : ((score1<score2) ? 'btn-danger' : 'btn-warning');
+        $scope.betColor = function(game, teamDisplay){
+
+            if(!game.user_bet)
+                return null;
+            
+            if(game.user_bet.team1_points == game.user_bet.team2_points && game.user_bet.winner_id != null) {
+                if (game.user_bet.winner_id == game.team1_id && teamDisplay == 1)
+                    return 'btn-success';
+
+                if (game.user_bet.winner_id == game.team2_id && teamDisplay == 2)
+                    return 'btn-success';
+
+                return 'btn-warning';
+            }
+
+            if(teamDisplay == 1)
+                return (game.user_bet.team1_points>game.user_bet.team2_points) ? 'btn-success' : ((game.user_bet.team1_points<game.user_bet.team2_points) ? 'btn-danger' : 'btn-warning');
+            else
+                return (game.user_bet.team2_points>game.user_bet.team1_points) ? 'btn-success' : ((game.user_bet.team2_points<game.user_bet.team1_points) ? 'btn-danger' : 'btn-warning');
         }
 
         $scope.filterList = function(){

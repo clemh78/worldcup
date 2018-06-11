@@ -232,11 +232,11 @@ class BetBonusTypeTableSeeder extends Seeder {
     {
         DB::table('bet_bonus_type')->delete();
 
-        BetBonusType::create(array('label' => 'Vainqueur', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 100));
-        BetBonusType::create(array('label' => 'Vainqueur (raté)', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 50, 'linked_bbt_id' => 1));
+        BetBonusType::create(array('label' => 'Vainqueur', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-3OT17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 100));
+        BetBonusType::create(array('label' => 'Vainqueur (raté)', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-3OT17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 50, 'linked_bbt_id' => 1));
 
-        BetBonusType::create(array('label' => 'Finaliste', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 100));
-        BetBonusType::create(array('label' => 'Finaliste (raté)', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-14T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 50, 'linked_bbt_id' => 3));
+        BetBonusType::create(array('label' => 'Finaliste', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-30T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'LOOSER', 'trigger_points' => 100));
+        BetBonusType::create(array('label' => 'Finaliste (raté)', 'date' => DateTime::createFromFormat("U", strtotime("2018-06-30T17:00:00.000Z")), 'trigger_data_type' => 'GAME', 'trigger_data_id' => 63, 'trigger_condition' => 'WINNER', 'trigger_points' => 50, 'linked_bbt_id' => 3));
 
     }
 
