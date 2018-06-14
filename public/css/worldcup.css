@@ -861,10 +861,10 @@ ul.nav.nav-pills li.active a{
 .bet .userBet .userPoints {
     float: right;
     background-color: #47a447;
-    padding: 10px;
+    padding: 5px;
     border-radius: 50px;
     color: white;
-    font-size: 17px;
+    font-size: 14px;
 }
 
 .bet .finished h2 {

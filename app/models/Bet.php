@@ -71,15 +71,10 @@ class Bet extends Eloquent {
 
     public function getWinPointsAttribute()
     {
-        $user = User::getUserWithToken($_GET['token']);
-        if($user){
-            $total = DB::table('transaction')->where('user_id', '=', $user->id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
-            $total = $total - DB::table('transaction')->where('user_id', '=', $user->id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
+        $total = DB::table('transaction')->where('user_id', '=', $this->user_id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'gain')->orWhere('type', '=', 'bonus');})->sum('value');
+        $total = $total - DB::table('transaction')->where('user_id', '=', $this->user_id)->where('game_id', '=', $this->game_id)->where(function($req){$req->where('type', '=', 'bet');})->sum('value');
 
-            return $total;
-        }
-
-        return null;
+        return $total;
     }
 
     public function toArray()
