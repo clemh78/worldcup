@@ -164,7 +164,7 @@ class BetController extends BaseController {
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
-                    'error' => "Le date du match est dépassé !"
+                    'error' => "La date du match est dépassée !"
                 ),
                 400);
 
