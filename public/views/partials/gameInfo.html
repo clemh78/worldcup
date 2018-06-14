@@ -14,7 +14,11 @@
                     <h2>@@ game.team1_points @@</h2>
                     <h2>-</h2>
                     <h2>@@ game.team2_points @@</h2>
-                    <h5>@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
+
+                    <h5 ng-show="game.winner_id != null" >@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
+
+                    <h5 ng-show="game.winner_id == null && (game.team1_points != null || game.team2_points != null)">En cours</h5>
+                    <span class="minute label label-primary" ng-show="game.winner_id == null && (game.team1_points != null || game.team2_points != null)"><span class="point" >•</span> @@ game.minute @@'</span>
                 </div>
                 <div class="col-xs-4  text-center">
                     <div class="team2">
@@ -32,7 +36,7 @@
                         <div class="userScore" >
                             <b>@@ bet.team1_points @@</b> - <b>@@ bet.team2_points @@</b>
                         </div>
-                        <div class="userPoints" >
+                        <div class="userPoints" ng-show="gameDateIsBeforeNow() && game.winner_id != null" >
                             + @@ bet.win_points @@ XP
                         </div>
                         <span class="userLogin" >

@@ -155,6 +155,12 @@ angular.module('gamesController', [])
 
         $scope.bets = bets.data;
 
+        $scope.gameDateIsBeforeNow = function(){
+            now = moment();
+
+            return now.isAfter(moment($scope.game.date));
+        };
+
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };

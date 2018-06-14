@@ -28,14 +28,17 @@
                         <img src="images/flags/@@ game.team1.code.toLowerCase() @@"/>
                         <span>@@ game.team1.name @@</span>
                     </div>
-                    <div class="col-xs-4 text-center" ng-show="game.team1_points != null || game.team2_points != null">
+                    <div class="col-xs-4 text-center inprogress" ng-show="game.team1_points != null || game.team2_points != null">
                         <h5>En cours</h5>
+                        <span class="minute label label-primary"><span class="point" >•</span> @@ game.minute @@'</span>
                         <div class="row scores">
                         	<div class="col-xs-4 no-padding"><h3 class="goals-team1">@@ game.team1_points @@</h3></div>
 							<div class="col-xs-4 no-padding"><h3>—</h3></div>
 							<div class="col-xs-4 no-padding"><h3 class="goals-team2">@@ game.team2_points @@</h3></div>
                         </div>
-                        <span class="minute label label-primary"><span class="point" >•</span> @@ game.minute @@'</span>
+                        <button class="btn btn-default" ng-controller="gamesControllerModal" ng-click="open(game)" >
+                            Liste des paris
+                        </button>
                     </div>
                     <div class="col-xs-4" ng-show="game.team1_points == null && game.team2_points == null" style="margin-top: 10px;">
                         <div class="col-xs-12 col-centered text-center" >
