@@ -511,7 +511,7 @@ ul.nav.nav-pills li.active a{
   }
 }
 
-.game.inprogress button.btn {
+.game.inprogress button.btn.lstBet {
     margin-top:5px;
 }
 

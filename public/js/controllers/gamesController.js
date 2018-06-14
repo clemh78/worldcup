@@ -13,10 +13,34 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "games", "gamesPrevious", "bracket", "groups", function($scope, games, gamesPrevious, bracket, groups) {
+    .controller('gamesControllerList', ["$scope", "$rootScope", "$timeout", "$cookies", "$modal", "games", "gamesPrevious", "bracket", "groups", "serviceGame", function($scope, $rootScope, $timeout, $cookies, $modal, games, gamesPrevious, bracket, groups, Game) {
         $scope.games = games.data;
         $scope.gamesPrevious = gamesPrevious.data;
         $scope.groups = groups.data;
+
+        $scope.reload = function(){
+            Game.GetNext($cookies['token'])
+                .success(function(data){
+                    $scope.games = data;
+
+                    $scope.games.forEach(function(entry) {
+                        $rootScope.$broadcast('game_'+entry.id, entry);
+                    });
+                });
+
+            Game.GetPrevious($cookies['token'])
+                .success(function(data){
+                    $scope.gamesPrevious = data;
+                });
+
+            $timeout(function(){
+                $scope.reload();
+            },30000);
+        };
+
+        $timeout(function(){
+            $scope.reload();
+        },30000);
 
         $("#rounds").gracket({
             src : bracket.data['rounds'],
@@ -127,9 +151,7 @@ angular.module('gamesController', [])
             $('#groups').show();
             $('.groups-header').show();
         };
-    }])
 
-    .controller('gamesControllerModal', function ($scope, $modal) {
 
         $scope.open = function (game) {
             $modal.open({
@@ -145,7 +167,7 @@ angular.module('gamesController', [])
                 }
             });
         };
-    })
+    }])
 
 
     .controller('gamesControllerModalInstance', ["$scope", "$modalInstance", "$cookies", "game", "bets", function ($scope, $modalInstance, $cookies, game, bets) {
@@ -160,6 +182,13 @@ angular.module('gamesController', [])
 
             return now.isAfter(moment($scope.game.date));
         };
+
+        //Si MAJ du match en live, MAJ de l'interface
+        $scope.$on('game_'+$scope.game.id, function(event, args) {
+
+            var game = args;
+            $scope.game = game;
+        });
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
