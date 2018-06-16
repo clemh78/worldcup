@@ -110,7 +110,7 @@ angular.module('services', [])
                 return $http.get('api/games/'+gameId+'?token=' + token + '');
             },
             GetNext : function(token){
-                return $http.get('api/games?token=' + token + '&winner_id=null&team1_id!=null&team2_id!=null&orderby=date&order=ASC');
+                return $http.get('api/games?token=' + token + '&finished=0&team1_id!=null&team2_id!=null&orderby=date&order=ASC');
             },
             GetPrevious : function(token){
                 return $http.get('api/games?token=' + token + '&finished=1&orderby=date&order=DESC');

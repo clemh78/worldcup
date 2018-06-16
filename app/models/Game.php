@@ -174,7 +174,7 @@ class Game extends Eloquent {
                 }
             }
         }else{
-            foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, null))->get() as $bet){
+            foreach(Bet::whereRaw('game_id = ? && winner_id IS NULL', array($this->id))->get() as $bet){
                 if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
                     Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT, 'gain', null);
                 else if($this->team2_points-$this->team1_points == $bet->team2_points-$bet->team1_points)

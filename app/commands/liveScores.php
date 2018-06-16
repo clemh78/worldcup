@@ -41,7 +41,7 @@ class liveScores extends Command {
 	{
         while(true){
             $date = new DateTime();
-            $games = Game::whereRaw('date < ? && winner_id IS NULL', array(new DateTime()))->get();
+            $games = Game::whereRaw('date < ? && finished = 0', array(new DateTime()))->get();
             if(count($games) > 0){
                 foreach($games as $value){
                     $response = Unirest\Request::get("https://api.fifa.com/api/v1/live/football/17/254645/275073/".$value->fifa_match_id."");
@@ -77,7 +77,7 @@ class liveScores extends Command {
                                     }
                                 }
                                 else{
-                                    $value->setFinished();
+                                    $value->setFinished(null);
                                     $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : match nul.');
                                 }
                             }
