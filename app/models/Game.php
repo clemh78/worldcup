@@ -237,13 +237,14 @@ class Game extends Eloquent {
         if($num_team != null){
             //Si l'équipe une a gagnée, on lui donne 3 points
             if($num_team == 1){
-                $team1 = Team::find($this->team1_id)->first();
+                $team1 = Team::whereRaw('id = ?', array($this->team1_id))->first();
+
                 $team1->points = $team1->points + 3;
                 $team1->save();
 
                 //Si l'équipe deux a gagnée, on lui donne 3 points
             }else{
-                $team2 = Team::find($this->team2_id)->first();
+                $team2 = Team::whereRaw('id = ?', array($this->team2_id))->first();
 
                 $team2->points = $team2->points + 3;
                 $team2->save();
@@ -251,10 +252,10 @@ class Game extends Eloquent {
 
             //Si match nul, on donne 1 points aux deux
         }else{
-            $team1 = Team::find($this->team1_id)->first();
+            $team1 = Team::whereRaw('id = ?', array($this->team1_id))->first();
             $team1->points = $team1->points + 1;
             $team1->save();
-            $team2 = Team::find($this->team2_id)->first();
+            $team2 = Team::whereRaw('id = ?', array($this->team2_id))->first();
             $team2->points = $team2->points + 1;
             $team2->save();
         }

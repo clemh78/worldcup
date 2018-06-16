@@ -32,7 +32,7 @@
         <div class="row">
             <div class="col-xs-12">
                 <div ng-hide="bets.length == 0" >
-                    <div class="userBet" ng-repeat="bet in bets | orderBy : '-win_points'" >
+                    <div class="userBet" ng-repeat="bet in bets | orderBy : detailedOrderedScore" >
                         <div class="userScore" >
                             <b>@@ bet.team1_points @@</b> - <b>@@ bet.team2_points @@</b>
                         </div>

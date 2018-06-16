@@ -26,7 +26,7 @@ return array(
 	|
 	*/
 
-	'url' => 'https://kupi.fr',
+	'url' => 'https://worldcup.hemidy.fr',
 
     'version' => '1.0.2',
 
