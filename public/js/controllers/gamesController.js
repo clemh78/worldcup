@@ -182,6 +182,14 @@ angular.module('gamesController', [])
 
             return now.isAfter(moment($scope.game.date));
         };
+		
+		//Affinement du tri des scores des participants 
+		// en prennant en compte les écarts au but 
+		// score * 100 - la valeure absolue des ecarts de points entre le pari et le réel
+		$scope.detailedOrderedScore = function(bet) {
+		   return -(bet.win_points*10000 - ((Math.abs($scope.game.team1_points - bet.team1_points) + Math.abs($scope.game.team2_points - bet.team2_points))*100 - bet.team1_points));
+		};
+		
 
         //Si MAJ du match en live, MAJ de l'interface
         $scope.$on('game_'+$scope.game.id, function(event, args) {

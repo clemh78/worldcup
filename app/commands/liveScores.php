@@ -51,8 +51,10 @@ class liveScores extends Command {
                         //Dans tous les cas : MAJ du score
                         $value->team1_points = $match->HomeTeam->Score;
                         $value->team2_points = $match->AwayTeam->Score;
-                        $value->team1_kick_at_goal = $match->HomeTeamPenaltyScore;
-                        $value->team2_kick_at_goal = $match->AwayTeamPenaltyScore;
+						if($value->kick_at_goal == 1){
+							$value->team1_kick_at_goal = $match->HomeTeamPenaltyScore;
+							$value->team2_kick_at_goal = $match->AwayTeamPenaltyScore;
+						}
                         $value->minute = $match->MatchTime;
                         $this->info('[' . $date->format('Y-m-d H:i:s') . '] MAJ scores : ' . $value->team1()->first()->name . ' ' . $value->team1_points . '-' . $value->team2_points . ' ' . $value->team2()->first()->name . '.');
 
@@ -64,13 +66,19 @@ class liveScores extends Command {
                             } else if ($value->team1_points < $value->team2_points) {
                                 $value->setFinished(2);
                                 $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : ' . $value->team2()->first()->name . ' gagnant.');
-                            } else if ($value->team1_points == $value->team2_points) {
-                                if ($value->team1_kick_at_goal > $value->team2_kick_at_goal) {
-                                    $value->setFinished(1);
-                                    $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : ' . $value->team1()->first()->name . ' gagnant.');
-                                } else {
-                                    $value->setFinished(2);
-                                    $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : ' . $value->team2()->first()->name . ' gagnant.');
+                            } else if($value->team1_points == $value->team2_points){
+                                if($value->kick_at_goal == 1){
+                                    if($value->team1_kick_at_goal > $value->team2_kick_at_goal){
+                                        $value->setFinished(1);
+                                        $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team1()->first()->name.' gagnant.');
+                                    }else{
+                                        $value->setFinished(2);
+                                        $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : '.$value->team2()->first()->name.' gagnant.');
+                                    }
+                                }
+                                else{
+                                    $value->setFinished();
+                                    $this->info('[' . $date->format('Y-m-d H:i:s') . '] Match fini : match nul.');
                                 }
                             }
                         }
