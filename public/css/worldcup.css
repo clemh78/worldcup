@@ -605,11 +605,16 @@ ul.nav.nav-pills li.active a{
     font-size: 25px;
     padding-top: 5px;
 
-
+    padding-left: 10px;
+    padding-right: 10px;
 
     font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;
     font-weight:bold;
+}
+
+.users .modal-body .user .login.me {
+    background-color: #c5181f;
 }
 
 .users .modal-body .user .points {
@@ -877,6 +882,12 @@ ul.nav.nav-pills li.active a{
     display: inline-block;
     width: 100px;
     text-align: center;
+}
+
+.bet .userBet .userLogin.me {
+    background-color: #c5181f;
+    padding-left:10px;
+    padding-right:10px;
 }
 
 .bet .userBet .userPoints {

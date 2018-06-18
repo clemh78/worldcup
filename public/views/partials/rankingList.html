@@ -9,16 +9,18 @@
         <div class="alert alert-info" ng-show="rooms.length == 0" role="alert">Rejoignez ou créez un nouveau salon pour jouer avec vos amis et partager vos résultats</div>
 
         <ul class="nav nav-pills" ng-show="rooms.length > 1">
-            <li ng-class="{'active' : selector=='all'}" ><a href="#" ng-click="select('all', users)" >Tous les utilisateurs</a></li>
             <li ng-repeat="room in rooms" ng-class="{'active' : selector==room.id}" ><a href="#" ng-click="select(room.id, room.users)" >@@room.name@@</a></li>
         </ul>
 
-        <div class="user" ng-repeat="user in usersSelect | orderBy : '-winPoints'">
-            <div class="position" >
-                #@@ $index + 1 @@
+        <div class="user" ng-repeat="userR in usersSelect">
+            <div class="position" ng-show="showRank($index)" >
+                #@@ userR.rank @@
             </div>
-            <span class="points" >@@ user.winPoints @@ XP</span>
-            <span class="login" >@@ user.firstname @@ @@ user.lastname @@.</span>
+            <div class="position" style="background-color: transparent;border-right: 5px solid #c5181f;height: 16px;" ng-show="!showRank($index)" >
+
+            </div>
+            <span class="points" >@@ userR.winPoints @@ XP</span>
+            <span class="login" ng-class="{'me' : userR.id == user.id}" >@@ userR.firstname @@ @@ userR.lastname @@.</span>
         </div>
     </div>
 </div>

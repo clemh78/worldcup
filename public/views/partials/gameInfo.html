@@ -15,10 +15,12 @@
                     <h2>-</h2>
                     <h2>@@ game.team2_points @@</h2>
 
-                    <h5 ng-show="game.finished == 1" >@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
+                    <h5 ng-show="game.status=='completed'" >@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
 
-                    <h5 ng-show="game.finished == 0 && (game.team1_points != null || game.team2_points != null)">En cours</h5>
-                    <span class="minute label label-primary" ng-show="game.finished == 0 && (game.team1_points != null || game.team2_points != null)"><span class="point" >•</span> @@ game.minute @@'</span>
+                    <h5 ng-show="game.status=='in_progress'">En cours</h5>
+
+                    <span class="minute label label-primary" ng-show="game.status=='in_progress' && game.time != 'half-time' && game.time != 'full-time'" ><span class="point" >•</span> @@ game.time @@</span>
+                    <span class="minute label label-primary" ng-show="game.status=='in_progress' && game.time == 'half-time' && game.time != 'full-time'" >MI-TEMPS</span>
                 </div>
                 <div class="col-xs-4  text-center">
                     <div class="team2">
@@ -36,10 +38,10 @@
                         <div class="userScore" >
                             <b>@@ bet.team1_points @@</b> - <b>@@ bet.team2_points @@</b>
                         </div>
-                        <div class="userPoints" ng-show="gameDateIsBeforeNow() && game.finished == 1" >
+                        <div class="userPoints" ng-show="gameDateIsBeforeNow() && game.status=='completed'" >
                             + @@ bet.win_points @@ XP
                         </div>
-                        <span class="userLogin" >
+                        <span class="userLogin" ng-class="{'me' : bet.user.id == user.id}" >
                             @@ bet.user.firstname @@ @@ bet.user.lastname @@.
                         </span>
                     </div>
