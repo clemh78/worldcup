@@ -34,7 +34,11 @@
         <div class="row">
             <div class="col-xs-12">
                 <div ng-hide="bets.length == 0" >
-                    <div class="userBet" ng-repeat="bet in bets | orderBy : detailedOrderedScore" >
+                    <ul class="nav nav-pills" ng-show="user.rooms.length > 1">
+                        <li ng-repeat="room in user.rooms" ng-class="{'active' : selector==room.id}" ><a href="#" ng-click="select(room.id)" >@@room.name@@</a></li>
+                    </ul><br />
+
+                    <div class="userBet" ng-repeat="bet in bets | orderBy : detailedOrderedScore" ng-show="showBet(bet)" >
                         <div class="userScore" >
                             <b>@@ bet.team1_points @@</b> - <b>@@ bet.team2_points @@</b>
                         </div>
@@ -44,7 +48,7 @@
                         <span class="userLogin" ng-class="{'me' : bet.user.id == user.id}" >
                             @@ bet.user.firstname @@ @@ bet.user.lastname @@.
                         </span>
-                    </div>
+                    </div><br />
                 </div>
 
                 <div class="alert alert-info" ng-show="bets.length == 0" role="alert">Aucun paris sur ce match !</div>
