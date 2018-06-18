@@ -12,3 +12,4 @@
 */
 
 Artisan::add(new liveScores);
+Artisan::add(new live);
