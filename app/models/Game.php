@@ -46,7 +46,7 @@ class Game extends Eloquent {
         'winner_id',
         'stage_game_num',
         'date',
-        'finished');
+        'status');
 
     /**
      * Tableau indiquant les sous élements à imbriquer
@@ -184,7 +184,7 @@ class Game extends Eloquent {
             }
         }
 
-        $this->finished = true;
+        $this->status = "completed";
 
         /////////////////////////////////////////////////
         //******************* ROUND X *****************//
@@ -279,5 +279,7 @@ class Game extends Eloquent {
         'winner_id' => 'integer',
         'stage_game_num' => 'integer',
         'date' => 'required|date',
+        'status' => 'alpha|max:255',
+        'time' => 'alphanum|max:255',
     );
 }

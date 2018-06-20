@@ -54,7 +54,7 @@ angular.module('usersController', [])
 
     }])
 
-    .controller('usersControllerListModalInstance', ["$scope", "$rootScope", "serviceUser","$cookies", "$modalInstance", "users", function($scope, $rootScope, User, $cookies, $modalInstance, users) {
+    .controller('usersControllerListModalInstance', ["$scope", "$rootScope", "$filter", "serviceUser","$cookies", "$modalInstance", "users", function($scope, $rootScope, $filter, User, $cookies, $modalInstance, users) {
         $scope.users = users.data;
         $scope.roomsTmp = [];
         $scope.rooms = [];
@@ -68,24 +68,51 @@ angular.module('usersController', [])
             angular.forEach(user.rooms, function(room, key) {
                 if(room.id){
                     if($scope.roomsTmp[room.id] != undefined){
-                        $scope.roomsTmp[room.id].users.push(user);
+                        $scope.roomsTmp[room.id].users.push(angular.copy(user));
                     }
                 }
             });
         });
 
-        $scope.usersSelect = $scope.users;
-        $scope.selector = 'all';
+        //TRIE + gestion des ex æquo
+        angular.forEach($scope.roomsTmp, function(room, key) {
+            if(room != undefined){
+                users = $filter('orderBy')(room.users, ['-winPoints', 'lastname', 'firstname', 'id']);
+
+                index = 1;
+                rank = null;
+                lastScore = null;
+                angular.forEach(users, function(user, key) {
+                    if(lastScore != user.winPoints)
+                        rank = index;
+                    user.rank = rank;
+
+                    index++;
+                    lastScore = user.winPoints;
+                });
+            }
+        });
+
+        $scope.usersSelect = $filter('orderBy')($rootScope.user.rooms[0].users, ['-winPoints', 'lastname', 'firstname', 'id']);
+        $scope.selector = $rootScope.user.rooms[0].id;
 
         $scope.select = function(selector, users){
             $scope.selector = selector;
-            $scope.usersSelect = users;
+            $scope.usersSelect = $filter('orderBy')(users, ['-winPoints', 'lastname', 'firstname', 'id']);
         };
 
         angular.forEach($scope.roomsTmp, function(room, key) {
             if(room != undefined)
                 $scope.rooms.push(room);
         });
+
+        $scope.showRank = function(index){
+            if(index == 0)
+                return true;
+            if($scope.usersSelect[index-1].rank != $scope.usersSelect[index].rank)
+                return true;
+            return false;
+        }
     }])
 
     .controller('usersControllerAccountModalInstance', ["$scope", "$rootScope", "$modalInstance", "$cookies", "serviceUser", "user", function($scope, $rootScope, $modalInstance, $cookies, User, user) {

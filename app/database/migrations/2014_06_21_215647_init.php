@@ -103,7 +103,7 @@ class Init extends Migration {
             $table->string('team1_tmp_name', 255)->nullable();
             $table->string('team2_tmp_name', 255)->nullable();
             $table->integer('winner_id')->unsigned()->nullable();
-            $table->integer('minute')->nullable();
+            $table->string('minute')->nullable();
             $table->integer('stage_game_num')->nullable();
             $table->integer('fifa_match_id');
             $table->timestamp('date');

@@ -177,6 +177,23 @@ angular.module('gamesController', [])
 
         $scope.bets = bets.data;
 
+        $scope.selector = $scope.user.rooms[0].id;
+
+        $scope.select = function(id){
+            $scope.selector = id;
+        };
+
+        $scope.showBet = function(bet){
+            inRoom = false;
+
+            angular.forEach(bet.user.rooms, function(room, key) {
+                if(room.id == $scope.selector)
+                    inRoom = true;
+            });
+
+            return inRoom;
+        };
+
         $scope.gameDateIsBeforeNow = function(){
             now = moment();
 

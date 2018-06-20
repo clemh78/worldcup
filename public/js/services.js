@@ -110,10 +110,10 @@ angular.module('services', [])
                 return $http.get('api/games/'+gameId+'?token=' + token + '');
             },
             GetNext : function(token){
-                return $http.get('api/games?token=' + token + '&finished=0&team1_id!=null&team2_id!=null&orderby=date&order=ASC');
+                return $http.get('api/games?token=' + token + '&status!=completed&team1_id!=null&team2_id!=null&orderby=date&order=ASC');
             },
             GetPrevious : function(token){
-                return $http.get('api/games?token=' + token + '&finished=1&orderby=date&order=DESC');
+                return $http.get('api/games?token=' + token + '&status=completed&orderby=date&order=DESC');
             },
             GetBets : function(token, gameId){
                 return $http.get('api/games/' + gameId + '/bets?token=' + token);

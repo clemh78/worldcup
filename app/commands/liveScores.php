@@ -13,7 +13,7 @@ class liveScores extends Command {
 	 *
 	 * @var string
 	 */
-	protected $name = 'wc:live';
+	protected $name = 'wc:liveFifa';
 
 	/**
 	 * The console command description.
