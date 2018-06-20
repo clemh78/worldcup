@@ -55,7 +55,7 @@ return array(
 		'mysql' => array(
 			'driver'    => 'mysql',
 			'host'      => 'localhost',
-			'database'  => 'c3worldcup',
+			'database'  => 'c3kupi',
 			'username'  => 'c3worldcup',
 			'password'  => 'LiZz6Q!r5eL',
 			'charset'   => 'utf8',
