@@ -1,6 +1,16 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.5] - 2018-06-20
+### Added
+- New status for game (half-time for exemple)
+
+### Changed
+- Ranked list and list of bet in game (hightlight connected user)
+
+### Removed
+nothing...
+
 ## [1.0.3] & [1.0.4] - 2018-06-16
 ### Added
 nothing...
