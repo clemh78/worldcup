@@ -8,18 +8,10 @@ All notable changes to this project will be documented in this file.
 ### Changed
 - Ranked list and list of bet in game (hightlight connected user)
 
-### Removed
-nothing...
-
 ## [1.0.3] & [1.0.4] - 2018-06-16
-### Added
-nothing...
 
-### Changed
-- HOT FIX : sync problem when is a draw
-
-### Removed
-nothing...
+### Fixed
+- sync problem when is a draw
 
 ## [1.0.2] - 2018-06-14
 ### Added
@@ -27,12 +19,11 @@ nothing...
 - Auto refresh of games list
 
 ### Changed
-- HOT FIX : sync problem with fifa
 - Error message when bet is added or updated and the date of game is outdated
 - Validation rules for bet (block negative score)
 
-### Removed
-nothing...
+### Fixed
+- Sync problem with fifa
 
 ## [1.0.1] - 2018-06-11
 ### Added
@@ -42,10 +33,12 @@ nothing...
 - Scores on each finished games
 
 ### Changed
+- Bonus bet countries orderer list
+
+### Fixed
 - Fix Safari problem with bet edition
 - Fix layout responsivity
 - Fix spelling mistakes
-- Bonus bet countries orderer list
 
 ### Removed
 nothing...
