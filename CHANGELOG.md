@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.6] - 2018-06-25
+### Added
+- Command for set winners of groups
+
+### Changed
+- Add check icon on group list
+
 ## [1.0.5] - 2018-06-20
 ### Added
 - New status for game (half-time for exemple)
