@@ -28,8 +28,9 @@ class Group extends Eloquent {
         parent::boot();
 
         //Si le champ winner ou runnerup est renseigné, on assigne l'équipe dans l'arbre
-        User::saving(function($group)
+        Group::saving(function($group)
         {
+
             if($group->winner_id != null){
                 $code = '1'.$group->code;
 
