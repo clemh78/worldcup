@@ -1,6 +1,13 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.7] - 2018-06-27
+### Added
+- New stats for teams
+
+### Changed
+- Display order of teams on groups page
+
 ## [1.0.6] - 2018-06-25
 ### Added
 - Command for set winners of groups
