@@ -104,7 +104,7 @@
                     <div class="col-md-3 col-sm-6 group" ng-repeat="group in groups" >
                         <h2 class="subheader" >@@ group.name @@</h2>
                         <ul>
-                            <li ng-repeat="team in group.teams  | orderBy : '-points'" >
+                            <li ng-repeat="team in group.teams  | orderBy : ['-points', '-goals_diff', '-goals_for', 'name']" >
                                 <img src="images/flags/@@ team.code.toLowerCase() @@">
                                 @@ team.name @@ <i ng-show="team.id == group.winner_id || team.id == group.runnerup_id" class="fa fa-check"></i>
                                 <div class="points">@@ team.points @@</div>
