@@ -14,3 +14,4 @@
 Artisan::add(new live);
 Artisan::add(new liveScores());
 Artisan::add(new setWinnersOfGroup);
+Artisan::add(new refreshGroupsStats);

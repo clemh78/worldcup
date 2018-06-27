@@ -104,7 +104,7 @@ class BetController extends BaseController {
 
         $input['winner_id'] = ($input['winner_id'] != null)?$input['winner_id']:null;
 
-        if($game->kick_at_goal && $bet->winner_id == null)
+        if($game->kick_at_goal && $input['winner_id'] == null)
             return Response::json(
                 array('success' => false,
                     'payload' => array(),
