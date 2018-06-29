@@ -100,9 +100,9 @@ return array(
 
     'app_key' => "fc68cae9-0903-47a2-a83a-a307e0c5142897",
 
-    'pusher_app_id' => "552407",
-    'pusher_app_key' => "43697dec0e136b78cafd",
-    'pusher_app_secret' => "7fb8cdf1df8abfb4d1df",
+    'pusher_app_id' => "552561",
+    'pusher_app_key' => "507008a7a13e163f1928",
+    'pusher_app_secret' => "aad367260e661dff6282",
     'pusher_cluster' => "eu",
 
 
