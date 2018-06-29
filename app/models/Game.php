@@ -137,6 +137,7 @@ class Game extends Eloquent {
         if($num_team != null){
             //Si l'équipe une a gagnée, on redistribue les points pour les paris corrects (paris sur l'équipe une)
             if($num_team == 1){
+
                 foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet){
 
                     if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
@@ -145,6 +146,16 @@ class Game extends Eloquent {
                         Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART, 'gain', null);
                     else
                         Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
+                }
+
+                if($bet->team1_points == $bet->team2_points){
+                    //On vérifie ceux qui se serait trompé de gagnant mais qui aurait le bon score (score nul obligatoire)
+                    foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet) {
+                        if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                            Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT/2, 'gain', null);
+                        else
+                            Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART/2, 'gain', null);
+                    }
                 }
 
                 $this->winner_id = $this->team1_id;
@@ -161,6 +172,16 @@ class Game extends Eloquent {
                         Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
                 }
 
+                if($bet->team1_points == $bet->team2_points){
+                    //On vérifie ceux qui se serait trompé de gagnant mais qui aurait le bon score (score nul obligatoire)
+                    foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet) {
+                        if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
+                            Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT/2, 'gain', null);
+                        else
+                            Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART/2, 'gain', null);
+                    }
+                }
+
                 $this->winner_id = $this->team2_id;
                 $looser_id = $this->team1_id;
             }
@@ -173,6 +194,8 @@ class Game extends Eloquent {
                     }
                 }
             }
+
+        //Si match nul
         }else{
             foreach(Bet::whereRaw('game_id = ? && winner_id IS NULL', array($this->id))->get() as $bet){
                 if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
