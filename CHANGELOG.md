@@ -1,6 +1,14 @@
 # Changelog
 All notable changes to this project will be documented in this file.
 
+## [1.0.8] - 2018-06-30
+### Added
+- Websocket for live refresh
+
+### Changed
+- Add new rules on points distribution (for final stages)
+- List of matchs (add kick at goal points)
+
 ## [1.0.7] - 2018-06-27
 ### Added
 - New stats for teams
