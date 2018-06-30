@@ -193,7 +193,7 @@ angular.module('gamesController', [])
             object = $filter('filter')($scope.games, { id: parseInt(data.id) }, true)[0];
             $scope.games.splice($scope.games.indexOf(object), 1);
 
-            $scope.gamesPrevious.push(object);
+            $scope.gamesPrevious.unshift(object);
 
             objectNew = $filter('filter')($scope.gamesPrevious, { id: parseInt(data.id) }, true)[0];
 

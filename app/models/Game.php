@@ -148,12 +148,12 @@ class Game extends Eloquent {
                         Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
                 }
 
-                if($bet->team1_points == $bet->team2_points){
+                if($this->team1_points == $this->team2_points){
                     //On vérifie ceux qui se serait trompé de gagnant mais qui aurait le bon score (score nul obligatoire)
                     foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team2_id))->get() as $bet) {
                         if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
                             Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT/2, 'gain', null);
-                        else
+                        else if($bet->team1_points == $bet->team2_points)
                             Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART/2, 'gain', null);
                     }
                 }
@@ -172,12 +172,12 @@ class Game extends Eloquent {
                         Transaction::addTransaction($bet->user_id, $this->id, $POINTS_BON_WINNER, 'gain', null);
                 }
 
-                if($bet->team1_points == $bet->team2_points){
+                if($this->team1_points == $this->team2_points){
                     //On vérifie ceux qui se serait trompé de gagnant mais qui aurait le bon score (score nul obligatoire)
                     foreach(Bet::whereRaw('game_id = ? && winner_id = ?', array($this->id, $this->team1_id))->get() as $bet) {
                         if($bet->team1_points == $this->team1_points && $bet->team2_points == $this->team2_points)
                             Transaction::addTransaction($bet->user_id, $this->id, $POINTS_SCORE_EXACT/2, 'gain', null);
-                        else
+                        else if($bet->team1_points == $bet->team2_points)
                             Transaction::addTransaction($bet->user_id, $this->id, $POINTS_ECART/2, 'gain', null);
                     }
                 }
