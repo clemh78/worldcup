@@ -29,12 +29,15 @@ Route::post('/api/users/join', array('before' => 'token', 'uses' => 'UserControl
 Route::get('/api/games/{id?}/bets', array('before' => 'token', 'uses' => 'GameController@getBets'));
 
 Route::get('/api/report/', array('before' => 'key', 'uses' => 'ReportController@index'));
+Route::post('/api/ws/existence', array('before' => 'key', 'uses' => 'WsController@channelExitence'));
 
 //Tout les ressources disponibles avec un token
 Route::group(array('prefix' => 'api', 'before' => 'token'), function() {
 
     Route::resource('users', 'UserController',
         array('only' => array('index', 'show', 'update')));
+
+    Route::post('ws/auth', array('before' => 'token', 'uses' => 'WsController@authChannel'));
 
     Route::resource('games', 'GameController',
         array('only' => array('index', 'show')));

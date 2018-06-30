@@ -1,0 +1,317 @@
+{
+   "Stadium":{
+      "IdStadium":"5031302",
+      "Name":[
+         {
+            "Locale":"en-GB",
+            "Description":"Fisht Stadium"
+         }
+      ],
+      "Capacity":null,
+      "WebAddress":null,
+      "Built":null,
+      "Roof":false,
+      "Turf":null,
+      "IdCity":"35268",
+      "CityName":[
+         {
+            "Locale":"en-GB",
+            "Description":"Sochi"
+         }
+      ],
+      "IdCountry":"RUS",
+      "PostalCode":null,
+      "Street":null,
+      "Email":null,
+      "Fax":null,
+      "Phone":null,
+      "AffiliationCountry":null,
+      "AffiliationRegion":null,
+      "Latitude":null,
+      "Longitude":null,
+      "Length":null,
+      "Width":null,
+      "Properties":{
+         "IdCBS":"5031302",
+         "IdIFES":"5031302"
+      },
+      "IsUpdateable":null
+   },
+   "ResultType":0,
+   "MatchDay":"16",
+   "IdMatch":"300331544",
+   "IdStage":"275093",
+   "IdGroup":null,
+   "IdSeason":"254645",
+   "IdCompetition":"17",
+   "HomeTeamPenaltyScore":8,
+   "AwayTeamPenaltyScore":5,
+   "AggregateHomeTeamScore":0,
+   "AggregateAwayTeamScore":0,
+   "Weather":{
+      "Humidity":"78",
+      "Temperature":"28",
+      "WindSpeed":"10",
+      "Type":10,
+      "TypeLocalized":[
+         {
+            "Locale":"en-GB",
+            "Description":"Clear Night"
+         }
+      ]
+   },
+   "Attendance":null,
+   "Date":"2018-06-30T18:00:00Z",
+   "LocalDate":"2018-06-30T21:00:00Z",
+   "MatchTime":"0'",
+   "SecondHalfTime":null,
+   "FirstHalfTime":null,
+   "FirstHalfExtraTime":null,
+   "SecondHalfExtraTime":null,
+   "Winner":null,
+   "Period":0,
+   "HomeTeam":{
+      "Score":1,
+      "Side":null,
+      "IdTeam":"43930",
+      "PictureUrl":"https://api.fifa.com/api/v1/picture/flags-{format}-{size}/URU",
+      "IdCountry":"URU",
+      "TeamType":1,
+      "AgeType":7,
+      "Tactics":"",
+      "TeamName":[
+         {
+            "Locale":"en-GB",
+            "Description":"Uruguay"
+         }
+      ],
+      "Coaches":[
+         {
+            "IdCoach":"61566",
+            "IdCountry":"URU",
+            "Name":[
+               {
+                  "Locale":"en-GB",
+                  "Description":"TABAREZ Oscar"
+               }
+            ],
+            "Alias":[
+               {
+                  "Locale":"en-GB",
+                  "Description":"Oscar TABAREZ"
+               }
+            ],
+            "Role":0
+         }
+      ],
+      "Players":[
+
+      ],
+      "Bookings":[
+
+      ],
+      "Goals":[
+
+      ],
+      "Substitutions":[
+
+      ],
+      "FootballType":0,
+      "Gender":1
+   },
+   "AwayTeam":{
+      "Score":1,
+      "Side":null,
+      "IdTeam":"43963",
+      "PictureUrl":"https://api.fifa.com/api/v1/picture/flags-{format}-{size}/POR",
+      "IdCountry":"POR",
+      "TeamType":1,
+      "AgeType":7,
+      "Tactics":"",
+      "TeamName":[
+         {
+            "Locale":"en-GB",
+            "Description":"Portugal"
+         }
+      ],
+      "Coaches":[
+         {
+            "IdCoach":"325536",
+            "IdCountry":"POR",
+            "Name":[
+               {
+                  "Locale":"en-GB",
+                  "Description":"SANTOS Fernando"
+               }
+            ],
+            "Alias":[
+               {
+                  "Locale":"en-GB",
+                  "Description":"Fernando SANTOS"
+               }
+            ],
+            "Role":0
+         }
+      ],
+      "Players":[
+
+      ],
+      "Bookings":[
+
+      ],
+      "Goals":[
+
+      ],
+      "Substitutions":[
+
+      ],
+      "FootballType":0,
+      "Gender":1
+   },
+   "BallPossession":{
+      "Intervals":[
+
+      ],
+      "LastX":[
+
+      ],
+      "OverallHome":null,
+      "OverallAway":null
+   },
+   "TerritorialPossesion":null,
+   "TerritorialThirdPossesion":null,
+   "Officials":[
+      {
+         "IdCountry":"MEX",
+         "OfficialId":"374810",
+         "NameShort":[
+            {
+               "Locale":"en-GB",
+               "Description":"Cesar RAMOS"
+            }
+         ],
+         "Name":[
+            {
+               "Locale":"en-GB",
+               "Description":"RAMOS Cesar"
+            }
+         ],
+         "OfficialType":1,
+         "TypeLocalized":[
+            {
+               "Locale":"en-GB",
+               "Description":"Main referee"
+            }
+         ]
+      },
+      {
+         "IdCountry":"MEX",
+         "OfficialId":"239960",
+         "NameShort":[
+            {
+               "Locale":"en-GB",
+               "Description":"Marvin TORRENTERA"
+            }
+         ],
+         "Name":[
+            {
+               "Locale":"en-GB",
+               "Description":"TORRENTERA Marvin"
+            }
+         ],
+         "OfficialType":2,
+         "TypeLocalized":[
+            {
+               "Locale":"en-GB",
+               "Description":"Lineman 1"
+            }
+         ]
+      },
+      {
+         "IdCountry":"MEX",
+         "OfficialId":"374814",
+         "NameShort":[
+            {
+               "Locale":"en-GB",
+               "Description":"Miguel HERNANDEZ"
+            }
+         ],
+         "Name":[
+            {
+               "Locale":"en-GB",
+               "Description":"HERNANDEZ Miguel"
+            }
+         ],
+         "OfficialType":3,
+         "TypeLocalized":[
+            {
+               "Locale":"en-GB",
+               "Description":"Lineman 2"
+            }
+         ]
+      },
+      {
+         "IdCountry":"USA",
+         "OfficialId":"256570",
+         "NameShort":[
+            {
+               "Locale":"en-GB",
+               "Description":"Jair MARRUFO"
+            }
+         ],
+         "Name":[
+            {
+               "Locale":"en-GB",
+               "Description":"MARRUFO Jair"
+            }
+         ],
+         "OfficialType":4,
+         "TypeLocalized":[
+            {
+               "Locale":"en-GB",
+               "Description":"Fourth official"
+            }
+         ]
+      },
+      {
+         "IdCountry":"USA",
+         "OfficialId":"256580",
+         "NameShort":[
+            {
+               "Locale":"en-GB",
+               "Description":"Corey ROCKWELL"
+            }
+         ],
+         "Name":[
+            {
+               "Locale":"en-GB",
+               "Description":"ROCKWELL Corey"
+            }
+         ],
+         "OfficialType":10,
+         "TypeLocalized":[
+            {
+               "Locale":"en-GB",
+               "Description":"Reserve Assistant Referee"
+            }
+         ]
+      }
+   ],
+   "MatchStatus":0,
+   "GroupName":[
+
+   ],
+   "StageName":[
+      {
+         "Locale":"en-GB",
+         "Description":"Round of 16"
+      }
+   ],
+   "OfficialityStatus":0,
+   "TimeDefined":true,
+   "Properties":{
+      "IdCBS":"300331544",
+      "IdIFES":"108599"
+   },
+   "IsUpdateable":null
+}

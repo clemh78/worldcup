@@ -670,7 +670,7 @@ ul.nav.nav-pills li.active a{
 .g_team {
     background: #0057b8 url(../images/fwc_darkbluebg.png);
 }
-.g_team h3 small{font-size: 65%;color: #fff;float: right;font-weight: bold;margin-right: 10px;margin-top: 5px;}
+.g_team h3 small{font-size: 100%;color: #fff;float: right;font-weight: bold;margin-right: 10px;margin-top: 0px;}
 .g_round_label { top: -5px; font-weight: normal; color: #0057b8; text-align: center; font-size: 18px;
     font-family: 'El Messiri', sans-serif;
     text-transform: uppercase;

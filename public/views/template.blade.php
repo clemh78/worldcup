@@ -20,6 +20,8 @@
     <script src="/bower_components/angular-loading-bar/build/loading-bar.min.js" type="text/javascript"></script>
     <script src="/js/jquery.gracket.min.js"></script>
 
+    <script src="https://js.pusher.com/4.1/pusher.min.js"></script>
+
     <!-- CUSTOM -->
     <link rel="stylesheet" type="text/css" href="/css/worldcup.css?v={{Config::get('app.version')}}" media="screen" />
     <link rel="stylesheet" type="text/css" href="/css/animate.css?v={{Config::get('app.version')}}" media="screen" />
@@ -42,6 +44,7 @@
     <script>
         REGISTER_ON = {{ (Config::get('app.register_on')==1)?1:0 }};
         VERSION = "{{Config::get('app.version')}}";
+        PUSHER_APP_KEY = "{{Config::get('app.pusher_app_key')}}";
     </script>
 
 </head>

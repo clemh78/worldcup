@@ -15,6 +15,9 @@
                 <li><a href="#" id="filter-bracket" class="hidden-xs hidden-sm" ng-click="filterBracket()">Arbre</a></li>
             </ul>
         </div>
+	
+	<p style="clear:both;" ></p>
+        <div class="alert alert-info">Des précisions quand à la distribution des points à partir des <strong>1/8 de finale</strong> ont été ajouté sur la <a href="#" style="color:white;font-weight:bold;" ng-controller="helpControllerModal" ng-click="open()" >page d'aide</a>.</div>
 
         <div class="col-xs-12" id="games-list">
             
@@ -35,9 +38,9 @@
                         <span class="minute label label-primary" ng-show="game.time != 'half-time' && game.time != 'full-time'" ><span class="point" >•</span> @@ game.time @@</span>
                         <span class="minute label label-primary" ng-show="game.time == 'half-time' && game.time != 'full-time'" >MI-TEMPS</span>
                         <div class="row scores">
-                        	<div class="col-xs-4 no-padding"><h3 class="goals-team1">@@ game.team1_points @@</h3></div>
+                        	<div class="col-xs-4 no-padding"><h3 class="goals-team1"><span ng-show="game.team1_kick_at_goal" >(@@ game.team1_kick_at_goal @@)</span> @@ game.team1_points @@</h3></div>
 							<div class="col-xs-4 no-padding"><h3>—</h3></div>
-							<div class="col-xs-4 no-padding"><h3 class="goals-team2">@@ game.team2_points @@</h3></div>
+							<div class="col-xs-4 no-padding"><h3 class="goals-team2">@@ game.team2_points @@ <span ng-show="game.team2_kick_at_goal" >(@@ game.team2_kick_at_goal @@)</span></h3></div>
                         </div>
                         <button class="btn btn-default lstBet" ng-click="open(game)" >
                             Liste des paris
@@ -80,9 +83,9 @@
                         <h5 class="game-previous-experience text-success" ng-show="game.user_bet.win_points && game.user_bet.win_points!=0 ">+@@ game.user_bet.win_points @@XP</h5>
                         <h5 class="game-previous-experience text-danger" ng-show="!game.user_bet.win_points || game.user_bet.win_points==0">0XP</h5>
 
-                        <div class="col-xs-4 no-padding"><h3 class="goals-team1">@@ game.team1_points @@</h3></div>
+                        <div class="col-xs-4 no-padding"><h3 class="goals-team1"><span ng-show="game.team1_kick_at_goal" >(@@ game.team1_kick_at_goal @@)</span> @@ game.team1_points @@</h3></div>
                         <div class="col-xs-4 no-padding"><h3>—</h3></div>
-                        <div class="col-xs-4 no-padding"><h3 class="goals-team2">@@ game.team2_points @@</h3></div><br />
+                        <div class="col-xs-4 no-padding"><h3 class="goals-team2">@@ game.team2_points @@ <span ng-show="game.team2_kick_at_goal" >(@@ game.team2_kick_at_goal @@)</span></h3></div><br />
                         <button class="btn btn-default" ng-click="open(game)">
                             Liste des paris
                         </button>

@@ -11,9 +11,9 @@
                     <div ng-show="game.winner_id == game.team1.id" class="winnerFlag one" ><i class="fa fa-check"></i></div>
                 </div>
                 <div class="col-xs-4 bet-input-form dash">
-                    <h2>@@ game.team1_points @@</h2>
+                    <h2><span ng-show="game.team1_kick_at_goal" >(@@ game.team1_kick_at_goal @@)</span> @@ game.team1_points @@</h2>
                     <h2>-</h2>
-                    <h2>@@ game.team2_points @@</h2>
+                    <h2>@@ game.team2_points @@ <span ng-show="game.team2_kick_at_goal" >(@@ game.team2_kick_at_goal @@)</span></h2>
 
                     <h5 ng-show="game.status=='completed'" >@@game.date | amDateFormat:'DD/MM à HH:mm'@@</h5>
 

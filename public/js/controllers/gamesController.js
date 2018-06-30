@@ -13,34 +13,10 @@
 
 angular.module('gamesController', [])
 
-    .controller('gamesControllerList', ["$scope", "$rootScope", "$timeout", "$cookies", "$modal", "games", "gamesPrevious", "bracket", "groups", "serviceGame", function($scope, $rootScope, $timeout, $cookies, $modal, games, gamesPrevious, bracket, groups, Game) {
+    .controller('gamesControllerList', ["$scope", "$rootScope", "$timeout", "$cookies", "$modal", "$filter", "games", "gamesPrevious", "bracket", "groups", "serviceGame", function($scope, $rootScope, $timeout, $cookies, $modal, $filter, games, gamesPrevious, bracket, groups, Game) {
         $scope.games = games.data;
         $scope.gamesPrevious = gamesPrevious.data;
         $scope.groups = groups.data;
-
-        $scope.reload = function(){
-            Game.GetNext($cookies['token'])
-                .success(function(data){
-                    $scope.games = data;
-
-                    $scope.games.forEach(function(entry) {
-                        $rootScope.$broadcast('game_'+entry.id, entry);
-                    });
-                });
-
-            Game.GetPrevious($cookies['token'])
-                .success(function(data){
-                    $scope.gamesPrevious = data;
-                });
-
-            $timeout(function(){
-                $scope.reload();
-            },30000);
-        };
-
-        $timeout(function(){
-            $scope.reload();
-        },30000);
 
         $("#rounds").gracket({
             src : bracket.data['rounds'],
@@ -167,6 +143,79 @@ angular.module('gamesController', [])
                 }
             });
         };
+
+
+        // Enable pusher logging - don't include this in production
+        Pusher.logToConsole = true;
+
+        var pusher = new Pusher(PUSHER_APP_KEY, {
+            cluster: 'eu',
+            encrypted: true,
+            authEndpoint: '/api/ws/auth?token=' + $cookies['token']
+        });
+
+        var channel = pusher.subscribe('private-user-' + $cookies['user_id']);
+        var channelPresence = pusher.subscribe('presence-users');
+
+        channel.bind('start', function(data) {
+
+            object = $filter('filter')($scope.games, { id: parseInt(data.id) }, true)[0];
+
+            object.status = "in_progress";
+            object.time = data.time;
+
+            object.team1_points = 0;
+            object.team2_points = 0;
+            object.team1_kick_at_goal = 0;
+            object.team2_kick_at_goal = 0;
+
+            $scope.$apply();
+        });
+
+        channel.bind('progress', function(data) {
+
+            object = $filter('filter')($scope.games, { id: parseInt(data.id) }, true)[0];
+
+            object.status = "in_progress";
+            object.time = data.time;
+
+            object.team1_points = data.team1_points;
+            object.team2_points = data.team2_points;
+            object.team1_kick_at_goal = data.team1_kick_at_goal;
+            object.team2_kick_at_goal = data.team2_kick_at_goal;
+
+            $scope.$apply();
+        });
+
+
+        channel.bind('finish', function(data) {
+
+            object = $filter('filter')($scope.games, { id: parseInt(data.id) }, true)[0];
+            $scope.games.splice($scope.games.indexOf(object), 1);
+
+            $scope.gamesPrevious.unshift(object);
+
+            objectNew = $filter('filter')($scope.gamesPrevious, { id: parseInt(data.id) }, true)[0];
+
+            objectNew.status = "completed";
+            objectNew.time = "full-time";
+            objectNew.team1_points = data.team1_points;
+            objectNew.team2_points = data.team2_points;
+            objectNew.team1_kick_at_goal = data.team1_kick_at_goal;
+            objectNew.team2_kick_at_goal = data.team2_kick_at_goal;
+            objectNew.winner_id = data.winner_id;
+            objectNew.winner = data.winner;
+            objectNew.user_bet.win_points = data.user_bet_points;
+
+            $rootScope.user.winPoints = data.user_points;
+
+            $scope.$apply();
+        });
+
+
+        $scope.$on("$destroy", function() {
+            pusher.disconnect();
+        });
     }])
 
 

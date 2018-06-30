@@ -28,7 +28,7 @@ return array(
 
 	'url' => 'https://kupi.fr',
 
-    'version' => '1.0.7',
+    'version' => '1.0.8',
 
 	/*
 	|--------------------------------------------------------------------------
@@ -100,6 +100,12 @@ return array(
 
     'app_key' => "fc68cae9-0903-47a2-a83a-a307e0c5142897",
 
+    'pusher_app_id' => "552561",
+    'pusher_app_key' => "507008a7a13e163f1928",
+    'pusher_app_secret' => "aad367260e661dff6282",
+    'pusher_cluster' => "eu",
+
+
 	/*
 	|--------------------------------------------------------------------------
 	| Autoloaded Service Providers
@@ -139,7 +145,7 @@ return array(
 		'Illuminate\Validation\ValidationServiceProvider',
 		'Illuminate\View\ViewServiceProvider',
 		'Illuminate\Workbench\WorkbenchServiceProvider',
-        'Barryvdh\DomPDF\ServiceProvider',
+        'Barryvdh\DomPDF\ServiceProvider'
 	),
 
 	/*
